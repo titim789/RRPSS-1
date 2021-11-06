@@ -2,7 +2,6 @@ package Reservation;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.ParseException;
@@ -83,7 +82,7 @@ public class ReservationMgr {
 	public void removeReservationTime() {
 		
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.MINUTE, -15);
+		cal.add(Calendar.MINUTE, -5);
 		
 		try {
 		int i;
@@ -105,15 +104,11 @@ public class ReservationMgr {
     	
     	removeReservationTime(); // remove reservation the past 10 mins of current time
     	
-    	Scanner scan = new Scanner(System.in);
-    	
 		switch(n) {
 			case 0: 
 			if(!listOfReservations.isEmpty()) {
 				displayReservation.reservationDisplayAll(listOfReservations);
-				displayReservation.removeReservationDisplay();
-				int m = scan.nextInt();
-				
+				int m = displayReservation.removeReservationDisplay();
 				switch(m){
 					case 0:
 						removeReservationId();
@@ -125,14 +120,10 @@ public class ReservationMgr {
 			else System.out.println("There are no Reservations!!");
 			break;
 			case 1: 
-			System.out.print("Enter Customer Id to check : ");
-			int term = scan.nextInt();
-			
+			int term = displayReservation.removeReservationDisplay();
 			if(checkCustResv(term)) {
 				displayReservation.reservationDisplayCustomer(listOfReservations, term);
-				displayReservation.removeReservationDisplay();
-				int m = scan.nextInt();
-				
+				int m = displayReservation.removeReservationDisplay();
 				switch(m){
 					case 0:
 						removeReservationId();
@@ -169,8 +160,7 @@ public class ReservationMgr {
 			int choice;
 			int tableId = -1; int cusId = -1;String date = "";int noPax = -1;String cName = "";String contactNo = "";
 			do{
-				displayReservation.updateReservationDisplay();
-				choice = scan.nextInt();
+				choice = displayReservation.updateReservationDisplay();
 				switch(choice){
 					case 1:
 						System.out.print("Enter new Table ID : ");
