@@ -1,6 +1,6 @@
 package Reservation;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class DisplayReservation {
 	
@@ -38,7 +38,8 @@ public class DisplayReservation {
         
     }
 	
-	public void updateReservationDisplay(){
+	public int updateReservationDisplay(){
+		Scanner sc = new Scanner(System.in);
 		System.out.println("\nSelect Parameter you want to change?");
 		System.out.println("1 : Change Table ID");
 		System.out.println("2 : Change Customer ID");
@@ -48,12 +49,24 @@ public class DisplayReservation {
 		System.out.println("6 : Change Contact Number");
 		System.out.println("7 : Stop Changing");
 		System.out.print("Enter Choice : ");
+		int choice = sc.nextInt();
+		return choice;
     }
 	
-	public void removeReservationDisplay() {
+	public int removeReservationDisplay() {
+		Scanner sc = new Scanner(System.in);
 		System.out.println("\nWant to Remove Reservation?");
 		System.out.println("0 : Want Remove Reservations");
 		System.out.println("1 : Do Not want to Remove Reservation");
 		System.out.print("Enter your choice : ");
+		int m = sc.nextInt();
+		return m;
+	}
+	
+	public int GetCustomerId() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter Customer Id to check : ");
+		int m = sc.nextInt();
+		return m;
 	}
 }
