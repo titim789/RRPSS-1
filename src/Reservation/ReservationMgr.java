@@ -1,4 +1,4 @@
-package project;
+package Reservation;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
