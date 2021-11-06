@@ -80,7 +80,7 @@ public class ReservationMgr {
 	public void removeReservationTime() {
 		
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.MINUTE, -5);
+		cal.add(Calendar.MINUTE, -15);
 		
 		try {
 		int i;
