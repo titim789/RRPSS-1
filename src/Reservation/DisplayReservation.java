@@ -8,35 +8,35 @@ public class DisplayReservation {
 	
 	public void reservationDisplayCustomer(ArrayList<Reservation>listOfReservations,int n){
     	
-        System.out.printf("%n%-20s", "Reservation ID");
+        	System.out.printf("%n%-20s", "Reservation ID");
 		System.out.printf("%-20s", "Table ID");
 		System.out.printf("%-20s", "Customer ID");
 		System.out.printf("%-20s", "Date time");
-        System.out.printf("%-20s", "Number of People");
-        System.out.printf("%-20s", "Customer Name");
+        	System.out.printf("%-20s", "Number of People");
+        	System.out.printf("%-20s", "Customer Name");
 		System.out.printf("%-20s%n", "Contact Number");
 
-        for(Reservation reservation : listOfReservations){
-            if(n == reservation.getCustomerId())
-                reservation.displayStatus();
-        }
-    }
+        	for(Reservation reservation : listOfReservations){
+            		if(n == reservation.getCustomerId())
+                		reservation.displayStatus();
+        	}
+   	 }
 	
 	public void reservationDisplayAll(ArrayList<Reservation>listOfReservations){
     	
-    	System.out.printf("%n%-20s", "Reservation ID");
+    		System.out.printf("%n%-20s", "Reservation ID");
 		System.out.printf("%-20s", "Table ID");
 		System.out.printf("%-20s", "Customer ID");
 		System.out.printf("%-20s", "Date time");
-        System.out.printf("%-20s", "Number of People");
-        System.out.printf("%-20s", "Customer Name");
+        	System.out.printf("%-20s", "Number of People");
+        	System.out.printf("%-20s", "Customer Name");
 		System.out.printf("%-20s%n", "Contact Number");
 		
-        for(Reservation reservation : listOfReservations){
-            reservation.displayStatus();
-        }
+        	for(Reservation reservation : listOfReservations){
+           		reservation.displayStatus();
+        	}
         
-    }
+    	}
 	
 	public int updateReservationDisplay(){
 		Scanner sc = new Scanner(System.in);
@@ -51,7 +51,7 @@ public class DisplayReservation {
 		System.out.print("Enter Choice : ");
 		int choice = sc.nextInt();
 		return choice;
-    }
+    	}
 	
 	public int removeReservationDisplay() {
 		Scanner sc = new Scanner(System.in);
