@@ -63,10 +63,17 @@ public class DisplayReservation {
 		return m;
 	}
 	
-	public int GetCustomerId() {
+	public int getCustomerIdFromUser() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Customer Id to check : ");
 		int m = sc.nextInt();
 		return m;
+	}
+	
+	public int getReservationIdFromUser() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter Reservation Id : ");
+		int n = sc.nextInt();
+		return n;
 	}
 }
