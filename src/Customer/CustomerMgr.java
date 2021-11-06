@@ -3,7 +3,9 @@ package Customer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.String;
+import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.List;
 import java.io.BufferedReader;
 import java.lang.String;
 import java.util.Scanner;
@@ -14,159 +16,195 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 
 public class CustomerMgr {
+	
+
 	private ArrayList<Customer> ListOfCustomer;
-	
-	private ReadCustomerList readCustomerList = new ReadCustomerList();
-	
 	public CustomerMgr() {
-		ListOfCustomer = readCustomerList.readCustomerFromFile("customerList.txt");
+
 	}
-	
-	public void displayCustomerList() {
+
+	public void init(){
+		CustomerUI customerui = new CustomerUI();
+				
+		int choice;
+		ListOfCustomer = loadCustomerList("customerList.txt");
+
+		do {
+			choice = customerui.mainMenu();
+			switch (choice) {
+			case 1:
+				displayCustomerList(ListOfCustomer);
+				break;
+			case 2:
+				// add customer
+				int customerId = getLastCustomerId(ListOfCustomer) + 1;
+				System.out.println("Customer Id to insert:" + customerId);
+				
+				// launch customerUI to get customer info
+				String customerName = customerui.getCustomerName();
+				String customerPhone = customerui.getCustomerPhone();
+				String customrMember = customerui.getCustomerMember();
+
+				// create new customer
+				addCustomer(ListOfCustomer, customerId, customerName, customerPhone, customrMember);
+				System.out.println("\nCustomer added..");
+				displayCustomerList(ListOfCustomer);
+				break;
+			case 3:
+				// remove customer object from the ArrayList of customer
+				String customerIdToRemove = customerui.getRemoveId();
+				removeCustomer(ListOfCustomer, customerIdToRemove);
+				break;
+			case 4:
+				// removeCustomer();
+				saveCustomer(ListOfCustomer, "customerList.txt");
+				break;
+			case 5:
+				// saveCustomer();
+				break;
+			default:
+				System.out.println("Invalid choice");
+				break;
+			}
+		} while (choice != 5);
+
+		
+	}
+
+	// load file name and return an ArrayList of Customer objects
+	public ArrayList<Customer> loadCustomerList(String fileName) {
+		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		try {
-			FileReader fr = new FileReader("customerList.txt");
-			BufferedReader br = new BufferedReader(fr);
+			BufferedReader br = new BufferedReader(new FileReader(fileName));
 			//to store a line
 			String line = "";
-			System.out.println("Customer List");
-			System.out.printf("CustId\tName\t\tPhone\t\tMember\n");
+			
 			// to consume the header row of csv
 			String headerLine = "";
 			headerLine = br.readLine();
+			
 			// keeps instanciating staff object until no more rows
 			while((line = br.readLine()) != null) {			
 				// split a line of string into an array
 				// [0] is id, [1] is name etc...
 				String[] values = line.split(",");
 				
-				String custid = values[0];
-				String name = values[1];
-				String phone = values[2];
-				String member = values[3];
-				System.out.printf("%s\t%s\t\t%s\t%s\n", custid, name, phone, member);
-			}
-			
-		} 
-		// catch blocks for reading csv or if not will throw error
-		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// catch IO exception for br.readline()
-			e.printStackTrace();
-		}
-		}
-	
-	public void addCustomer() {
-		// prompt for id, name, phone, etc
-		// filewriter to append
-		// re-load ListOfCustomer
-		Scanner sc = new Scanner(System.in);
-		
-		// read the last customer id and increment
-		int lastId = readCustomerList.readLastCustomerId("customerList.txt");
-		int customer_id = ++lastId;
-		
-		// prompt user to enter customer name
-		System.out.println("Enter the customer name:");
-		String name = sc.next();
-		
-		// prompt user to enter customer phone
-		System.out.println("Enter customer phone number:");
-		String phone = sc.next();
-		
-		// prompt user to enter is it member
-		System.out.println("Is it a member? y/n");
-		String isMember = sc.next();
-		
-		// concat strings together
-		String outputText = customer_id+","+name+","+phone+","+isMember;
-		
-		// read file
-		File file1 = new File("customerList.txt");
-		
-		// initialise writer object, append new row using printwriter
-		FileWriter fw = null;
-		try {
-			fw = new FileWriter(file1,true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		PrintWriter pw = new PrintWriter(fw);
-		pw.println(outputText);
-		pw.close();
-		sc.close();
-		displayCustomerList();
-	}
-	
-	public void removeCustomer() {
-		// prompt user to enter customer id to remove
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter customer id to remove:");
-		String CustomerId = sc.next();
-		
-		String tempFile = "temp2.txt";
-		
-		File oldFile = new File("customerList.txt");
-		File newFile = new File(tempFile);
-		
-		String currentline;
-		String data[];
-		
-		try {
-			FileWriter fw = new FileWriter(tempFile,true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			PrintWriter pw = new PrintWriter(bw);
-			
-			FileReader fr = new FileReader("customerList.txt");
-			BufferedReader br = new BufferedReader(fr);
-			
-			while((currentline = br.readLine())!= null) {
-				data = currentline.split(",");
-				if(!(data[0].equalsIgnoreCase(CustomerId))) {
-					pw.println(currentline);
+				// takes the corresponding array[0], fit into staff object
+				Customer customer = new Customer();
+				int i = Integer.parseInt(values[0]);
+				customer.setCustomer_id(i);
+				customer.setName(values[1]);
+				customer.setPhone(values[2]);
+				
+				// if value[3] is y, set the boolean to true
+				if(values[3].equals("y")) {
+					customer.setMember(true);
 				}
+				else {
+					customer.setMember(false);
+				}
+				
+				// append this customer object into the the array list of staff
+				customerList.add(customer);
 			}
-			pw.flush();
-			pw.close();
-			fr.close();
-			br.close();
-			bw.close();
-			fw.close();
-		
-		  PrintWriter writer2 = null;
-			try {
-				writer2 = new PrintWriter(oldFile);
-			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return customerList;
+	}
+
+	// pass in an ArrayList<Customer> and display all customers in the list
+	public void displayCustomerList(ArrayList<Customer> customerList) {
+		System.out.printf("CustId\tName\tPhone\t\tMember\n");
+		for (Customer customer : customerList) {
+			String member = "";
+			if (customer.isMember()) {
+				member = "y";
+			} else {
+				member = "n";
 			}
-			writer2.print("");
-			writer2.close();
-			
-		  FileReader fin = new FileReader("temp2.txt");  
-		  FileWriter fout = new FileWriter("customerList.txt", true);  
-		  int c;  
-		  while ((c = fin.read()) != -1) {  
-		   fout.write(c);  
-		  }  
-//		  System.out.println("Copy finish...");  
-		  displayCustomerList();
-		  fin.close();  
-		  fout.close();  
-		  
-		  PrintWriter writer = null;
-			try {
-				writer = new PrintWriter(tempFile);
-			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			writer.print("");
-			writer.close();
-			}
-			catch(Exception e) {}
+			System.out.println(customer.getCustomer_id() + "\t" + customer.getName() + "\t" + customer.getPhone() + "\t" + customer.isMember());
+		}
 	}
 	
+	// function to add customer object to list of customer
+	public void addCustomer(ArrayList<Customer> customerList, int customer_id, String name, String phone, String member) {
+		Customer newCustomer = new Customer();
+		newCustomer.setCustomer_id(customer_id);
+		newCustomer.setName(name);
+		newCustomer.setPhone(phone);
+		if(member.equals("y")) {
+			newCustomer.setMember(true);
+		}
+		else {
+			newCustomer.setMember(false);
+		}
+		customerList.add(newCustomer);
+	}
+
+	// returns the last customer id in the list
+	public int getLastCustomerId(ArrayList<Customer> customerList) {
+		int lastCustomerId = 0;
+		for (Customer customer : customerList) {
+			if (customer.getCustomer_id() > lastCustomerId) {
+				lastCustomerId = customer.getCustomer_id();
+			}
+		}
+		return lastCustomerId;
+	}
+
+	// remove customer object from the list of customer, store into a temp ArrayList if customer id is not CustomerIdemoval
+	public void removeCustomer(ArrayList<Customer> customerList, String customerIdToRemove) {
+		ArrayList<Customer> tempList = new ArrayList<Customer>();
+		for (Customer customer : customerList) {
+			if (customer.getCustomer_id() != Integer.parseInt(customerIdToRemove)) {
+				tempList.add(customer);
+			}
+		}
+		customerList.clear();
+		customerList.addAll(tempList);
+
+		System.out.println("Staff removed..");
+	}
+
+
+	// save customer list to csv file
+	public void saveCustomer(ArrayList<Customer> customerList, String fileName) {
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter(new File(fileName));
+			pw.print("");
+			pw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+			// write header row
+			bw.write("CustomerId,Name,Phone,Member");
+			bw.newLine();
+			
+			// write each customer object into the file
+			for (Customer customer : customerList) {
+				String member = "";
+				if (customer.isMember()) {
+					member = "y";
+				} else {
+					member = "n";
+				}
+				bw.write(customer.getCustomer_id() + "," + customer.getName() + "," + customer.getPhone() + "," + member);
+				bw.newLine();
+			}
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

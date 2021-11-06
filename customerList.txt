@@ -1,4 +1,4 @@
-customerid,name,phone,member
+CustomerId,Name,Phone,Member
 1,LiFang,98007220,y
 2,ZhangJ,96558304,y
 3,Loke,92830515,n
