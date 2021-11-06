@@ -1,0 +1,4 @@
+staffId,staffName,gender,jobTitle
+1,James,m,Waiter
+2,Davis,m,Chef
+3,Jenny,f,Manager
