@@ -100,9 +100,9 @@ public class ReservationMgr {
 	}
 	
 	//-----------------Display Reservation---------------------------//
-    public void displayResv(int n) {
+    	public void displayResv(int n) {
     	
-    	removeReservationTime(); // remove reservation the past 10 mins of current time
+    		removeReservationTime(); // remove reservation the past 10 mins of current time
     	
 		switch(n) {
 			case 0: 
@@ -119,8 +119,9 @@ public class ReservationMgr {
 			}
 			else System.out.println("There are no Reservations!!");
 			break;
+			
 			case 1: 
-			int term = displayReservation.removeReservationDisplay();
+			int term = displayReservation.GetCustomerId();
 			if(checkCustResv(term)) {
 				displayReservation.reservationDisplayCustomer(listOfReservations, term);
 				int m = displayReservation.removeReservationDisplay();
