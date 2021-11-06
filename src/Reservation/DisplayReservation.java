@@ -1,4 +1,4 @@
-package project;
+package reservation;
 
 import java.util.ArrayList;
 
