@@ -1,4 +1,4 @@
-package project;
+package Table;
 
 import java.util.ArrayList;
 
