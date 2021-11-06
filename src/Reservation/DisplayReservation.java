@@ -1,4 +1,4 @@
-package reservation;
+package Reservation;
 
 import java.util.ArrayList;
 
