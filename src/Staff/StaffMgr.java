@@ -1,6 +1,7 @@
 package Staff;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,46 +19,62 @@ import java.io.BufferedReader;
 public class StaffMgr {
 	private ArrayList<Staff> ListOfStaff;
 	
-	
-	// when initialise StaffMgr(), a list of <staff> objects are created
 	public StaffMgr() {
-		ListOfStaff = loadStaffList("StaffList.txt");
 	}
 	
 	public void init() {
 		StaffUI staffui = new StaffUI();
 		int choice;
+
+		ListOfStaff = loadStaffList("StaffList.txt");
 		
 		while((choice = staffui.displayMenu()) != 5) {
 			switch(choice) {
 			// Display staff
 			case 1:
-				displayStaffList();
+				displayStaffList(ListOfStaff);
 				break;
 			
 			// Add staff
 			case 2:	
-				// return last id
-				int staffId = returnNextAvailStaffId("StaffList.txt");
+				// an mgr function to get new staffId to be inserted
+				int staffId = getLastId(ListOfStaff)+1;
+				System.out.println("staffID to insert:"+staffId);
+				
+				// launch StaffUI to get staff info
 				String name = staffui.getStaffName();
 				String gender = staffui.getStaffGender();				
 				String title = staffui.getStaffTitle();
-				addStaff(staffId, name, gender, title);
+				
+				addStaff(ListOfStaff, staffId, name, gender, title);				
+
 				System.out.println("Staff List Updated..");
-				displayStaffList();
+				displayStaffList(ListOfStaff);
 				break;
 			
 			
 			// remove staff
 			case 3:
-			String staffId1 = staffui.getRemoveId();
-			removeStaff(staffId1);
+			
+			displayStaffList(ListOfStaff);
+			
+			// remove staff object from the ArrayList of Staff
+			String staffIdRemoval = staffui.getRemoveId();			
+			removeStaff(ListOfStaff, staffIdRemoval);
+
+			// show what's after removal
 			System.out.println("Staff List Updated..");
-			displayStaffList();
+			displayStaffList(ListOfStaff);
+			
 			break;
 			
 			case 4:
 				// insert function to go back one level
+				// save ArrayList of Staff to csv file
+
+				System.out.println("StaffList saved to file");
+				displayStaffList(ListOfStaff);
+				saveStaffList(ListOfStaff, "StaffList.txt");
 				break;
 				
 			// quit
@@ -68,7 +85,75 @@ public class StaffMgr {
 		}
 		
 	}}
+
+	// checks if the staffId is already in the ArrayList, if yes, return true
+	public boolean checkStaffId(int staffId) {
+		ListOfStaff = loadStaffList("StaffList.txt");
+
+		for(int i = 0; i < ListOfStaff.size(); i++) {
+			System.out.println("staffId: "+ListOfStaff.get(i).getStaff_id());
+			if(ListOfStaff.get(i).getStaff_id() == staffId) {
+				return true;
+			}
+		}
+		// System.out.println("Invalid Staff ID");
+		return false;
+	}
 	
+	// remove staff based on staffId, store into a temp ArrayList if staddId is not StaffIdRemoval
+	private void removeStaff(ArrayList<Staff> listOfStaff2, String staffIdRemoval) {
+		ArrayList<Staff> tempList = new ArrayList<Staff>();
+		
+		// for each staff in listOfStaff, add to a temp list if staffId is not StaffIdRemoval
+		for(Staff staff: listOfStaff2) {
+			if(staff.getStaff_id() != Integer.parseInt(staffIdRemoval)) {
+				tempList.add(staff);
+			}
+		}
+		
+		listOfStaff2.clear();
+		listOfStaff2.addAll(tempList);
+		
+		System.out.println("Staff Removed..");
+		displayStaffList(listOfStaff2);
+	}
+
+	// save staff list to csv file
+	private void saveStaffList(ArrayList<Staff> listOfStaff2, String fileName) {
+		// empty content in file fileName, then write new content, attributes of ListOfStaff2, then close the file
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter(new File(fileName));
+			pw.print("");
+			pw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			pw = new PrintWriter(new FileWriter(fileName, true));
+			pw.println("staffId,staffName,gender,jobTitle");
+			pw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// write new content to file fileName
+		try {
+			pw = new PrintWriter(new FileWriter(fileName, true));
+			for(Staff staff: listOfStaff2) {
+				pw.println(staff.getStaff_id() + "," + staff.getStaff_name() + "," + staff.getGender() + "," + staff.getJob_title());
+			}
+			pw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 	// pass in a file name, and returns a list of <staff> objects
 	public ArrayList<Staff> loadStaffList(String fileName){
 		ArrayList<Staff> ListOfStaff = new ArrayList<Staff>();
@@ -111,155 +196,35 @@ public class StaffMgr {
 	}
 	
 	// function to display the list of staff
-	public void displayStaffList() {
-		try {
-			FileReader fr = new FileReader("StaffList.txt");
-			BufferedReader br = new BufferedReader(fr);
-			//to store a line
-			String line = "";
-			System.out.println("Staff List");
-			System.out.printf("StaffId\t\tName\tGender\tTitle\n");
-			// to consume the header row of csv
-			String headerLine = "";
-			headerLine = br.readLine();
-			// keeps instanciating staff object until no more rows
-			while((line = br.readLine()) != null) {			
-				// split a line of string into an array
-				// [0] is id, [1] is name etc...
-				String[] values = line.split(",");
-				
-				String id = values[0];
-				String name = values[1];
-				String title = values[2];
-				String gender = values[3];
-				System.out.printf("%s\t\t%s\t%s\t%s\n", id, name, gender, title);
-			}
-			
-		} 
-		// catch blocks for reading csv or if not will throw error
-		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// catch IO exception for br.readline()
-			e.printStackTrace();
+	public void displayStaffList(ArrayList<Staff> ListOfStaff) {
+
+		for(Staff staff : ListOfStaff) {
+			// print out staff object's attributes
+			System.out.println(staff.getStaff_id() + " " + staff.getStaff_name() + " " + staff.getGender() + " " + staff.getJob_title());
 		}
 		}
 	
-	public void addStaff(int staffId, String name, String gender, String title) {
-		String outputText = staffId + "," + name + "," + gender + "," + title;
-		// read file
-		File file1 = new File("staffList.txt");
-		
-		// initialise writer object, append new row using printwriter
-		FileWriter fw = null;
-		try {
-			fw = new FileWriter(file1,true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		PrintWriter pw = new PrintWriter(fw);
-		pw.println(outputText);
-		pw.close();
+	// function to add staff object to the list of staff
+	public void addStaff(ArrayList<Staff> ListOfStaff, int staffId, String name, String gender, String title) {
+			Staff newStaff = new Staff();
+			newStaff.setStaff_id(staffId);
+			newStaff.setStaff_name(name);
+			newStaff.setGender(gender);
+			newStaff.setJob_title(title);
+			ListOfStaff.add(newStaff);
+
 	}
 
-	public int returnNextAvailStaffId(String fileName) {
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(fileName));
-			//to store a line
-			String line = "";
-			String line2 = "";
-			
-			while((line = br.readLine()) != null) {
-				//// test printing the file
-				// System.out.println(line);
-				String[] values = line.split(",");	
-//				System.out.println(line);
-				line2 = line;
+	// returns the last auto increment staff id in the list
+	public int getLastId(ArrayList<Staff> ListOfStaff) {
+		int lastId = 0;
+		for(Staff staff : ListOfStaff) {
+			if(staff.getStaff_id() > lastId) {
+				lastId = staff.getStaff_id();
 			}
-			
-			String[] lastrow = line2.split(",");
-			int a = Integer.parseInt(lastrow[0]);
-			return a+1;
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// catch IO exception for br.readline()
-			e.printStackTrace();
 		}
-		return 0;
+		return lastId;
 	}
-	
-	public void removeStaff(String staffId) {
-		
-		String tempFile = "temp2.txt";
-		
-		File oldFile = new File("StaffList.txt");
-		File newFile = new File(tempFile);
-		
-		String currentline;
-		String data[];
-		
-		try {
-			FileWriter fw = new FileWriter(tempFile,true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			PrintWriter pw = new PrintWriter(bw);
-			
-			FileReader fr = new FileReader("StaffList.txt");
-			BufferedReader br = new BufferedReader(fr);
-			
-			// keep reading next row until data[0] matches
-			while((currentline = br.readLine())!= null) {
-				data = currentline.split(",");
-				if(!(data[0].equalsIgnoreCase(staffId))) {
-					pw.println(currentline);
-				}
-			}
-			pw.flush();
-			pw.close();
-			fr.close();
-			br.close();
-			bw.close();
-			fw.close();
-		
-			// in order search for record and delete
-			// use a WRITER write to temp txt
-			// copy the temp.txt content into the staffList
-			
-		  PrintWriter writer2 = null;
-			try {
-				writer2 = new PrintWriter(oldFile);
-			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			writer2.print("");
-			writer2.close();
-			
-		  FileReader fin = new FileReader("temp2.txt");  
-		  FileWriter fout = new FileWriter("staffList.txt", true);  
-		  int c;  
-		  while ((c = fin.read()) != -1) {  
-		   fout.write(c);  
-		  }  
-//		  System.out.println("Copy finish...");  
-		  fin.close();  
-		  fout.close();  
-		  
-		  PrintWriter writer = null;
-			try {
-				writer = new PrintWriter(tempFile);
-			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			writer.print("");
-			writer.close();
-			}
-			catch(Exception e) {}
-	}
+
 	
 }
