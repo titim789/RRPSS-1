@@ -61,9 +61,7 @@ public class ReservationMgr {
 	
 	//-----------------Remove Reservation By ID---------------------------//
 	public void removeReservationId() {
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter Reservation Id to be deleted : ");
-		int resvId = sc.nextInt();
+		int resvId = displayReservation.getReservationIdFromUser();
 		
 		int i;
 		for(i=0; i<listOfReservations.size();i++)
@@ -82,7 +80,7 @@ public class ReservationMgr {
 	public void removeReservationTime() {
 		
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.MINUTE, -15);
+		cal.add(Calendar.MINUTE, -5);
 		
 		try {
 		int i;
@@ -121,7 +119,7 @@ public class ReservationMgr {
 			break;
 			
 			case 1: 
-			int term = displayReservation.GetCustomerId();
+			int term = displayReservation.getCustomerIdFromUser();
 			if(checkCustResv(term)) {
 				displayReservation.reservationDisplayCustomer(listOfReservations, term);
 				int m = displayReservation.removeReservationDisplay();
@@ -154,9 +152,8 @@ public class ReservationMgr {
 		if(checkCustResv(editTerm)) {
 			displayReservation.reservationDisplayCustomer(listOfReservations, editTerm);
 		
-			System.out.print("\nEnter Reservation Id to update : ");
 			Scanner scan = new Scanner(System.in);
-			int resvTerm = scan.nextInt();
+			int resvTerm = displayReservation.getReservationIdFromUser();
 		
 			int choice;
 			int tableId = -1; int cusId = -1;String date = "";int noPax = -1;String cName = "";String contactNo = "";
