@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuItemMgr {
-	private ArrayList<MenuItem> listOfMenuItems;
+	private static ArrayList<MenuItem> listOfMenuItems;
 	
 	//constructor
-	public MenuItemMgr() {}
+	public MenuItemMgr() {
+		listOfMenuItems = new ArrayList<MenuItem>();
+	}
 	
 	public void edit() {
 		MenuItemUI menuItemUI = new MenuItemUI();
@@ -25,35 +27,24 @@ public class MenuItemMgr {
 		}
 		else if(choice == 3) {
 			
-			for(int i=0; i<listOfMenuItems.size();i++)
-			{
-					int update = menuItemUI.getUpdateOption();
-					if(update == 1) {
-						int id = menuItemUI.getID();
-						String name = menuItemUI.getName();
-						updateItemName(id, name);
-						
-					}
-					else if(update == 2){
-						int id = menuItemUI.getID();
-						String description = menuItemUI.getDescription();
-						updateItemDescription(id, description);
-						
-					}
-					else if(update == 3){
-						int id = menuItemUI.getID();
-						double price = menuItemUI.getPrice();
-						updateItemPrice(id, price);;			
-					}
-					else if(update == 4){
-						int id = menuItemUI.getID();
-						TYPEOFMENU menuType = menuItemUI.getMenuType();
-						updateItemMenuType(id, menuType);						
-					}
-				
-			}
-			System.out.println("Invalid Item ID.");
-			
+			int id = menuItemUI.getID();	
+			int update = menuItemUI.getUpdateOption();
+				if(update == 1) {					
+					String name = menuItemUI.getName();
+					updateItemName(id, name);
+				}
+				else if(update == 2){
+					String description = menuItemUI.getDescription();
+					updateItemDescription(id, description);					
+				}
+				else if(update == 3){
+					double price = menuItemUI.getPrice();
+					updateItemPrice(id, price);;			
+				}
+				else if(update == 4){
+					TYPEOFMENU menuType = menuItemUI.getMenuType();
+					updateItemMenuType(id, menuType);						
+				}			
 		}
 		else if(choice == 4) {
 			System.out.println("returning...");
@@ -64,15 +55,19 @@ public class MenuItemMgr {
 	}
 	
 	public ArrayList<MenuItem> getListOfMenuItems() {
-		return this.listOfMenuItems;
+		return listOfMenuItems;
 	}
 
 	public void viewMenuItems() {
 		// TODO - implement Menu.viewMenuItems
 		int i;
-		System.out.println("Name\t|\tDescription\t|\tPrice\t|");
+		System.out.println(String.format("%-20s", "Name")
+				+"|"+String.format("%-50s", "Description")
+				+"|"+"Price"+"\t|");
 		for(i=0; i<listOfMenuItems.size(); i++) {
-			System.out.println(listOfMenuItems.get(i).getName()+"\t|\t"+listOfMenuItems.get(i).getDescription()+"\t|\t"+listOfMenuItems.get(i).getPrice()+"\t|");
+			System.out.println(String.format("%-20s", listOfMenuItems.get(i).getName())
+					+"|"+String.format("%-50s", listOfMenuItems.get(i).getDescription())
+					+"|"+listOfMenuItems.get(i).getPrice()+"\t|");
 		}
 	}
 	
@@ -105,8 +100,7 @@ public class MenuItemMgr {
 			return 0;
 		}
 		
-		MenuItem temp = new MenuItem(itemId, name, description,price,menuType);
-		listOfMenuItems.add(temp);
+		listOfMenuItems.add(new MenuItem(itemId, name, description,price,menuType));
 		return 1;
 	}
 	
@@ -121,7 +115,7 @@ public class MenuItemMgr {
 		{
 			if(listOfMenuItems.get(i).getItemId() == itemId) {
 				listOfMenuItems.remove(i);
-				System.out.println("itemID:" + itemId + "removed.");
+				System.out.println("itemID:" + itemId + " removed.");
 				return;
 			}
 		}
@@ -144,7 +138,7 @@ public class MenuItemMgr {
 		{
 			if(listOfMenuItems.get(i).getItemId() == itemId) {
 				listOfMenuItems.get(i).setName(newName);
-				System.out.println("itemID:" + itemId + "'s name changed to"+newName+".");
+				System.out.println("Item ID:" + itemId + "'s name changed to "+newName+".");
 				return;
 			}
 		}
@@ -167,7 +161,7 @@ public class MenuItemMgr {
 		{
 			if(listOfMenuItems.get(i).getItemId() == itemId) {
 				listOfMenuItems.get(i).setPrice(newPrice);
-				System.out.println("itemID:" + itemId + "'s price changed to"+newPrice+".");
+				System.out.println("itemID:" + itemId + "'s price changed to "+newPrice+".");
 				return;
 			}
 		}
@@ -186,7 +180,7 @@ public class MenuItemMgr {
 		{
 			if(listOfMenuItems.get(i).getItemId() == itemId) {
 				listOfMenuItems.get(i).setDescription(newDesc);
-				System.out.println("itemID:" + itemId + "'s Description changed to"+newDesc+".");
+				System.out.println("itemID:" + itemId + "'s Description changed to "+newDesc+".");
 				return;
 			}
 		}
@@ -205,11 +199,21 @@ public class MenuItemMgr {
 		{
 			if(listOfMenuItems.get(i).getItemId() == itemId) {
 				listOfMenuItems.get(i).setMenuType(menuType);
-				System.out.println("itemID:" + itemId + "'s Menu Item type changed to"+menuType+".");
+				System.out.println("itemID:" + itemId + "'s Menu Item type changed to "+menuType+".");
 				return;
 			}
 		}
 		System.out.println(itemId+" not found.");
+	}
+	
+	public static MenuItem getItemMenu(int itemId) {
+		int i;
+		for(i=0;i<listOfMenuItems.size();i++) {
+			if(listOfMenuItems.get(i).getItemId() == itemId) {
+				return listOfMenuItems.get(i);
+			}
+		}
+		return null;
 	}
 	
 	public void load() {

@@ -11,6 +11,7 @@ public class MenuMgr {
 		// TODO - implement Menu.Menu
 		menuItemMgr = new MenuItemMgr();
 		promotionPackageMgr = new PromotionPackageMgr();
+		load();
 	}
 	
 	public void seeMenu() {
@@ -19,7 +20,10 @@ public class MenuMgr {
 	}
 	
 	public void editMenu() {
-		System.out.println("Choose Menu Type:\n1)\tMenu\n2)\tPromotions");
+		System.out.println("Choose Menu Type:\n"
+				+ "1)\tMenu\n"
+				+ "2)\tPromotions\n"
+				+ "3)\tExit");
 		Scanner sc = new Scanner(System.in);
 		int choice = sc.nextInt();
 		if(choice == 1) {
@@ -28,7 +32,9 @@ public class MenuMgr {
 		else if(choice == 2) {
 			promotionPackageMgr.edit(menuItemMgr.getListOfMenuItems());
 		}
-		sc.close();
+		else {
+			System.out.println("Exiting to Main Menu");
+		}
 	}
 	
 	public MenuItem getMenuItem(int itemId){

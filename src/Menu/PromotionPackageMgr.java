@@ -12,7 +12,9 @@ public class PromotionPackageMgr {
 	private ArrayList<PromotionPackage> listOfPromotion;
 	
 	//constructor
-	public PromotionPackageMgr() {}
+	public PromotionPackageMgr() {
+		listOfPromotion = new ArrayList<PromotionPackage>();
+	}
 	
 	public void edit(ArrayList<MenuItem> listOfMenuItems) {
 	    PromotionPackageUI promotionPackageUI = new PromotionPackageUI();
@@ -24,25 +26,21 @@ public class PromotionPackageMgr {
 	        int packageId = promotionPackageUI.getRemoveOption();
 	        removePromotion(packageId);
 	    }else if(choice == 3){
+	    	int packageId = promotionPackageUI.getUpdateIDOption();
 	        int choice2 = promotionPackageUI.getUpdateOption();
 	        if(choice2==1){
-	            int packageId = promotionPackageUI.getUpdateIDOption();
 	            String packageName = promotionPackageUI.getUpdateNameOption();
 	            updatePackageName(packageId, packageName);
 	        }else if(choice2==2){
-	            int packageId = promotionPackageUI.getUpdateIDOption();
 	            String packageDescription = promotionPackageUI.getUpdateDescOption();
 	            updatePackageDescription(packageId, packageDescription);
 	        }else if(choice2==3){
-	            int packageId = promotionPackageUI.getUpdateIDOption();
 	            double packagePrice = promotionPackageUI.getUpdatePriceOption();
 	            updatePackagePrice(packageId, packagePrice);
 	        }else if(choice2==4){
-	            int packageId = promotionPackageUI.getUpdateIDOption();
 	            int itemId = promotionPackageUI.getAddItemOption();
 	            addItemToPackage(packageId, itemId, listOfMenuItems);
 	        }else if(choice2==5){
-	            int packageId = promotionPackageUI.getUpdateIDOption();
 	            int itemId = promotionPackageUI.getRemoveItemOption();
 	            removeItemFromPackage(packageId, itemId);
 	        }else if(choice2==6){
@@ -51,10 +49,11 @@ public class PromotionPackageMgr {
 	            choice=5;
 	        }
 	    }else if(choice == 4){
-	        System.out.println("returning...");
+	        System.out.println("Returning to Main Menu...");
 	        return;
 	    }else{
-	        System.out.println("Invalid edit option.\nreturning...");
+	        System.out.println("Invalid edit option.\n"
+	        		+ "Returning to Main Menu...");
 	        return;
 	    }
 	}
@@ -72,8 +71,11 @@ public class PromotionPackageMgr {
 	        System.out.println("Package Price\t"+listOfPromotion.get(i).getPackagePrice());
 	        System.out.println("Package Desc\t"+listOfPromotion.get(i).getPackageDesc());
 	        System.out.println("Package Menu Items");
-	        System.out.println("Name\t|\tDescription\t|\tPrice\t|");
+	        System.out.println(String.format("%-20s", "Name")
+					+"|"+String.format("%-50s", "Description")
+					+"|"+"Original Price"+"\t|");
 	        viewItemsInPackage(listOfPromotion.get(i).getPackageId());
+	        System.out.println("\n");
 	    }
 	}
 
@@ -116,7 +118,7 @@ public class PromotionPackageMgr {
 		{
 			if(listOfPromotion.get(i).getPackageId() == packageId) {
 				listOfPromotion.remove(i);
-				System.out.println("packageId:" + packageId + "removed.");
+				System.out.println("packageId:" + packageId + " removed.");
 				return;
 			}
 		}
@@ -139,7 +141,7 @@ public class PromotionPackageMgr {
 		{
 			if(listOfPromotion.get(i).getPackageId() == packageId) {
 				listOfPromotion.get(i).setPackageName(newName);
-				System.out.println("packageId:" + packageId + "'s name changed to"+newName+".");
+				System.out.println("packageId:" + packageId + "'s name changed to "+newName+".");
 				return;
 			}
 		}
@@ -158,7 +160,7 @@ public class PromotionPackageMgr {
 		{
 			if(listOfPromotion.get(i).getPackageId() == packageId) {
 				listOfPromotion.get(i).setPackageDesc(newDesc);
-				System.out.println("packageId:" + packageId + "'s Description changed to"+newDesc+".");
+				System.out.println("packageId:" + packageId + "'s Description changed to "+newDesc+".");
 				return;
 			}
 		}
@@ -181,7 +183,7 @@ public class PromotionPackageMgr {
 		{
 			if(listOfPromotion.get(i).getPackageId() == packageId) {
 				listOfPromotion.get(i).setPackagePrice(newPrice);
-				System.out.println("packageId:" + packageId + "'s price changed to"+newPrice+".");
+				System.out.println("packageId:" + packageId + "'s price changed to "+newPrice+".");
 				return;
 			}
 		}
@@ -205,7 +207,7 @@ public class PromotionPackageMgr {
 				{
 					if(listOfPromotion.get(j).getPackageId() == packageId) {
 						listOfPromotion.get(j).addMenuItem(temp);;
-						System.out.println("itemId:" + itemId + "added to packageId"+packageId+".");
+						System.out.println("itemId:" + itemId + " added to packageId "+packageId+".");
 						return;
 					}
 				}
@@ -228,6 +230,7 @@ public class PromotionPackageMgr {
 		{
 			if(listOfPromotion.get(i).getPackageId() == packageId) {
 				listOfPromotion.get(i).removeMenuItem(itemId);
+				System.out.println("itemId:"+itemId+" has been removed from Package Id "+ packageId);
 				return;
 			}
 		}
@@ -246,7 +249,9 @@ public class PromotionPackageMgr {
 			if(listOfPromotion.get(i).getPackageId() == packageId) {
 				PromotionPackage temp = listOfPromotion.get(i);
 				for(j=0; j<temp.getNumberOfItems();j++){
-					System.out.println(temp.getListOfMenuItem().get(j).getName()+"\t|\t"+temp.getListOfMenuItem().get(j).getDescription()+"\t|\t"+temp.getListOfMenuItem().get(j).getPrice()+"\t|");
+					System.out.println(String.format("%-20s", temp.getListOfMenuItem().get(j).getName())
+								+"|"+String.format("%-50s", temp.getListOfMenuItem().get(j).getDescription())
+								+"|"+temp.getListOfMenuItem().get(j).getPrice()+"\t\t|");
 				}
 				return;
 			}
