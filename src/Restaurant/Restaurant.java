@@ -53,8 +53,8 @@ public class Restaurant {
 				System.out.println("3 : Update Reservation");
 				System.out.println("4 : Quit");
 				System.out.print("Enter Choice : ");
-				choice = sc.nextInt();
-				switch(choice){
+				int reservechoice = sc.nextInt();
+				switch(reservechoice){
 					case 0:
 						reserveManager.displayTableDetails();
 						break;
