@@ -16,26 +16,13 @@ public class OrderMgr {
 		
 	}
 	
-	public void newOrder() {
-		Scanner scan = new Scanner(System.in);
-		int orderId, staffId, customerId, tableId;
-		orderId = ListOfOrders.size();
+	public void newOrder(int staffId, int customerId, int tableId) {
 		
-		System.out.println("\n---Adding new order---\n");
-		System.out.println("Enter staffId: ");
-		staffId = scan.nextInt();
-		System.out.println("Enter customerId: ");
-		customerId = scan.nextInt();
-		System.out.println("Enter tableId: ");
-		tableId = scan.nextInt();
-		
-	    Calendar caley = Calendar.getInstance();
-	    
+		int orderId = ListOfOrders.size();
+		Calendar caley = Calendar.getInstance();
 	    Order ord = new Order(orderId, staffId, customerId, tableId, caley);
 	    ListOfOrders.add(ord);
-	    scan.close();
 	    //print menu and call add items method in the restaurant boundary
-	    
 	}
 	
 	public Order getOrder(int orderId) {
@@ -63,7 +50,14 @@ public class OrderMgr {
 		ListOfOrders.get(orderId).removePromotion(pack);
 	}
 	
-	/*
+	public boolean exists(int orderId) {
+		if (orderId > ListOfOrders.size() ) {
+			return false;
+		}
+		return true;
+	}
+	
+	/* no need save/load orders
 	public void save() {
 		
 	}

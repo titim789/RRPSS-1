@@ -29,53 +29,33 @@ public class InvoiceMgr {
 		
 	}
 	
-	public void generateSalesReport(){
-		int opt = 0;
-		System.out.println("1. Generate report for today\n2.Generate report for this month\n");
-		Scanner sk = new Scanner(System.in);
-		opt = sk.nextInt();
-		//check if invalid input.
-		
+	
+	public void generateSalesReportMth(){
 		Date dte = new Date();
 		Calendar tdy = Calendar.getInstance();
 		tdy.setTime(dte);
-		int tdyDate = tdy.get(Calendar.DATE);
+		//int tdyDate = tdy.get(Calendar.DATE);
 		int tdyMonth = tdy.get(Calendar.MONTH);
+		int tdyYear = tdy.get(Calendar.YEAR);
 		double revenue=0;
-		
-		switch (opt) {
-		case 1: 
-			System.out.println("\n");
-			for(int i=0;i<listOfInvoice.size();i++) {
-				if( ((listOfInvoice.get(i)).getCalTime()).get(Calendar.DATE) == tdyDate) {
-					System.out.println("Invoice "+i+": ");
-					(listOfInvoice.get(i).getOrder()).viewOrder();
-					revenue += listOfInvoice.get(i).getGrandTotal();
-				}
+		for(int i=0;i<listOfInvoice.size();i++) {
+			if( ( ( (listOfInvoice.get(i)).getCalTime() ).get(Calendar.MONTH) == tdyMonth) 
+				&&
+				( ( (listOfInvoice.get(i)).getCalTime() ).get(Calendar.YEAR) == tdyYear)	
+			  ){
+				System.out.println("Invoice "+i+": ");
+				(listOfInvoice.get(i).getOrder()).viewOrder();
+				revenue += listOfInvoice.get(i).getGrandTotal();
 			}
-			System.out.println("Total Revenue: $"+ revenue);
-			break;
-		case 2:
-			for(int i=0;i<listOfInvoice.size();i++) {
-				if( ((listOfInvoice.get(i)).getCalTime()).get(Calendar.MONTH) == tdyMonth) {
-					System.out.println("Invoice "+i+": ");
-					(listOfInvoice.get(i).getOrder()).viewOrder();
-					revenue += listOfInvoice.get(i).getGrandTotal();
-				}
-			}
-			System.out.println("Total Revenue: $"+ revenue);
-			break;
-		default:
-			
 		}
-		sk.close();
+		
+		System.out.println("Total Revenue: $"+ revenue);
+			
+		
 	}
 	
-	public void generateSalesReportDates(){
-		String str;
-		System.out.println("Input start date (inclusive) in DD/MM/YYYY format: ");
-		Scanner sk = new Scanner(System.in);
-		str = sk.nextLine();
+	
+	public void generateSalesReport(String str, String s){
 		//to do: check if invalid input.
 		
 		//splitting into date month year
@@ -90,10 +70,6 @@ public class InvoiceMgr {
 		startDate.set(Calendar.MONTH, sm);
 		startDate.set(Calendar.DAY_OF_MONTH, sd);
 		
-		String s;
-		System.out.println("Input end date (inclusive) in DD/MM/YYYY format: ");
-		//to do: check if valid input.
-		s = sk.nextLine();
 		String[] sarray = s.split("/");
 		int ed,em,ey;
 		ed = Integer.parseInt(stringarray[0]);
@@ -119,7 +95,6 @@ public class InvoiceMgr {
 		}
 		
 		System.out.println("Total revenue for this period: $"+ revenue);
-		sk.close();
 	}
 	
 	/*
@@ -163,7 +138,7 @@ public class InvoiceMgr {
 	}
 
 	
-	public void save() throws IOException {
+	public void save(){
 		try{
 		    FileOutputStream writeData = new FileOutputStream("invoice.txt");
 		    ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
@@ -178,7 +153,7 @@ public class InvoiceMgr {
 		
 	}
 	
-	public void load() throws IOException{
+	public void load(){
 		try{
 		    FileInputStream readData = new FileInputStream("invoice.txt");
 		    ObjectInputStream readStream = new ObjectInputStream(readData);
