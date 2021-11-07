@@ -4,14 +4,23 @@ import Order.Order;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
+
+//import Menu.MenuItem;
+
 import java.util.Date;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 //import java.text.SimpleDateFormat;
 
 
 
 public class InvoiceMgr {
 	
-	private ArrayList<Invoice> listOfInvoice = new ArrayList<Invoice>();
+	private ArrayList<Invoice> listOfInvoice;
 	//private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy,HH:mm");
 	
 	//private static final SimpleDateFormat justDates = new SimpleDateFormat("dd/MM/yyyy");
@@ -62,6 +71,57 @@ public class InvoiceMgr {
 		sk.close();
 	}
 	
+	public void generateSalesReportDates(){
+		String str;
+		System.out.println("Input start date (inclusive) in DD/MM/YYYY format: ");
+		Scanner sk = new Scanner(System.in);
+		str = sk.nextLine();
+		//to do: check if invalid input.
+		
+		//splitting into date month year
+		String[] stringarray = str.split("/");
+		int sd,sm,sy;
+		sd = Integer.parseInt(stringarray[0]);
+		sm = Integer.parseInt(stringarray[1]);
+		sy = Integer.parseInt(stringarray[2]);
+		
+		Calendar startDate = Calendar.getInstance();
+		startDate.set(Calendar.YEAR, sy);
+		startDate.set(Calendar.MONTH, sm);
+		startDate.set(Calendar.DAY_OF_MONTH, sd);
+		
+		String s;
+		System.out.println("Input end date (inclusive) in DD/MM/YYYY format: ");
+		//to do: check if valid input.
+		s = sk.nextLine();
+		String[] sarray = s.split("/");
+		int ed,em,ey;
+		ed = Integer.parseInt(stringarray[0]);
+		em = Integer.parseInt(stringarray[1]);
+		ey = Integer.parseInt(stringarray[2]);
+		
+		Calendar endDate = Calendar.getInstance();
+		endDate.set(Calendar.YEAR, sy);
+		endDate.set(Calendar.MONTH, sm);
+		endDate.set(Calendar.DAY_OF_MONTH, sd);
+		
+		double revenue=0;
+		
+		for(int i=0;i<listOfInvoice.size();i++) {
+			if( ( (listOfInvoice.get(i)).getCalTime()).compareTo(startDate) >= 0 ) {
+				if( ( (listOfInvoice.get(i)).getCalTime()).compareTo(endDate) <= 0 ) {
+					System.out.println("Invoice "+i+": ");
+					(listOfInvoice.get(i).getOrder()).viewOrder();
+					revenue += listOfInvoice.get(i).getGrandTotal();
+				}
+			}
+			
+		}
+		
+		System.out.println("Total revenue for this period: $"+ revenue);
+		sk.close();
+	}
+	
 	/*
 	 * not necessary to update invoices? Printed = customer paid and left alr.
 	public void updateInvoice(int invoiceId) {
@@ -102,14 +162,36 @@ public class InvoiceMgr {
 		System.out.println("GRAND TOTAL: "+ listOfInvoice.get(invoiceId).getGrandTotal());
 	}
 
-	/*
+	
 	public void save() throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter("inv.txt", true));
-		BufferedReader br = new BufferedReader(new FileReader("inv.txt"));
-		//wait how to save an arraylist of items in a csv???
+		try{
+		    FileOutputStream writeData = new FileOutputStream("invoice.txt");
+		    ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+
+		    writeStream.writeObject(listOfInvoice);
+		    writeStream.flush();
+		    writeStream.close();
+
+		}catch (IOException e) {
+		    e.printStackTrace();
+		}
 		
 	}
-	*/
+	
+	public void load() throws IOException{
+		try{
+		    FileInputStream readData = new FileInputStream("invoice.txt");
+		    ObjectInputStream readStream = new ObjectInputStream(readData);
+		    listOfInvoice = (ArrayList<Invoice>) readStream.readObject();
+		    readStream.close();
+		    //System.out.println(listOfMenuItems.toString());
+		}catch (Exception e) {
+		    e.printStackTrace();
+		}
+		
+	}
+	
+	
 /*
 	catch(FileNotFoundException e){
 		e.printStackTrace();
