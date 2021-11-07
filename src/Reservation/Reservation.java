@@ -34,7 +34,7 @@ public class Reservation {
 		return this.reservationId;
 	}
 
-	public void setReservation_id(int reservationId) {
+	public void setReservationId(int reservationId) {
 		this.reservationId = reservationId;
 	}
 
@@ -50,7 +50,7 @@ public class Reservation {
 		return this.customerId;
 	}
 
-	public void setCustomer_id(int customerId) {
+	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
 

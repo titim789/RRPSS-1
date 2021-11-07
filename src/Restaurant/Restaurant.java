@@ -24,6 +24,7 @@ public class Restaurant {
 					+ "6.\tExit");
 			System.out.print("Enter Choice : ");
 			choice = sc.nextInt();
+			//Menu Choice
 			if(choice == 1) {
 				System.out.println("1.\tView Menu\n"
 						+ "2.\tEdit Menu\n"
@@ -42,9 +43,11 @@ public class Restaurant {
 					System.out.println("Invalid Choice.\nReturning to Main Menu...");
 				}
 			}
+			//Ordering Choice
 			else if(choice == 2) {
 				
 			}
+			//Tables & Reservations Choice
 			else if(choice == 3) {
 				System.out.println("\n--------------------Reservation------------------------------");
 				System.out.println("0 : View Tables");
@@ -94,13 +97,15 @@ public class Restaurant {
 						break;
 				}
 			}
+			//Invoice Choice
 			else if(choice == 4) {
 							
 			}
+			//Sales Report Choice
 			else if(choice == 5) {
 				
 			}
-		}while(choice != 6);
+		}while(choice != 6); //Exiting
 		menuMgr.save();
 	}	
 
