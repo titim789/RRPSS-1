@@ -28,6 +28,7 @@ public class Restaurant {
 		staffMgr = new StaffMgr();
 		customerMgr = new CustomerMgr();
 		orderMgr = new OrderMgr();
+		invoiceMgr = new InvoiceMgr();
 		
 		Scanner sc = new Scanner(System.in);
 		int choice;
@@ -82,7 +83,12 @@ public class Restaurant {
 						int customerId = sc.nextInt();
 						System.out.println("Enter tableId: ");
 						int tableId = sc.nextInt();
+						int temp = orderMgr.currentSize();
 						orderMgr.newOrder(staffId, customerId, tableId);
+						
+						//print for ref
+						System.out.println("Your OrderID: "+temp+"\n");
+						
 						break;
 					case 2:
 						System.out.println("\nEnter order ID: ");
@@ -115,7 +121,7 @@ public class Restaurant {
 						System.out.println("\nadded.\n");
 						break;
 					case 4:
-						System.out.println("Enter package ID: ");
+						System.out.println("Enter order ID: ");
 						int addPackOrderId = sc.nextInt();
 						//check if exists
 						//wanna display just package menu anot?
@@ -126,7 +132,7 @@ public class Restaurant {
 						System.out.println("Enter quantity to add: ");
 						int addPackQty = sc.nextInt();
 						
-						menuMgr.getPromotionPackage(addPackId);
+						//menuMgr.getPromotionPackage(addPackId);
 						
 						//creating a new orderPromoPackage obj
 						orderPromotionPackage pak = new orderPromotionPackage(addPackId, menuMgr.getPromotionPackage(addPackId).getPackageName(),
@@ -145,11 +151,14 @@ public class Restaurant {
 						System.out.println("Enter item ID to remove: ");
 						int removeItemId = sc.nextInt();
 						//hmmm can check if exists first? Rather than just println and return null if not exists
+						System.out.println("Enter quantity to remove: ");
+						int removeItemIdQty = sc.nextInt();
 						
 						
 						orderMgr.removeItem(removeOrderId,
-								( (orderMgr.getOrder(removeOrderId)).getOrderMenuItem(removeItemId) ) );
-						System.out.println("\nremoved.\n");
+								( (orderMgr.getOrder(removeOrderId)).getOrderMenuItem(removeItemId) ),
+								removeItemIdQty);
+						//System.out.println("\nremoved.\n");
 						break;
 					case 6:
 						System.out.println("Enter order ID: ");
@@ -160,10 +169,13 @@ public class Restaurant {
 						System.out.println("Enter package ID to remove: ");
 						int removePackageId = sc.nextInt();
 						//hmmm can check if exists first? Rather than just println and return null if not exists
+						System.out.println("Enter quantity to remove: ");
+						int removePackIdQty = sc.nextInt();
 						
 						orderMgr.removePackage(removePackId,
-								( (orderMgr.getOrder(removePackId)).getOrderPromotionPackage(removePackageId) ) );
-						System.out.println("\nremoved.\n");
+								( (orderMgr.getOrder(removePackId)).getOrderPromotionPackage(removePackageId) ),
+								removePackIdQty);
+						//System.out.println("\nremoved.\n");
 						break;
 					case 7:
 					default:
@@ -226,20 +238,25 @@ public class Restaurant {
 			else if(choice == 4) {
 				System.out.println("What do you want to do? \n"
 				        + "1 - Create New Invoice\n"
-				        + "2 - Generate Sales Report\n"
-				        + "3 - Save Invoices to File\n"
-				        + "4 - Load Invoices From File\n"
-				        + "5 - Quit");
+				        + "2 - Print Invoice\n"
+				        + "3 - Generate Sales Report\n"
+				        + "4 - Save Invoices to File\n"
+				        + "5 - Load Invoices From File\n"
+				        + "6 - Quit");
 				int invchoice = sc.nextInt();
 				switch(invchoice) {
 					case 1:
 						System.out.println("Please enter order ID to create invoice for: ");
 						int invOrderId = sc.nextInt();
 						//to check if ord id exists
+						int tempy = invoiceMgr.currentSize();
 						invoiceMgr.newInvoice(orderMgr.getOrder(invOrderId), (customerMgr.getCustomerObj((orderMgr.getOrder(invOrderId)).getcustomerId())).isMember());
-						System.out.println("Invoice created.");
+						System.out.println("Invoice ID "+tempy+" created.");
 						break;
 					case 2:
+						System.out.println("Please enter order ID to print invoice for: ");
+						int printInvOrdId = sc.nextInt();
+						invoiceMgr.printInvoice(printInvOrdId);
 						break;
 					case 3:
 						invoiceMgr.save();

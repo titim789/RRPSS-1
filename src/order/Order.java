@@ -17,8 +17,10 @@ public class Order {
 	private int tableId;
 	private int customerId;
 	private double orderPrice;
-	private ArrayList<orderMenuItem> listOfOrderItems = new ArrayList<orderMenuItem>();
-	private ArrayList<orderPromotionPackage> listOfOrderPromotions = new ArrayList<orderPromotionPackage>();
+	//private ArrayList<orderMenuItem> listOfOrderItems = new ArrayList<orderMenuItem>();
+	//private ArrayList<orderPromotionPackage> listOfOrderPromotions = new ArrayList<orderPromotionPackage>();
+	private ArrayList<orderMenuItem> listOfOrderItems;
+	private ArrayList<orderPromotionPackage> listOfOrderPromotions;
 	private Calendar timestamp;
 	
 	private static final SimpleDateFormat sdf = 
@@ -26,13 +28,13 @@ public class Order {
 
 	public Order(int orderId, int staffId, int customerId, int tableId, Calendar timestamp) {
 		//added tableId as param
-		
 		this.orderId = orderId;
 		this.staffId = staffId;
 		this.customerId = customerId;
 		this.tableId = tableId;
 		this.timestamp = timestamp;
-		
+		listOfOrderItems = new ArrayList<orderMenuItem>();
+		listOfOrderPromotions = new ArrayList<orderPromotionPackage>();
 	}
 	
 
@@ -124,31 +126,57 @@ public class Order {
 		// TODO - implement Order.viewOrder
 		//throw new UnsupportedOperationException();
 		
-		
-		//if empty then println that is all empty. <- either in ctrl or here
-		
-		System.out.println("Ala carte items: ");
-		System.out.println("Item ID" + "\t" + "Item name" + "\t" + "Quantity" + "\t" + "Item price (each)" + "\t" + "Type");
-		listOfOrderItems.forEach((n) -> printItem(n));
-		
-		System.out.println("\nPromotion Package items: ");
-		System.out.println("\nPackage ID" + "\t" + "Package name" + "\t" + "Quantity" + "\t" + "Package price");
-		listOfOrderPromotions.forEach((n) -> printPack(n));
-		
+		if(listOfOrderItems.size()==0 && listOfOrderPromotions.size()==0) {
+			System.out.println("Order is empty.\n");
+		}
+		else {
+			if(listOfOrderItems.size()>0) {
+				System.out.println("Ala carte items: ");
+				System.out.println(String.format("%-10s", "ItemID") + 
+						String.format("%-20s", "Item name") +
+						String.format("%-10s", "Quantity") +
+						String.format("%-20s", "Item price (each)" ) +
+						String.format("%-20s", "Type")
+						);
+				listOfOrderItems.forEach((n) -> printItem(n));	
+			}
+			if(listOfOrderPromotions.size()>0) {
+				System.out.println("\nPromotion Package items: ");
+				System.out.println(String.format("%-10s", "PackID") + 
+						String.format("%-20s", "Package name") +
+						String.format("%-10s", "Quantity") + 
+						String.format("%-20s","Package price (each)")
+						);
+				listOfOrderPromotions.forEach((n) -> printPack(n));
+				System.out.println("\n");	
+			}
+		}
 	}
 	
 	//another method to print the stuff
 	public void printItem(orderMenuItem n){
-		System.out.println(n.getItemId() + "\t" + n.getName() + "\t" + n.getQty() + "\t" + n.getPrice() + "\t" + (n.getMenuType().toString()));
+		System.out.println(String.format("%-10s", n.getItemId() ) + 
+				String.format("%-20s", n.getName() ) + 
+				String.format("%-10s", n.getQty() ) + 
+				String.format("%-20s", n.getPrice() ) +
+				String.format("%-20s", (n.getMenuType().toString()) )
+				);
 	}
 	
 	public void printItemNoPrice(MenuItem n){
-		System.out.println(n.getItemId() + "\t" + n.getName() + "\t" + (n.getMenuType().toString()));
+		System.out.println(n.getItemId() + "\t" +
+						n.getName() + "\t" +
+						(n.getMenuType().toString())
+						);
 	}
 	
 	//for package
 	public void printPack(orderPromotionPackage p){
-		System.out.println(p.getPackageId() + "\t" + p.getPackageName() + "\t" + p.getQty() + "\t" + p.getPackagePrice());
+		System.out.println(String.format("%-10s", p.getPackageId() )+ 
+				String.format("%-20s", p.getPackageName() )+
+				String.format("%-10s", p.getQty() )+ 
+				String.format("%-20s", p.getPackagePrice() )
+				);
 		
 		ArrayList<MenuItem> temp = p.getListOfMenuItem();
 		System.out.println("Package contents: ");

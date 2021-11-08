@@ -13,6 +13,7 @@ public class orderPromotionPackage extends PromotionPackage{
 	public orderPromotionPackage(int packageId, String packageName, double packagePrice,
 			String packageDescription, ArrayList<MenuItem> listOfMenuItem, int qty) {
 		super(packageId, packageName, packagePrice, packageDescription, listOfMenuItem);
+		this.qty = qty;
 		this.qtyPrice = packagePrice * qty;
 		//super.setPackagePrice(packagePrice*qty);
 	}
@@ -29,4 +30,7 @@ public class orderPromotionPackage extends PromotionPackage{
 		return qtyPrice;
 	}
 
+	public void setQtyPrice(double qtyPrice) {
+		this.qtyPrice = qtyPrice;
+	}
 }

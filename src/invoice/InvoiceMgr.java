@@ -27,7 +27,7 @@ public class InvoiceMgr {
 	//private static final SimpleDateFormat justDates = new SimpleDateFormat("dd/MM/yyyy");
 	
 	public InvoiceMgr() {
-		
+		listOfInvoice = new ArrayList<Invoice>();
 	}
 	
 	
@@ -103,6 +103,17 @@ public class InvoiceMgr {
 	}
 	*/
 	
+	public boolean isExists(int invId) {
+		if(invId>=listOfInvoice.size()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public int currentSize() {
+		return listOfInvoice.size();
+	}
+	
 	public void newInvoice(Order ord, boolean isMember) {
 		int invoiceId = listOfInvoice.size();
 		int orderId = ord.getorderId();
@@ -122,6 +133,11 @@ public class InvoiceMgr {
 	}
 	
 	public void printInvoice(int invoiceId) {
+		if(invoiceId>=listOfInvoice.size()) {
+			System.out.println("Invoice does not exist. Create before printing.");
+			return;
+		}
+		
 		System.out.println("\nPrinting InvoiceId: "+ invoiceId);
 		System.out.println("For OrderId: "+ listOfInvoice.get(invoiceId).getOrderId());
 		String datey = listOfInvoice.get(invoiceId).getTimestamp();
@@ -133,7 +149,8 @@ public class InvoiceMgr {
 		System.out.println("Total Price: "+listOfInvoice.get(invoiceId).getTotalPrice());
 		System.out.println("Tax: "+ listOfInvoice.get(invoiceId).getTax());
 		System.out.println("Discount: "+ listOfInvoice.get(invoiceId).getDiscount());
-		System.out.println("GRAND TOTAL: "+ listOfInvoice.get(invoiceId).getGrandTotal());
+		System.out.println("GRAND TOTAL: "+ listOfInvoice.get(invoiceId).getGrandTotal() 
+				+ "\n");
 	}
 
 	

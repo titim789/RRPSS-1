@@ -19,6 +19,10 @@ public class orderMenuItem extends MenuItem{
 		return qtyPrice;
 	}
 	
+	public void setQtyPrice(double qtyPrice) {
+		this.qtyPrice = qtyPrice;
+	}
+	
 	public int getQty() {
 		return qty;
 	}
