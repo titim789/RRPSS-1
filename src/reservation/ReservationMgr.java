@@ -37,6 +37,11 @@ public class ReservationMgr {
 		tableManager.displayTbl();
 	}
 	
+	//-----------------Check Availability---------------------------//
+	public void checkAvail(){
+		tableManager.checkAvailability();
+	}
+	
 	
 	//-----------------Add New Reservation---------------------------//
 	public void newReservation(int tableId, int customerId, String calen, int noOfPax, String name, String contact){
