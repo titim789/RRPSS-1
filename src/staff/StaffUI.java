@@ -1,4 +1,4 @@
-package Staff;
+package staff;
 
 import java.util.ArrayList;
 import java.util.Scanner;

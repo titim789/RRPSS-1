@@ -1,6 +1,5 @@
-package Reservation;
+package reservation;
 
-import Table.TableMgr;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -11,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
+
+import table.TableMgr;
 
 public class ReservationMgr {
 	

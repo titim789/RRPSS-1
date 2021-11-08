@@ -1,4 +1,4 @@
-package Menu;
+package menu;
 import java.io.Serializable;
 
 public class MenuItem implements Serializable {

@@ -1,9 +1,11 @@
-package Invoice;
+package invoice;
 
-import Order.Order;
 //import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import order.Order;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 

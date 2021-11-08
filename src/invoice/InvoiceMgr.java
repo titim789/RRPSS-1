@@ -1,9 +1,10 @@
-package Invoice;
+package invoice;
 
-import Order.Order;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
+
+import order.Order;
 
 //import Menu.MenuItem;
 

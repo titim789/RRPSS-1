@@ -1,10 +1,12 @@
-package Order;
+package order;
 
-import Menu.MenuItem;
-import Menu.PromotionPackage;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import menu.MenuItem;
+import menu.PromotionPackage;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 

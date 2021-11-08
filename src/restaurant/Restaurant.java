@@ -1,11 +1,12 @@
-package Restaurant;
+package restaurant;
 
-import Menu.MenuMgr;
-import Order.OrderMgr;
-import Reservation.ReservationMgr;
-import Invoice.InvoiceMgr;
-import Customer.CustomerMgr;
-import Staff.StaffMgr;
+import customer.CustomerMgr;
+import invoice.InvoiceMgr;
+import menu.MenuMgr;
+import order.OrderMgr;
+import reservation.ReservationMgr;
+import staff.StaffMgr;
+
 import java.util.*;
 
 
