@@ -193,7 +193,8 @@ public class Restaurant {
 						reserveManager.updateReservation(editTerm);
 						break;
 					case 4:
-						reserveManager.save();
+					default:
+						//pass
 						break;
 				}
 			}
@@ -270,6 +271,7 @@ public class Restaurant {
 		
 		}while(choice != 8); //Exiting
 		menuMgr.save();
+		reserveManager.save();
 		staffMgr.saveStaffList("staffList.txt");
 		customerMgr.saveCustomerList("customerList.txt");
 	}	
