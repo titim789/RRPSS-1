@@ -3,7 +3,10 @@ package restaurant;
 import customer.CustomerMgr;
 import invoice.InvoiceMgr;
 import menu.MenuMgr;
+import order.Order;
 import order.OrderMgr;
+import order.orderMenuItem;
+import order.orderPromotionPackage;
 import reservation.ReservationMgr;
 import staff.StaffMgr;
 import filemanager.FileMan;
@@ -25,6 +28,8 @@ public class Restaurant {
 		menuMgr = new MenuMgr();
 		staffMgr = new StaffMgr();
 		customerMgr = new CustomerMgr();
+		orderMgr = new OrderMgr();
+		
 		FileMan.load(customerMgr);
 		FileMan.load(menuMgr);
 		FileMan.load(reserveManager);
@@ -105,7 +110,13 @@ public class Restaurant {
 						//hmmm can check if exists first? Rather than just println and return null if not exists
 						System.out.println("Enter quantity to add: ");
 						int addQty = sc.nextInt();
-						orderMgr.addItem(addOrderId, menuMgr.getMenuItem(addItemId), addQty);
+						
+						//creating a new orderMenuItem
+						orderMenuItem ord = new orderMenuItem(addItemId, menuMgr.getMenuItem(addItemId).getName(),
+								menuMgr.getMenuItem(addItemId).getDescription(), menuMgr.getMenuItem(addItemId).getPrice(),
+								menuMgr.getMenuItem(addItemId).getMenuType(), addQty);
+						//adding it.
+						orderMgr.addItem(addOrderId, ord);
 						System.out.println("\nadded.\n");
 						break;
 					case 4:
@@ -119,7 +130,15 @@ public class Restaurant {
 						//hmmm can check if exists first? Rather than just println and return null if not exists
 						System.out.println("Enter quantity to add: ");
 						int addPackQty = sc.nextInt();
-						orderMgr.addPackage(addPackOrderId, menuMgr.getPromotionPackage(addPackId), addPackQty);
+						
+						menuMgr.getPromotionPackage(addPackId);
+						
+						//creating a new orderPromoPackage obj
+						orderPromotionPackage pak = new orderPromotionPackage(addPackId, menuMgr.getPromotionPackage(addPackId).getPackageName(),
+								menuMgr.getPromotionPackage(addPackId).getPackagePrice(), menuMgr.getPromotionPackage(addPackId).getPackageDesc(),
+								menuMgr.getPromotionPackage(addPackId).getListOfMenuItem(), addPackQty);
+						
+						orderMgr.addPackage(addPackOrderId, pak);
 						System.out.println("\nadded.\n");
 						break;
 					case 5:
@@ -127,11 +146,14 @@ public class Restaurant {
 						int removeOrderId = sc.nextInt();
 						//check if exists
 						//wanna display just package menu anot?
-						menuMgr.seeMenu();
+						//menuMgr.seeMenu();
 						System.out.println("Enter item ID to remove: ");
 						int removeItemId = sc.nextInt();
 						//hmmm can check if exists first? Rather than just println and return null if not exists
-						orderMgr.removeItem(removeOrderId, menuMgr.getMenuItem(removeItemId));
+						
+						
+						orderMgr.removeItem(removeOrderId,
+								( (orderMgr.getOrder(removeOrderId)).getOrderMenuItem(removeItemId) ) );
 						System.out.println("\nremoved.\n");
 						break;
 					case 6:
@@ -139,11 +161,13 @@ public class Restaurant {
 						int removePackId = sc.nextInt();
 						//check if exists
 						//wanna display just package menu anot?
-						menuMgr.seeMenu();
+						//menuMgr.seeMenu();
 						System.out.println("Enter package ID to remove: ");
 						int removePackageId = sc.nextInt();
 						//hmmm can check if exists first? Rather than just println and return null if not exists
-						orderMgr.removePackage(removePackId, menuMgr.getPromotionPackage(removePackageId));
+						
+						orderMgr.removePackage(removePackId,
+								( (orderMgr.getOrder(removePackId)).getOrderPromotionPackage(removePackageId) ) );
 						System.out.println("\nremoved.\n");
 						break;
 					case 7:

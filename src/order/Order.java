@@ -128,18 +128,18 @@ public class Order {
 		//if empty then println that is all empty. <- either in ctrl or here
 		
 		System.out.println("Ala carte items: ");
-		System.out.println("Item ID" + "\t" + "Item name" + "\t" + "Item price" + "\t" + "Type");
+		System.out.println("Item ID" + "\t" + "Item name" + "\t" + "Quantity" + "\t" + "Item price (each)" + "\t" + "Type");
 		listOfOrderItems.forEach((n) -> printItem(n));
 		
 		System.out.println("\nPromotion Package items: ");
-		System.out.println("\nPackage ID" + "\t" + "Package name" + "\t" + "Package price");
+		System.out.println("\nPackage ID" + "\t" + "Package name" + "\t" + "Quantity" + "\t" + "Package price");
 		listOfOrderPromotions.forEach((n) -> printPack(n));
 		
 	}
 	
 	//another method to print the stuff
 	public void printItem(orderMenuItem n){
-		System.out.println(n.getItemId() + "\t" + n.getName() + "\t" + n.getPrice() + "\t" + (n.getMenuType().toString()));
+		System.out.println(n.getItemId() + "\t" + n.getName() + "\t" + n.getQty() + "\t" + n.getPrice() + "\t" + (n.getMenuType().toString()));
 	}
 	
 	public void printItemNoPrice(MenuItem n){
@@ -148,7 +148,7 @@ public class Order {
 	
 	//for package
 	public void printPack(orderPromotionPackage p){
-		System.out.println(p.getPackageId() + "\t" + p.getPackageName() + "\t" + p.getPackagePrice());
+		System.out.println(p.getPackageId() + "\t" + p.getPackageName() + "\t" + p.getQty() + "\t" + p.getPackagePrice());
 		
 		ArrayList<MenuItem> temp = p.getListOfMenuItem();
 		System.out.println("Package contents: ");
@@ -158,7 +158,26 @@ public class Order {
 	}
 	
 
-
+	public orderMenuItem getOrderMenuItem(int itemId) {
+		for(orderMenuItem ord: listOfOrderItems) {
+			if( ord.getItemId() == itemId) {
+				return ord;
+			}
+		}
+		//doesn't exist.
+		return null;
+	}
+	
+	
+	public orderPromotionPackage getOrderPromotionPackage(int packageId) {
+		for(orderPromotionPackage pek: listOfOrderPromotions) {
+			if( pek.getPackageId() == packageId) {
+				return pek;
+			}
+		}
+		//doesn't exist
+		return null;
+	}
 
 
 

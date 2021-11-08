@@ -9,12 +9,12 @@ import menu.PromotionPackage;
 
 
 public class OrderMgr {
-	private ArrayList<Order> ListOfOrders = new ArrayList<Order>();
+	private ArrayList<Order> ListOfOrders;
 
 	//private AddNewOrder addNewOrder = new AddNewOrder();
 	
 	public OrderMgr() {
-		
+		ListOfOrders = new ArrayList<Order>();
 	}
 	
 	public void newOrder(int staffId, int customerId, int tableId) {
@@ -35,22 +35,20 @@ public class OrderMgr {
 		ListOfOrders.get(orderId).viewOrder();
 	}
 	
-	public void addItem(int orderId, orderMenuItem item, int qty) {
+	public void addItem(int orderId, orderMenuItem item) {
 		ListOfOrders.get(orderId).addOrderItem(item);
 		
 	}
 	
-	public void removeItem(int orderId, MenuItem item) {
+	public void removeItem(int orderId, orderMenuItem item) {
 		ListOfOrders.get(orderId).removeOrderItem(item);
 	}
 	
-	public void addPackage(int orderId, PromotionPackage pack, int qty) {
-		for(int i=0;i<qty;i++) {
-			ListOfOrders.get(orderId).addPromotion(pack);	
-		}
+	public void addPackage(int orderId, orderPromotionPackage pack) {
+		ListOfOrders.get(orderId).addPromotion(pack);
 	}
 	
-	public void removePackage(int orderId, PromotionPackage pack) {
+	public void removePackage(int orderId, orderPromotionPackage pack) {
 		ListOfOrders.get(orderId).removePromotion(pack);
 	}
 	
@@ -60,6 +58,7 @@ public class OrderMgr {
 		}
 		return true;
 	}
+	
 	
 	/* no need save/load orders
 	public void save() {
