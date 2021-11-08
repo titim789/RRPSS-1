@@ -36,6 +36,16 @@ public class TableUI {
         }
     }
 	
+	public void displayTablePax(ArrayList<Table>ListOfTables, int n){
+		System.out.printf("%n%-20s", "Table Number");
+        System.out.printf("%-20s", "Number of Seats");
+        System.out.printf("%-20s%n", "Table Status");
+        for(Table table : ListOfTables){
+            if(table.getNoOfPax() == n && table.getTableStatus().equals("VACANT"))
+                table.displayStatus();
+        }
+    }
+	
 	public int getDisplayType() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\nSelect Which Type of Table Status to view?");
@@ -43,6 +53,13 @@ public class TableUI {
 		System.out.println("1 : Occupied");
 		System.out.println("2 : Reserved");
 		System.out.print("Enter your choice : ");
+		int n = sc.nextInt();
+		return n;
+	}
+	
+	public int getSizeCheck() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("\nEnter Size of Table : ");
 		int n = sc.nextInt();
 		return n;
 	}
