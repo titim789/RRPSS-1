@@ -31,7 +31,7 @@ public class InvoiceMgr {
 	}
 	
 	
-	public void generateSalesReportMth(){
+	public void generateSalesReport(){
 		Date dte = new Date();
 		Calendar tdy = Calendar.getInstance();
 		tdy.setTime(dte);
@@ -51,8 +51,6 @@ public class InvoiceMgr {
 		}
 		
 		System.out.println("Total Revenue: $"+ revenue);
-			
-		
 	}
 	
 	
@@ -73,14 +71,14 @@ public class InvoiceMgr {
 		
 		String[] sarray = s.split("/");
 		int ed,em,ey;
-		ed = Integer.parseInt(stringarray[0]);
-		em = Integer.parseInt(stringarray[1]);
-		ey = Integer.parseInt(stringarray[2]);
+		ed = Integer.parseInt(sarray[0]);
+		em = Integer.parseInt(sarray[1]);
+		ey = Integer.parseInt(sarray[2]);
 		
 		Calendar endDate = Calendar.getInstance();
-		endDate.set(Calendar.YEAR, sy);
-		endDate.set(Calendar.MONTH, sm);
-		endDate.set(Calendar.DAY_OF_MONTH, sd);
+		endDate.set(Calendar.YEAR, ey);
+		endDate.set(Calendar.MONTH, em);
+		endDate.set(Calendar.DAY_OF_MONTH, ed);
 		
 		double revenue=0;
 		

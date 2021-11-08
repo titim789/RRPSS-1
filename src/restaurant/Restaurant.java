@@ -237,7 +237,7 @@ public class Restaurant {
 				switch(genchoice) {
 					case 1:
 						System.out.println("Printing sales rpt for this month\n");
-						invoiceMgr.generateSalesReportMth();
+						invoiceMgr.generateSalesReport();
 						break;
 					case 2:
 						System.out.println("Input start date (inclusive) in DD/MM/YYYY format: ");
