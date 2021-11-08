@@ -1,8 +1,10 @@
 package menu;
+
+import filemanager.FileMgr;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MenuMgr {
+public class MenuMgr implements FileMgr{
 	
 	private MenuItemMgr menuItemMgr;
 	private PromotionPackageMgr promotionPackageMgr;

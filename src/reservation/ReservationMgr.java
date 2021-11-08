@@ -1,5 +1,6 @@
 package reservation;
 
+import filemanager.FileMgr;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -13,7 +14,7 @@ import java.util.Scanner;
 
 import table.TableMgr;
 
-public class ReservationMgr {
+public class ReservationMgr implements FileMgr {
 	
 	//-----------------Table Manager-------------------------//
 	private TableMgr tableManager = new TableMgr();
@@ -239,7 +240,7 @@ public class ReservationMgr {
   	}
   	
   	//-----------------Load---------------------------//
-  	@SuppressWarnings("unchecked")
+  	//@SuppressWarnings("unchecked")
   	public void load() {
   		tableManager.load();
   		try{

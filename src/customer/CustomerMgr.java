@@ -1,21 +1,28 @@
 package customer;
 
 import java.io.File;
+import java.io.FileInputStream;
+
+import filemanager.FileMgr;
+import menu.MenuItem;
+
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.lang.String;
 import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
-import java.lang.String;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 
-public class CustomerMgr {
+public class CustomerMgr implements FileMgr{
 
 	private static ArrayList<Customer> ListOfCustomer;
 	
@@ -217,5 +224,30 @@ public class CustomerMgr {
 		}
 		return customer;
 	}
-
+	
+	public void load() {
+		// TODO - implement Menu.load
+		try{
+		    FileInputStream readData = new FileInputStream("customerList.txt");
+		    ObjectInputStream readStream = new ObjectInputStream(readData);
+		    ListOfCustomer = (ArrayList<Customer>) readStream.readObject();
+		    readStream.close();
+		    //System.out.println(listOfMenuItems.toString());
+		}catch (Exception e) {
+		    e.printStackTrace();
+		}
+		
+	}
+	
+	public void save() {
+		// TODO - implement Menu.save
+		try {
+		    FileOutputStream fos = new FileOutputStream("customerList.txt");
+		    ObjectOutputStream oos = new ObjectOutputStream(fos);   
+		    oos.writeObject(ListOfCustomer); // write List of customer to ObjectOutputStream
+		    oos.close(); 
+		} catch(Exception ex) {
+		    ex.printStackTrace();
+		}
+	}
 }

@@ -1,29 +1,34 @@
 package staff;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Scanner;
 
+import customer.Customer;
 import staff.Staff;
+import filemanager.FileMgr;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.lang.String;
-import java.io.BufferedReader;
 
-public class StaffMgr {
-	private static ArrayList<Staff> ListOfStaff;
+public class StaffMgr implements FileMgr{
+	private static ArrayList<Staff> listOfStaff;
 	
 	public StaffMgr() {
-		ListOfStaff = new ArrayList<Staff>();
-		ListOfStaff = loadStaffList("staffList.txt");
+		listOfStaff = new ArrayList<Staff>();
+		listOfStaff = loadStaffList("staffList.txt");
 	}
 	
 	public void init() {
@@ -88,11 +93,11 @@ public class StaffMgr {
 
 	// checks if the staffId is already in the ArrayList, if yes, return true
 	public boolean checkStaffId(int staffId) {
-		ListOfStaff = loadStaffList("StaffList.txt");
+		listOfStaff = loadStaffList("StaffList.txt");
 
-		for(int i = 0; i < ListOfStaff.size(); i++) {
-			System.out.println("staffId: "+ListOfStaff.get(i).getStaffId());
-			if(ListOfStaff.get(i).getStaffId() == staffId) {
+		for(int i = 0; i < listOfStaff.size(); i++) {
+			System.out.println("staffId: "+listOfStaff.get(i).getStaffId());
+			if(listOfStaff.get(i).getStaffId() == staffId) {
 				return true;
 			}
 		}
@@ -105,14 +110,14 @@ public class StaffMgr {
 		ArrayList<Staff> tempList = new ArrayList<Staff>();
 		
 		// for each staff in listOfStaff, add to a temp list if staffId is not StaffIdRemoval
-		for(Staff staff: ListOfStaff) {
+		for(Staff staff: listOfStaff) {
 			if(staff.getStaffId() != staffIdRemoval) {
 				tempList.add(staff);
 			}
 		}
 		
-		ListOfStaff.clear();
-		ListOfStaff.addAll(tempList);
+		listOfStaff.clear();
+		listOfStaff.addAll(tempList);
 		
 		System.out.println("Staff Removed..");
 		displayStaffList();
@@ -120,7 +125,7 @@ public class StaffMgr {
 
 	// function to display the list of staff
 	public void displayStaffList() {
-		for(Staff staff : ListOfStaff) {
+		for(Staff staff : listOfStaff) {
 			// print out staff object's attributes
 			System.out.println(staff.getStaffId() + " " + staff.getStaffName() + " " + staff.getGender() + " " + staff.getJobTitle());
 		}
@@ -151,7 +156,7 @@ public class StaffMgr {
 		// write new content to file fileName
 		try {
 			pw = new PrintWriter(new FileWriter(fileName, true));
-			for(Staff staff: ListOfStaff) {
+			for(Staff staff: listOfStaff) {
 				pw.println(staff.getStaffId() + "," + staff.getStaffName() + "," + staff.getGender() + "," + staff.getJobTitle());
 			}
 			pw.close();
@@ -180,7 +185,7 @@ public class StaffMgr {
 				String[] values = line.split(",");
 				
 				// append this staff object into the the array list of staff
-				ListOfStaff.add(new Staff(Integer.parseInt(values[0]),values[1], values[2],  values[3]));
+				listOfStaff.add(new Staff(Integer.parseInt(values[0]),values[1], values[2],  values[3]));
 			}
 		} 
 		// catch blocks for reading csv or if not will throw error
@@ -191,20 +196,20 @@ public class StaffMgr {
 			// catch IO exception for br.readline()
 			e.printStackTrace();
 		}
-		return ListOfStaff;
+		return listOfStaff;
 	}
 	
 	
 	// function to add staff object to the list of staff
 	public void addStaff(int staffId, String name, String gender, String title) {
-			ListOfStaff.add(new Staff(staffId, name, gender, title));
+		listOfStaff.add(new Staff(staffId, name, gender, title));
 
 	}
 
 	// returns the last auto increment staff id in the list
 	public int getLastId() {
 		int lastId = 0;
-		for(Staff staff : ListOfStaff) {
+		for(Staff staff : listOfStaff) {
 			if(staff.getStaffId() > lastId) {
 				lastId = staff.getStaffId();
 			}
@@ -212,5 +217,29 @@ public class StaffMgr {
 		return lastId;
 	}
 
+	public void load() {
+		// TODO - implement Menu.load
+		try{
+		    FileInputStream readData = new FileInputStream("staffList.txt");
+		    ObjectInputStream readStream = new ObjectInputStream(readData);
+		    listOfStaff = (ArrayList<Staff>) readStream.readObject();
+		    readStream.close();
+		    //System.out.println(listOfMenuItems.toString());
+		}catch (Exception e) {
+		    e.printStackTrace();
+		}
+		
+	}
 	
+	public void save() {
+		// TODO - implement Menu.save
+		try {
+		    FileOutputStream fos = new FileOutputStream("staffList.txt");
+		    ObjectOutputStream oos = new ObjectOutputStream(fos);   
+		    oos.writeObject(listOfStaff); // write List of customer to ObjectOutputStream
+		    oos.close(); 
+		} catch(Exception ex) {
+		    ex.printStackTrace();
+		}
+	}
 }

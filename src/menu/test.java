@@ -1,4 +1,5 @@
 package menu;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -97,13 +98,13 @@ public class test {
 		menuItemMgr.addNewMenuItem(13,"Cheese Cake","Cake made of cream cheese and crackers",5.6,TYPEOFMENU.DESSERT) ;
 		menuItemMgr.addNewMenuItem(14,"Tiramisu","Coffee-flavoured dessert",5.6,TYPEOFMENU.DESSERT) ;
 		menuItemMgr.addNewMenuItem(15,"Gelato","Frozen dessert",2.1,TYPEOFMENU.DESSERT);
-		menuItemMgr.getListOfMenuItems()();
+		menuItemMgr.getListOfMenuItems();
 		menuItemMgr.viewMenuItems();
 		
 		try {
 		    FileOutputStream fos = new FileOutputStream("menuitems.txt");
 		    ObjectOutputStream oos = new ObjectOutputStream(fos);   
-		    oos.writeObject(menuItemMgr.getListOfMenuItems()()); // write MenuArray to ObjectOutputStream
+		    oos.writeObject(menuItemMgr.getListOfMenuItems()); // write MenuArray to ObjectOutputStream
 		    oos.close(); 
 		} catch(Exception ex) {
 		    ex.printStackTrace();
@@ -128,7 +129,7 @@ public class test {
 		ArrayList<MenuItem> menuItem4 = new ArrayList<MenuItem>(); 
 		ArrayList<MenuItem> menuItem5 = new ArrayList<MenuItem>();
 		PromotionPackageMgr promotionPackageMgr = new PromotionPackageMgr();
-		MenuItemMgr menuItemMgr = new MenuItemMgr();
+		//MenuItemMgr menuItemMgr = new MenuItemMgr();
 		menuItemMgr.load();
 
 		promotionPackageMgr.addNewPromotion(1,"Carbonara Meal","Carbonara + Tea + Cheese Cake",13,menuItem1); 
@@ -174,6 +175,10 @@ public class test {
 		}
 		
 		System.out.println(listOfPromoPack.get(0).getPackageName());
-		*/
+		
+	}
+	*/
+		
+		MenuMgr mgr = new MenuMgr();
 	}
 }

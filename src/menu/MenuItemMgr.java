@@ -229,10 +229,7 @@ public class MenuItemMgr {
 		}
 		
 	}
-	/**
-	 * 
-	 * @param menuType (String - either 'promopack', 'menu', or both is accepted)
-	 */
+	
 	public void save() {
 		// TODO - implement Menu.save
 		try {
