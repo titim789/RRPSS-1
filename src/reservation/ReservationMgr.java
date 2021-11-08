@@ -26,7 +26,7 @@ public class ReservationMgr implements FileMgr {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy,HH:mm");
 		
 	//-----------------Reservation Display---------------------------//
-	private DisplayReservation displayReservation = new DisplayReservation();
+	private ReservationUI reservationUI = new ReservationUI();
 	
 	public ReservationMgr(){
 		load();
@@ -66,7 +66,7 @@ public class ReservationMgr implements FileMgr {
 	
 	//-----------------Remove Reservation By ID---------------------------//
 	public void removeReservationId() {
-		int resvId = displayReservation.getReservationIdFromUser();
+		int resvId = reservationUI.getReservationIdFromUser();
 		
 		int i;
 		for(i=0; i<listOfReservations.size();i++)
@@ -103,15 +103,15 @@ public class ReservationMgr implements FileMgr {
 	}
 	
 	//-----------------Display Reservation---------------------------//
-    	public void displayResv(int n) {
+    public void displayResv(int n) {
     	
-    		removeReservationTime(); // remove reservation the past 10 mins of current time
+    	removeReservationTime(); // remove reservation the past 10 mins of current time
     	
 		switch(n) {
 			case 0: 
 			if(!listOfReservations.isEmpty()) {
-				displayReservation.reservationDisplayAll(listOfReservations);
-				int m = displayReservation.removeReservationDisplay();
+				reservationUI.reservationDisplayAll(listOfReservations);
+				int m = reservationUI.removeReservationDisplay();
 				switch(m){
 					case 0:
 						removeReservationId();
@@ -124,10 +124,10 @@ public class ReservationMgr implements FileMgr {
 			break;
 			
 			case 1: 
-			int term = displayReservation.getCustomerIdFromUser();
+			int term = reservationUI.getCustomerIdFromUser();
 			if(checkCustResv(term)) {
-				displayReservation.reservationDisplayCustomer(listOfReservations, term);
-				int m = displayReservation.removeReservationDisplay();
+				reservationUI.reservationDisplayCustomer(listOfReservations, term);
+				int m = reservationUI.removeReservationDisplay();
 				switch(m){
 					case 0:
 						removeReservationId();
@@ -155,15 +155,15 @@ public class ReservationMgr implements FileMgr {
   	public void updateReservation(int editTerm) {
 		
 		if(checkCustResv(editTerm)) {
-			displayReservation.reservationDisplayCustomer(listOfReservations, editTerm);
+			reservationUI.reservationDisplayCustomer(listOfReservations, editTerm);
 		
 			Scanner scan = new Scanner(System.in);
-			int resvTerm = displayReservation.getReservationIdFromUser();
+			int resvTerm = reservationUI.getReservationIdFromUser();
 		
 			int choice;
 			int tableId = -1; int cusId = -1;String date = "";int noPax = -1;String cName = "";String contactNo = "";
 			do{
-				choice = displayReservation.updateReservationDisplay();
+				choice = reservationUI.updateReservationDisplay();
 				switch(choice){
 					case 1:
 						System.out.print("Enter new Table ID : ");
@@ -236,7 +236,7 @@ public class ReservationMgr implements FileMgr {
   		try {
   		    FileOutputStream fos = new FileOutputStream("reservation.txt");
   		    ObjectOutputStream oos = new ObjectOutputStream(fos);   
-  		    oos.writeObject(listOfReservations); // write MenuArray to ObjectOutputStream
+  		    oos.writeObject(listOfReservations);
   		    oos.close(); 
   		} catch(Exception ex) {
   		    ex.printStackTrace();
@@ -244,7 +244,7 @@ public class ReservationMgr implements FileMgr {
   	}
   	
   	//-----------------Load---------------------------//
-  	//@SuppressWarnings("unchecked")
+  	@SuppressWarnings("unchecked")
   	public void load() {
   		tableManager.load();
   		try{
