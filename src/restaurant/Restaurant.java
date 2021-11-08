@@ -187,10 +187,11 @@ public class Restaurant {
 			else if(choice == 3) {
 				System.out.println("\n--------------------Reservation------------------------------");
 				System.out.println("0 : View Tables");
-				System.out.println("1 : Create reservation booking");
-				System.out.println("2 : Check/Remove Reservations");
-				System.out.println("3 : Update Reservation");
-				System.out.println("4 : Quit");
+				System.out.println("1 : Check Availability");
+				System.out.println("2 : Create reservation booking");
+				System.out.println("3 : Check/Remove Reservations");
+				System.out.println("4 : Update Reservation");
+				System.out.println("5 : Quit");
 				System.out.print("Enter Choice : ");
 				int reservechoice = sc.nextInt();
 				switch(reservechoice){
@@ -198,6 +199,9 @@ public class Restaurant {
 						reserveManager.displayTableDetails();
 						break;
 					case 1:
+						reserveManager.checkAvail();
+						break;
+					case 2:
 						Scanner scan = new Scanner(System.in);
 						System.out.print("Enter Table ID to be assigned : ");
 						int tableId = scan.nextInt();
@@ -213,7 +217,7 @@ public class Restaurant {
 						String contact = scan.next();
 						reserveManager.newReservation(tableId,customerId,calen,noOfPax,name,contact);
 						break;
-					case 2:
+					case 3:
 						Scanner scan1 = new Scanner(System.in);
 						System.out.println("\nSelect Which Type of Reservation?");
 						System.out.println("0 : All Reservations");
@@ -222,13 +226,13 @@ public class Restaurant {
 						int n = scan1.nextInt();
 						reserveManager.displayResv(n);
 						break;
-					case 3:
+					case 4:
 						Scanner scan2 = new Scanner(System.in);
 						System.out.print("Enter Customer Id to check : ");
 						int editTerm = scan2.nextInt();
 						reserveManager.updateReservation(editTerm);
 						break;
-					case 4:
+					case 5:
 					default:
 						//pass
 						break;
