@@ -90,7 +90,6 @@ public class StaffMgr implements FileMgr{
 
 	// checks if the staffId is already in the ArrayList, if yes, return true
 	public boolean checkStaffId(int staffId) {
-		listOfStaff = load("StaffList.txt");
 
 		for(int i = 0; i < listOfStaff.size(); i++) {
 			System.out.println("staffId: "+listOfStaff.get(i).getStaffId());
