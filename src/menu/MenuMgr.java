@@ -13,7 +13,6 @@ public class MenuMgr implements FileMgr{
 		// TODO - implement Menu.Menu
 		menuItemMgr = new MenuItemMgr();
 		promotionPackageMgr = new PromotionPackageMgr();
-		load();
 	}
 	
 	public void seeMenu() {

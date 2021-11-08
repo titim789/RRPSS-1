@@ -6,6 +6,7 @@ import menu.MenuMgr;
 import order.OrderMgr;
 import reservation.ReservationMgr;
 import staff.StaffMgr;
+import filemanager.FileMan;
 
 import java.util.*;
 
@@ -24,6 +25,10 @@ public class Restaurant {
 		menuMgr = new MenuMgr();
 		staffMgr = new StaffMgr();
 		customerMgr = new CustomerMgr();
+		FileMan.load(customerMgr);
+		FileMan.load(menuMgr);
+		FileMan.load(reserveManager);
+		FileMan.load(staffMgr);
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		
@@ -270,10 +275,10 @@ public class Restaurant {
 			}
 		
 		}while(choice != 8); //Exiting
-		menuMgr.save();
-		reserveManager.save();
-		staffMgr.save();
-		customerMgr.save();
+		FileMan.save(customerMgr);
+		FileMan.save(menuMgr);
+		FileMan.save(reserveManager);
+		FileMan.save(staffMgr);
 	}
 }
 

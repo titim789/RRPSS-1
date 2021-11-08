@@ -25,7 +25,6 @@ public class StaffMgr implements FileMgr{
 	
 	public StaffMgr() {
 		listOfStaff = new ArrayList<Staff>();
-		load();
 	}
 	
 	public void init() {

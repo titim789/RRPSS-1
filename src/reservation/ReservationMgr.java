@@ -29,7 +29,7 @@ public class ReservationMgr implements FileMgr {
 	private ReservationUI reservationUI = new ReservationUI();
 	
 	public ReservationMgr(){
-		load();
+		
 	}
 	
 	//-----------------Print Table---------------------------//

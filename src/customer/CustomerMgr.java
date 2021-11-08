@@ -27,7 +27,6 @@ public class CustomerMgr implements FileMgr{
 	private static ArrayList<Customer> listOfCustomer;
 	
 	public CustomerMgr() {
-		load();
 	}
 
 	public void init(){
