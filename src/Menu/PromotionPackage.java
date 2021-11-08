@@ -95,11 +95,11 @@ public class PromotionPackage implements Serializable{
 	 * 
 	 * @param item_id
 	 */
-	public void removeMenuItem(int item_id) {
+	public void removeMenuItem(int itemId) {
 		// TODO - implement Promotion_Package.removeMenu_Item
 		int i;
 		for(i=0; i < listOfMenuItem.size(); i++) {
-			if(listOfMenuItem.get(i).getItemId() == item_id) {
+			if(listOfMenuItem.get(i).getItemId() == itemId) {
 				listOfMenuItem.remove(i);
 				return;
 			}
