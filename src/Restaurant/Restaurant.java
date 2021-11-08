@@ -3,7 +3,6 @@ package Restaurant;
 import Menu.MenuMgr;
 import Order.OrderMgr;
 import Reservation.ReservationMgr;
-import Staff.StaffMgr;
 import Invoice.InvoiceMgr;
 import Customer.CustomerMgr;
 import java.util.*;
@@ -16,13 +15,10 @@ public class Restaurant {
 	private static OrderMgr orderMgr;
 	private static InvoiceMgr invoiceMgr;
 	private static CustomerMgr customerMgr;
-	private static StaffMgr staffMgr;
 	
 	public static void main(String[] args){
 		reserveManager = new ReservationMgr();
 		menuMgr = new MenuMgr();
-		staffMgr = new StaffMgr();
-		customerMgr = new CustomerMgr();
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		
@@ -32,9 +28,7 @@ public class Restaurant {
 					+ "3.\tReservation & Tables\n"
 					+ "4.\tInvoice\n"
 					+ "5.\tSales Report\n"
-					+ "6.\tManage Staff\n"
-					+ "7.\tManage Customer\n"
-					+ "8.\tExit");
+					+ "6.\tExit");
 			System.out.print("Enter Choice : ");
 			choice = sc.nextInt();
 			//Menu Choice
@@ -209,7 +203,6 @@ public class Restaurant {
 						invoiceMgr.newInvoice(orderMgr.getOrder(invOrderId), (customerMgr.getCustomerObj((orderMgr.getOrder(invOrderId)).getcustomerId())).isMember());
 						System.out.println("Invoice created.");
 						break;
-					
 					case 2:
 						break;
 					case 3:
@@ -255,20 +248,9 @@ public class Restaurant {
 						break;
 				}
 			}
-		
-			else if (choice == 6){
-				staffMgr.init();
-			}
-
-			else if (choice == 7){
-				customerMgr.init();
-			}
-		
-		}while(choice != 8); //Exiting
+		}while(choice != 6); //Exiting
 		menuMgr.save();
-		staffMgr.saveStaffList("staffList.txt");
-		customerMgr.saveCustomerList("customerList.txt");
-	}
+	}	
 
 }
 
