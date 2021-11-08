@@ -4,6 +4,7 @@ import Menu.MenuMgr;
 import Order.OrderMgr;
 import Reservation.ReservationMgr;
 import Invoice.InvoiceMgr;
+import Customer.CustomerMgr;
 import java.util.*;
 
 
@@ -13,6 +14,7 @@ public class Restaurant {
 	private static MenuMgr menuMgr;
 	private static OrderMgr orderMgr;
 	private static InvoiceMgr invoiceMgr;
+	private static CustomerMgr customerMgr;
 	
 	public static void main(String[] args){
 		reserveManager = new ReservationMgr();
@@ -198,10 +200,9 @@ public class Restaurant {
 						System.out.println("Please enter order ID to create invoice for: ");
 						int invOrderId = sc.nextInt();
 						//to check if ord id exists
-						// customer id => (orderMgr.getOrder(invOrderId)).getcustomerId()
-						//^ is member boolean
+						invoiceMgr.newInvoice(orderMgr.getOrder(invOrderId), (customerMgr.getCustomerObj((orderMgr.getOrder(invOrderId)).getcustomerId())).isMember());
+						System.out.println("Invoice created.");
 						break;
-					
 					case 2:
 						break;
 					case 3:
