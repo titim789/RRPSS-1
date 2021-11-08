@@ -93,6 +93,17 @@ public class TableMgr {
 		return false;
 	}
 	
+	public boolean checkAvailability(){
+		int pax = tableUI.getSizeCheck();
+		for(Table table : listOfTables) {
+			if ((table.getTableStatus()).equals("VACANT") && table.getNoOfPax() == pax) {
+				tableUI.displayTablePax(listOfTables, pax);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	//-----------------Update Table---------------------------//
 	public void editTableDetail(int num, String newstatus){
