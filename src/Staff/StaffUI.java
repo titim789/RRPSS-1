@@ -38,10 +38,10 @@ public class StaffUI {
 		return title;
 	}
 	
-	public String getRemoveId() {
+	public int getRemoveId() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Staff id to remove");
-		String id = sc.next();
+		int id = sc.nextInt();
 		return id;
 	}
 	

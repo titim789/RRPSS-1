@@ -16,28 +16,27 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 
 public class CustomerMgr {
+
+	private static ArrayList<Customer> ListOfCustomer;
 	
-
-	private ArrayList<Customer> ListOfCustomer;
 	public CustomerMgr() {
-
+		ListOfCustomer = new ArrayList<Customer>();
+		ListOfCustomer = loadCustomerList("customerList.txt");
 	}
 
 	public void init(){
 		CustomerUI customerui = new CustomerUI();
 				
 		int choice;
-		ListOfCustomer = loadCustomerList("customerList.txt");
-
 		do {
 			choice = customerui.mainMenu();
 			switch (choice) {
 			case 1:
-				displayCustomerList(ListOfCustomer);
+				displayCustomerList();
 				break;
 			case 2:
 				// add customer
-				int customerId = getLastCustomerId(ListOfCustomer) + 1;
+				int customerId = getLastCustomerId() + 1;
 				System.out.println("Customer Id to insert:" + customerId);
 				
 				// launch customerUI to get customer info
@@ -46,18 +45,18 @@ public class CustomerMgr {
 				String customrMember = customerui.getCustomerMember();
 
 				// create new customer
-				addCustomer(ListOfCustomer, customerId, customerName, customerPhone, customrMember);
+				addCustomer(customerId, customerName, customerPhone, customrMember);
 				System.out.println("\nCustomer added..");
-				displayCustomerList(ListOfCustomer);
+				displayCustomerList();
 				break;
 			case 3:
 				// remove customer object from the ArrayList of customer
-				String customerIdToRemove = customerui.getRemoveId();
-				removeCustomer(ListOfCustomer, customerIdToRemove);
+				int customerIdToRemove = customerui.getRemoveId();
+				removeCustomer(customerIdToRemove);
 				break;
 			case 4:
 				// removeCustomer();
-				saveCustomer(ListOfCustomer, "customerList.txt");
+				saveCustomerList("customerList.txt");
 				break;
 			case 5:
 				// saveCustomer();
@@ -83,16 +82,16 @@ public class CustomerMgr {
 			String headerLine = "";
 			headerLine = br.readLine();
 			
-			// keeps instanciating staff object until no more rows
+			// keeps instanciating customer object until no more rows
 			while((line = br.readLine()) != null) {			
 				// split a line of string into an array
 				// [0] is id, [1] is name etc...
 				String[] values = line.split(",");
 				
-				// takes the corresponding array[0], fit into staff object
+				// takes the corresponding array[0], fit into customer object
 				Customer customer = new Customer();
 				int i = Integer.parseInt(values[0]);
-				customer.setCustomer_id(i);
+				customer.setCustomerId(i);
 				customer.setName(values[1]);
 				customer.setPhone(values[2]);
 				
@@ -104,7 +103,7 @@ public class CustomerMgr {
 					customer.setMember(false);
 				}
 				
-				// append this customer object into the the array list of staff
+				// append this customer object into the the array list of customer
 				customerList.add(customer);
 			}
 		} catch (FileNotFoundException e) {
@@ -117,23 +116,23 @@ public class CustomerMgr {
 	}
 
 	// pass in an ArrayList<Customer> and display all customers in the list
-	public void displayCustomerList(ArrayList<Customer> customerList) {
+	public void displayCustomerList() {
 		System.out.printf("CustId\tName\tPhone\t\tMember\n");
-		for (Customer customer : customerList) {
+		for (Customer customer : ListOfCustomer) {
 			String member = "";
 			if (customer.isMember()) {
 				member = "y";
 			} else {
 				member = "n";
 			}
-			System.out.println(customer.getCustomer_id() + "\t" + customer.getName() + "\t" + customer.getPhone() + "\t" + customer.isMember());
+			System.out.println(customer.getCustomerId() + "\t" + customer.getName() + "\t" + customer.getPhone() + "\t" + customer.isMember());
 		}
 	}
 	
 	// function to add customer object to list of customer
-	public void addCustomer(ArrayList<Customer> customerList, int customer_id, String name, String phone, String member) {
+	public void addCustomer(int customerId, String name, String phone, String member) {
 		Customer newCustomer = new Customer();
-		newCustomer.setCustomer_id(customer_id);
+		newCustomer.setCustomerId(customerId);
 		newCustomer.setName(name);
 		newCustomer.setPhone(phone);
 		if(member.equals("y")) {
@@ -142,37 +141,38 @@ public class CustomerMgr {
 		else {
 			newCustomer.setMember(false);
 		}
-		customerList.add(newCustomer);
+		ListOfCustomer.add(newCustomer);
 	}
 
 	// returns the last customer id in the list
-	public int getLastCustomerId(ArrayList<Customer> customerList) {
+	public int getLastCustomerId() {
 		int lastCustomerId = 0;
-		for (Customer customer : customerList) {
-			if (customer.getCustomer_id() > lastCustomerId) {
-				lastCustomerId = customer.getCustomer_id();
+		for (Customer customer : ListOfCustomer) {
+			if (customer.getCustomerId() > lastCustomerId) {
+				lastCustomerId = customer.getCustomerId();
 			}
 		}
 		return lastCustomerId;
 	}
 
 	// remove customer object from the list of customer, store into a temp ArrayList if customer id is not CustomerIdemoval
-	public void removeCustomer(ArrayList<Customer> customerList, String customerIdToRemove) {
+	public void removeCustomer(int customerIdToRemove) {
 		ArrayList<Customer> tempList = new ArrayList<Customer>();
-		for (Customer customer : customerList) {
-			if (customer.getCustomer_id() != Integer.parseInt(customerIdToRemove)) {
+		for (Customer customer : ListOfCustomer) {
+			if (customer.getCustomerId() != customerIdToRemove) {
 				tempList.add(customer);
 			}
 		}
-		customerList.clear();
-		customerList.addAll(tempList);
+		ListOfCustomer.clear();
+		ListOfCustomer.addAll(tempList);
 
-		System.out.println("Staff removed..");
+		System.out.println("Customer removed..");
+		displayCustomerList();
 	}
 
 
 	// save customer list to csv file
-	public void saveCustomer(ArrayList<Customer> customerList, String fileName) {
+	public void saveCustomerList(String fileName) {
 		PrintWriter pw = null;
 		try {
 			pw = new PrintWriter(new File(fileName));
@@ -191,14 +191,14 @@ public class CustomerMgr {
 			bw.newLine();
 			
 			// write each customer object into the file
-			for (Customer customer : customerList) {
+			for (Customer customer : ListOfCustomer) {
 				String member = "";
 				if (customer.isMember()) {
 					member = "y";
 				} else {
 					member = "n";
 				}
-				bw.write(customer.getCustomer_id() + "," + customer.getName() + "," + customer.getPhone() + "," + member);
+				bw.write(customer.getCustomerId() + "," + customer.getName() + "," + customer.getPhone() + "," + member);
 				bw.newLine();
 			}
 			bw.close();
@@ -207,4 +207,16 @@ public class CustomerMgr {
 			e.printStackTrace();
 		}
 	}
+
+	// pass in an CustomerId integer and return the customer object
+	public Customer getCustomerObj(int customerId) {
+		Customer customer = new Customer();
+		for (Customer c : ListOfCustomer) {
+			if (c.getCustomerId() == customerId) {
+				customer = c;
+			}
+		}
+		return customer;
+	}
+
 }

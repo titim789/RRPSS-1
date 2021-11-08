@@ -17,28 +17,28 @@ import java.lang.String;
 import java.io.BufferedReader;
 
 public class StaffMgr {
-	private ArrayList<Staff> ListOfStaff;
+	private static ArrayList<Staff> ListOfStaff;
 	
 	public StaffMgr() {
+		ListOfStaff = new ArrayList<Staff>();
+		ListOfStaff = loadStaffList("staffList.txt");
 	}
 	
 	public void init() {
 		StaffUI staffui = new StaffUI();
 		int choice;
-
-		ListOfStaff = loadStaffList("StaffList.txt");
 		
 		while((choice = staffui.displayMenu()) != 5) {
 			switch(choice) {
 			// Display staff
 			case 1:
-				displayStaffList(ListOfStaff);
+				displayStaffList();
 				break;
 			
 			// Add staff
 			case 2:	
 				// an mgr function to get new staffId to be inserted
-				int staffId = getLastId(ListOfStaff)+1;
+				int staffId = getLastId()+1;
 				System.out.println("staffID to insert:"+staffId);
 				
 				// launch StaffUI to get staff info
@@ -46,25 +46,25 @@ public class StaffMgr {
 				String gender = staffui.getStaffGender();				
 				String title = staffui.getStaffTitle();
 				
-				addStaff(ListOfStaff, staffId, name, gender, title);				
+				addStaff(staffId, name, gender, title);				
 
 				System.out.println("Staff List Updated..");
-				displayStaffList(ListOfStaff);
+				displayStaffList();
 				break;
 			
 			
 			// remove staff
 			case 3:
 			
-			displayStaffList(ListOfStaff);
+			displayStaffList();
 			
 			// remove staff object from the ArrayList of Staff
-			String staffIdRemoval = staffui.getRemoveId();			
-			removeStaff(ListOfStaff, staffIdRemoval);
+			int staffIdRemoval = staffui.getRemoveId();			
+			removeStaff(staffIdRemoval);
 
 			// show what's after removal
 			System.out.println("Staff List Updated..");
-			displayStaffList(ListOfStaff);
+			displayStaffList();
 			
 			break;
 			
@@ -73,8 +73,8 @@ public class StaffMgr {
 				// save ArrayList of Staff to csv file
 
 				System.out.println("StaffList saved to file");
-				displayStaffList(ListOfStaff);
-				saveStaffList(ListOfStaff, "StaffList.txt");
+				displayStaffList();
+				saveStaffList("StaffList.txt");
 				break;
 				
 			// quit
@@ -91,8 +91,8 @@ public class StaffMgr {
 		ListOfStaff = loadStaffList("StaffList.txt");
 
 		for(int i = 0; i < ListOfStaff.size(); i++) {
-			System.out.println("staffId: "+ListOfStaff.get(i).getStaff_id());
-			if(ListOfStaff.get(i).getStaff_id() == staffId) {
+			System.out.println("staffId: "+ListOfStaff.get(i).getStaffId());
+			if(ListOfStaff.get(i).getStaffId() == staffId) {
 				return true;
 			}
 		}
@@ -101,25 +101,33 @@ public class StaffMgr {
 	}
 	
 	// remove staff based on staffId, store into a temp ArrayList if staddId is not StaffIdRemoval
-	private void removeStaff(ArrayList<Staff> listOfStaff2, String staffIdRemoval) {
+	private void removeStaff(int staffIdRemoval) {
 		ArrayList<Staff> tempList = new ArrayList<Staff>();
 		
 		// for each staff in listOfStaff, add to a temp list if staffId is not StaffIdRemoval
-		for(Staff staff: listOfStaff2) {
-			if(staff.getStaff_id() != Integer.parseInt(staffIdRemoval)) {
+		for(Staff staff: ListOfStaff) {
+			if(staff.getStaffId() != staffIdRemoval) {
 				tempList.add(staff);
 			}
 		}
 		
-		listOfStaff2.clear();
-		listOfStaff2.addAll(tempList);
+		ListOfStaff.clear();
+		ListOfStaff.addAll(tempList);
 		
 		System.out.println("Staff Removed..");
-		displayStaffList(listOfStaff2);
+		displayStaffList();
 	}
 
+	// function to display the list of staff
+	public void displayStaffList() {
+		for(Staff staff : ListOfStaff) {
+			// print out staff object's attributes
+			System.out.println(staff.getStaffId() + " " + staff.getStaffName() + " " + staff.getGender() + " " + staff.getJobTitle());
+		}
+		}
+
 	// save staff list to csv file
-	private void saveStaffList(ArrayList<Staff> listOfStaff2, String fileName) {
+	private void saveStaffList(String fileName) {
 		// empty content in file fileName, then write new content, attributes of ListOfStaff2, then close the file
 		PrintWriter pw = null;
 		try {
@@ -143,8 +151,8 @@ public class StaffMgr {
 		// write new content to file fileName
 		try {
 			pw = new PrintWriter(new FileWriter(fileName, true));
-			for(Staff staff: listOfStaff2) {
-				pw.println(staff.getStaff_id() + "," + staff.getStaff_name() + "," + staff.getGender() + "," + staff.getJob_title());
+			for(Staff staff: ListOfStaff) {
+				pw.println(staff.getStaffId() + "," + staff.getStaffName() + "," + staff.getGender() + "," + staff.getJobTitle());
 			}
 			pw.close();
 		} catch (IOException e) {
@@ -156,7 +164,6 @@ public class StaffMgr {
 
 	// pass in a file name, and returns a list of <staff> objects
 	public ArrayList<Staff> loadStaffList(String fileName){
-		ArrayList<Staff> ListOfStaff = new ArrayList<Staff>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(fileName));
 			//to store a line
@@ -172,16 +179,8 @@ public class StaffMgr {
 				// [0] is id, [1] is name etc...
 				String[] values = line.split(",");
 				
-				// takes the corresponding array[0], fit into staff object
-				Staff staff = new Staff();
-				int i = Integer.parseInt(values[0]);
-				staff.setStaff_id(i);
-				staff.setStaff_name(values[1]);
-				staff.setGender(values[2]);
-				staff.setJob_title(values[3]);
-				
 				// append this staff object into the the array list of staff
-				ListOfStaff.add(staff);
+				ListOfStaff.add(new Staff(Integer.parseInt(values[0]),values[1], values[2],  values[3]));
 			}
 		} 
 		// catch blocks for reading csv or if not will throw error
@@ -195,32 +194,19 @@ public class StaffMgr {
 		return ListOfStaff;
 	}
 	
-	// function to display the list of staff
-	public void displayStaffList(ArrayList<Staff> ListOfStaff) {
-
-		for(Staff staff : ListOfStaff) {
-			// print out staff object's attributes
-			System.out.println(staff.getStaff_id() + " " + staff.getStaff_name() + " " + staff.getGender() + " " + staff.getJob_title());
-		}
-		}
 	
 	// function to add staff object to the list of staff
-	public void addStaff(ArrayList<Staff> ListOfStaff, int staffId, String name, String gender, String title) {
-			Staff newStaff = new Staff();
-			newStaff.setStaff_id(staffId);
-			newStaff.setStaff_name(name);
-			newStaff.setGender(gender);
-			newStaff.setJob_title(title);
-			ListOfStaff.add(newStaff);
+	public void addStaff(int staffId, String name, String gender, String title) {
+			ListOfStaff.add(new Staff(staffId, name, gender, title));
 
 	}
 
 	// returns the last auto increment staff id in the list
-	public int getLastId(ArrayList<Staff> ListOfStaff) {
+	public int getLastId() {
 		int lastId = 0;
 		for(Staff staff : ListOfStaff) {
-			if(staff.getStaff_id() > lastId) {
-				lastId = staff.getStaff_id();
+			if(staff.getStaffId() > lastId) {
+				lastId = staff.getStaffId();
 			}
 		}
 		return lastId;

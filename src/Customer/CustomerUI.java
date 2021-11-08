@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class CustomerUI {
 
+	// empty constructor
+	public CustomerUI() {}
+
     public int mainMenu() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Do you want to \n"
@@ -38,10 +41,10 @@ public class CustomerUI {
 		return member;
 	}
 	
-	public String getRemoveId() {
+	public int getRemoveId() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Customer id to remove");
-		String id = sc.next();
+		int id = sc.nextInt();
 		return id;
 	}
     

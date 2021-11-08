@@ -1,16 +1,16 @@
 package Customer;
 
 public class Customer {
-	private int customer_id;
+	private int customerId;
 	private String name;
 	private String phone;
 	private boolean member;
 	
-	public Customer() {};
+	public Customer() {}
 	
-	public Customer(int customer_id, String name, String phone, boolean member) {
+	public Customer(int customerId, String name, String phone, boolean member) {
 		// TODO - implement Staff.Staff
-		this.customer_id = customer_id;
+		this.customerId = customerId;
 		this.name = name;
 		this.phone = phone;
 		this.member = member;
@@ -41,12 +41,12 @@ public class Customer {
 		this.phone = phone;
 	}
 
-	public int getCustomer_id() {
-		return this.customer_id;
+	public int getCustomerId() {
+		return this.customerId;
 	}
 
-	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 
 }

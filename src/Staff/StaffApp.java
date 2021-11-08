@@ -7,11 +7,5 @@ public class StaffApp {
 
 		staffmgr.init();
 
-		// boolean a = staffmgr.checkStaffId(10);
 
-		// if (a == true) {
-		// 	System.out.println("Staff ID is valid");
-		// } else {
-		// 	System.out.println("Staff ID is invalid");
-		// }
 }}
