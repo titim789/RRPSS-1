@@ -1,6 +1,6 @@
 package reservation;
 
-import filemanager.FileMgr;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 import table.TableMgr;
 
-public class ReservationMgr implements FileMgr {
+public class ReservationMgr {
 	
 	//-----------------Table Manager-------------------------//
 	private TableMgr tableManager = new TableMgr();
@@ -29,7 +29,7 @@ public class ReservationMgr implements FileMgr {
 	private ReservationUI reservationUI = new ReservationUI();
 	
 	public ReservationMgr(){
-		
+		load();
 	}
 	
 	//-----------------Print Table---------------------------//

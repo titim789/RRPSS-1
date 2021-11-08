@@ -1,30 +1,21 @@
 package staff;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import customer.Customer;
-import staff.Staff;
-import filemanager.FileMgr;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.lang.String;
 
-public class StaffMgr implements FileMgr{
+public class StaffMgr{
 	private static ArrayList<Staff> listOfStaff;
 	
 	public StaffMgr() {
 		listOfStaff = new ArrayList<Staff>();
+		load();
 	}
 	
 	public void init() {

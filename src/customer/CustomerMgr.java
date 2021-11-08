@@ -3,7 +3,6 @@ package customer;
 import java.io.File;
 import java.io.FileInputStream;
 
-import filemanager.FileMgr;
 import menu.MenuItem;
 
 import java.io.FileNotFoundException;
@@ -22,11 +21,12 @@ import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 
-public class CustomerMgr implements FileMgr{
+public class CustomerMgr{
 
 	private static ArrayList<Customer> listOfCustomer;
 	
 	public CustomerMgr() {
+		load();
 	}
 
 	public void init(){
@@ -141,7 +141,6 @@ public class CustomerMgr implements FileMgr{
 		return customer;
 	}
 
-	@Override
 	public void save() {
 		// TODO Auto-generated method stub
 		PrintWriter pw = null;
@@ -179,7 +178,6 @@ public class CustomerMgr implements FileMgr{
 		}
 	}
 
-	@Override
 	public void load() {
 		// TODO Auto-generated method stub
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
