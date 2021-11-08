@@ -1,11 +1,4 @@
-/Customer/
 /Invoice/
-/Menu/
 /Order/
-/Reservation/
 /Restaurant/
-/Staff/
-/Table/
-/module-info.class
-/reservations.txt
-/tables.txt
+/Menu/

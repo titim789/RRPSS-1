@@ -3,11 +3,11 @@ import java.io.Serializable;
 
 public class MenuItem implements Serializable {
 
-	private int item_id;
+	private int itemId;
 	private String name;
 	private String description;
 	private double price;
-	private TYPEOFMENU menutype;
+	private TYPEOFMENU menuType;
 
 	/**
 	 * 
@@ -17,25 +17,25 @@ public class MenuItem implements Serializable {
 	 * @param price
 	 * @param menutype
 	 */
-	public MenuItem(int item_id, String name, String description, double price, TYPEOFMENU menutype) {
+	public MenuItem(int itemId, String name, String description, double price, TYPEOFMENU menuType) {
 		// TODO - implement Menu_Item.Menu_Item
-		this.item_id = item_id;
+		this.itemId = itemId;
 		this.name = name;
 		this.description = description;
 		this.price = price;
-		this.menutype = menutype;
+		this.menuType = menuType;
 	}
 
 	public int getItemId() {
-		return this.item_id;
+		return itemId;
 	}
 
 	/**
 	 * 
 	 * @param item_id
 	 */
-	public void setItemId(int item_id) {
-		this.item_id = item_id;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 
 	public String getName() {
@@ -74,27 +74,18 @@ public class MenuItem implements Serializable {
 		this.price = price;
 	}
 
-	public TYPEOFMENU getMenutype() {
-		return this.menutype;
+	public TYPEOFMENU getMenuType() {
+		return this.menuType;
 	}
 
 	/**
 	 * 
 	 * @param menutype
 	 */
-	public void setMenuType(TYPEOFMENU menutype) {
-		this.menutype = menutype;
+	public void setMenuType(TYPEOFMENU menuType) {
+		this.menuType = menuType;
 	}
 	
-	@Override
-    public String toString() {
-        return "MenuItem{" +
-                "Item ID ='" + item_id + '\'' +
-                ", Name ='" + name + '\'' +
-                ", Description =" + description +
-                ", Price =" + price +
-                ", Type =" + menutype +
-                "}\n";
-    }
+	
 
 }

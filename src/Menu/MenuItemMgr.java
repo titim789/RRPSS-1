@@ -20,7 +20,7 @@ public class MenuItemMgr {
 		int choice = menuItemUI.getEditOption();
 		if(choice == 1) {
 			MenuItem newItem = menuItemUI.getAddOption();
-			addNewMenuItem(newItem.getItemId(),newItem.getName(),newItem.getDescription(), newItem.getPrice(), newItem.getMenutype());
+			addNewMenuItem(newItem.getItemId(),newItem.getName(),newItem.getDescription(), newItem.getPrice(), newItem.getMenuType());
 		}
 		else if(choice == 2) {			
 			removeItem(menuItemUI.getRemoveOption());

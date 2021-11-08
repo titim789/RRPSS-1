@@ -137,11 +137,11 @@ public class Order {
 	
 	//another method to print the stuff
 	public void printItem(MenuItem n){
-		System.out.println(n.getItemId() + "\t" + n.getName() + "\t" + n.getPrice() + "\t" + (n.getMenutype().toString()));
+		System.out.println(n.getItemId() + "\t" + n.getName() + "\t" + n.getPrice() + "\t" + (n.getMenuType().toString()));
 	}
 	
 	public void printItemNoPrice(MenuItem n){
-		System.out.println(n.getItemId() + "\t" + n.getName() + "\t" + (n.getMenutype().toString()));
+		System.out.println(n.getItemId() + "\t" + n.getName() + "\t" + (n.getMenuType().toString()));
 	}
 	
 	//for package
