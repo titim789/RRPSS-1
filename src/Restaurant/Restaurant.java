@@ -5,6 +5,7 @@ import Order.OrderMgr;
 import Reservation.ReservationMgr;
 import Invoice.InvoiceMgr;
 import Customer.CustomerMgr;
+import Staff.StaffMgr;
 import java.util.*;
 
 
@@ -15,10 +16,13 @@ public class Restaurant {
 	private static OrderMgr orderMgr;
 	private static InvoiceMgr invoiceMgr;
 	private static CustomerMgr customerMgr;
+	private static StaffMgr staffMgr;
 	
 	public static void main(String[] args){
 		reserveManager = new ReservationMgr();
 		menuMgr = new MenuMgr();
+		staffMgr = new StaffMgr();
+		customerMgr = new CustomerMgr();
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		
@@ -28,7 +32,9 @@ public class Restaurant {
 					+ "3.\tReservation & Tables\n"
 					+ "4.\tInvoice\n"
 					+ "5.\tSales Report\n"
-					+ "6.\tExit");
+					+ "6.\tManage Staff\n"
+					+ "7.\tManage Customer\n"
+					+ "8.\tExit");
 			System.out.print("Enter Choice : ");
 			choice = sc.nextInt();
 			//Menu Choice
@@ -248,8 +254,19 @@ public class Restaurant {
 						break;
 				}
 			}
-		}while(choice != 6); //Exiting
+			
+			else if(choice == 6) {
+				staffMgr.init();
+			}
+
+			else if (choice == 7){
+				customerMgr.init();
+			}
+		
+		}while(choice != 8); //Exiting
 		menuMgr.save();
+		staffMgr.saveStaffList("staffList.txt");
+		customerMgr.saveCustomerList("customerList.txt");
 	}	
 
 }
