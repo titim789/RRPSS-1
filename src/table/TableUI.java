@@ -1,4 +1,4 @@
-package project;
+package table;
 
 import java.util.*;
 
