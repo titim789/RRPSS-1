@@ -98,7 +98,9 @@ public class Restaurant {
 						System.out.println("Enter item ID to add: ");
 						int addItemId = sc.nextInt();
 						//hmmm can check if exists first? Rather than just println and return null if not exists
-						orderMgr.addItem(addOrderId, menuMgr.getMenuItem(addItemId));
+						System.out.println("Enter quantity to add: ");
+						int addQty = sc.nextInt();
+						orderMgr.addItem(addOrderId, menuMgr.getMenuItem(addItemId), addQty);
 						System.out.println("\nadded.\n");
 						break;
 					case 4:
@@ -110,7 +112,9 @@ public class Restaurant {
 						System.out.println("Enter Package ID to add: ");
 						int addPackId = sc.nextInt();
 						//hmmm can check if exists first? Rather than just println and return null if not exists
-						orderMgr.addPackage(addPackOrderId, menuMgr.getPromotionPackage(addPackId));
+						System.out.println("Enter quantity to add: ");
+						int addPackQty = sc.nextInt();
+						orderMgr.addPackage(addPackOrderId, menuMgr.getPromotionPackage(addPackId), addPackQty);
 						System.out.println("\nadded.\n");
 						break;
 					case 5:

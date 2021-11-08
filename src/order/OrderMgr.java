@@ -35,16 +35,19 @@ public class OrderMgr {
 		ListOfOrders.get(orderId).viewOrder();
 	}
 	
-	public void addItem(int orderId, MenuItem item) {
+	public void addItem(int orderId, orderMenuItem item, int qty) {
 		ListOfOrders.get(orderId).addOrderItem(item);
+		
 	}
 	
 	public void removeItem(int orderId, MenuItem item) {
 		ListOfOrders.get(orderId).removeOrderItem(item);
 	}
 	
-	public void addPackage(int orderId, PromotionPackage pack) {
-		ListOfOrders.get(orderId).addPromotion(pack);
+	public void addPackage(int orderId, PromotionPackage pack, int qty) {
+		for(int i=0;i<qty;i++) {
+			ListOfOrders.get(orderId).addPromotion(pack);	
+		}
 	}
 	
 	public void removePackage(int orderId, PromotionPackage pack) {

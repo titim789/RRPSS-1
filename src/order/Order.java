@@ -17,8 +17,8 @@ public class Order {
 	private int tableId;
 	private int customerId;
 	private double orderPrice;
-	private ArrayList<MenuItem> listOfOrderItems = new ArrayList<MenuItem>();
-	private ArrayList<PromotionPackage> listOfOrderPromotions = new ArrayList<PromotionPackage>();
+	private ArrayList<orderMenuItem> listOfOrderItems = new ArrayList<orderMenuItem>();
+	private ArrayList<orderPromotionPackage> listOfOrderPromotions = new ArrayList<orderPromotionPackage>();
 	private Calendar timestamp;
 	
 	private static final SimpleDateFormat sdf = 
@@ -83,7 +83,7 @@ public class Order {
 	
 	
 	
-	public void addOrderItem(MenuItem item) {
+	public void addOrderItem(orderMenuItem item) {
 		listOfOrderItems.add(item);
 		orderPrice += item.getPrice();
 		System.out.println(item.getName()+" added.");
@@ -91,7 +91,7 @@ public class Order {
 
 
 	//param change to MenuItem
-	public void removeOrderItem(MenuItem item) {
+	public void removeOrderItem(orderMenuItem item) {
 		if(listOfOrderItems.remove(item)) {
 			System.out.println("Successfully Removed");
 			orderPrice -= item.getPrice();
@@ -102,14 +102,14 @@ public class Order {
 	}
 
 	//param change to PromoItem
-	public void addPromotion(PromotionPackage pack) {
+	public void addPromotion(orderPromotionPackage pack) {
 		listOfOrderPromotions.add(pack);
 		orderPrice += pack.getPackagePrice();
 		System.out.println(pack.getPackageName()+" added.");
 	}
 
 	//param change to PromoItem
-	public void removePromotion(PromotionPackage pack) {
+	public void removePromotion(orderPromotionPackage pack) {
 		if(listOfOrderPromotions.remove(pack)) {
 			System.out.println("Successfully Removed");
 			orderPrice -= pack.getPackagePrice();
@@ -138,7 +138,7 @@ public class Order {
 	}
 	
 	//another method to print the stuff
-	public void printItem(MenuItem n){
+	public void printItem(orderMenuItem n){
 		System.out.println(n.getItemId() + "\t" + n.getName() + "\t" + n.getPrice() + "\t" + (n.getMenuType().toString()));
 	}
 	
@@ -147,7 +147,7 @@ public class Order {
 	}
 	
 	//for package
-	public void printPack(PromotionPackage p){
+	public void printPack(orderPromotionPackage p){
 		System.out.println(p.getPackageId() + "\t" + p.getPackageName() + "\t" + p.getPackagePrice());
 		
 		ArrayList<MenuItem> temp = p.getListOfMenuItem();
