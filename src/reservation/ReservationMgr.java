@@ -60,6 +60,8 @@ public class ReservationMgr implements FileMgr {
 		
 		listOfReservations.add(reservation);
 		tableManager.editTableDetail(tableId,"RESERVED");
+		
+		System.out.println("New Reservation "+ i +" has been added.");
 	}
 	
 	//-----------------Remove Reservation By ID---------------------------//
@@ -219,6 +221,8 @@ public class ReservationMgr implements FileMgr {
 					resv.setNoOfPax(noPax);
 					resv.setCustomerName(cName);
 					resv.setContact(contactNo);
+					
+					System.out.println("Reservation " + resv.getReservationId() +" has been updated.");
 				}
 			}
 	  	
