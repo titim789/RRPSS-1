@@ -24,11 +24,10 @@ import java.io.FileReader;
 
 public class CustomerMgr implements FileMgr{
 
-	private static ArrayList<Customer> ListOfCustomer;
+	private static ArrayList<Customer> listOfCustomer;
 	
 	public CustomerMgr() {
-		ListOfCustomer = new ArrayList<Customer>();
-		ListOfCustomer = loadCustomerList("customerList.txt");
+		load();
 	}
 
 	public void init(){
@@ -76,11 +75,117 @@ public class CustomerMgr implements FileMgr{
 		
 	}
 
-	// load file name and return an ArrayList of Customer objects
-	public ArrayList<Customer> loadCustomerList(String fileName) {
+	// pass in an ArrayList<Customer> and display all customers in the list
+	public void displayCustomerList() {
+		System.out.printf("CustId\tName\tPhone\t\tMember\n");
+		for (Customer customer : listOfCustomer) {
+			String member = "";
+			if (customer.isMember()) {
+				member = "y";
+			} else {
+				member = "n";
+			}
+			System.out.println(customer.getCustomerId() + "\t" + customer.getName() + "\t" + customer.getPhone() + "\t" + customer.isMember());
+		}
+	}
+	
+	// function to add customer object to list of customer
+	public void addCustomer(int customerId, String name, String phone, String member) {
+		Customer newCustomer = new Customer();
+		newCustomer.setCustomerId(customerId);
+		newCustomer.setName(name);
+		newCustomer.setPhone(phone);
+		if(member.equals("y")) {
+			newCustomer.setMember(true);
+		}
+		else {
+			newCustomer.setMember(false);
+		}
+		listOfCustomer.add(newCustomer);
+	}
+
+	// returns the last customer id in the list
+	public int getLastCustomerId() {
+		int lastCustomerId = 0;
+		for (Customer customer : listOfCustomer) {
+			if (customer.getCustomerId() > lastCustomerId) {
+				lastCustomerId = customer.getCustomerId();
+			}
+		}
+		return lastCustomerId;
+	}
+
+	// remove customer object from the list of customer, store into a temp ArrayList if customer id is not CustomerIdemoval
+	public void removeCustomer(int customerIdToRemove) {
+		ArrayList<Customer> tempList = new ArrayList<Customer>();
+		for (Customer customer : listOfCustomer) {
+			if (customer.getCustomerId() != customerIdToRemove) {
+				tempList.add(customer);
+			}
+		}
+		listOfCustomer.clear();
+		listOfCustomer.addAll(tempList);
+
+		System.out.println("Customer removed..");
+		displayCustomerList();
+	}
+
+
+	// pass in an CustomerId integer and return the customer object
+	public Customer getCustomerObj(int customerId) {
+		Customer customer = new Customer();
+		for (Customer c : listOfCustomer) {
+			if (c.getCustomerId() == customerId) {
+				customer = c;
+			}
+		}
+		return customer;
+	}
+
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		PrintWriter pw = null;
+		try {
+			pw = new PrintWriter(new File("customerList.txt"));
+			pw.print("");
+			pw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("customerList.txt"));
+			// write header row
+			bw.write("CustomerId,Name,Phone,Member");
+			bw.newLine();
+			
+			// write each customer object into the file
+			for (Customer customer : listOfCustomer) {
+				String member = "";
+				if (customer.isMember()) {
+					member = "y";
+				} else {
+					member = "n";
+				}
+				bw.write(customer.getCustomerId() + "," + customer.getName() + "," + customer.getPhone() + "," + member);
+				bw.newLine();
+			}
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void load() {
+		// TODO Auto-generated method stub
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(fileName));
+			BufferedReader br = new BufferedReader(new FileReader("customerList.txt"));
 			//to store a line
 			String line = "";
 			
@@ -118,136 +223,32 @@ public class CustomerMgr implements FileMgr{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return customerList;
-	}
-
-	// pass in an ArrayList<Customer> and display all customers in the list
-	public void displayCustomerList() {
-		System.out.printf("CustId\tName\tPhone\t\tMember\n");
-		for (Customer customer : ListOfCustomer) {
-			String member = "";
-			if (customer.isMember()) {
-				member = "y";
-			} else {
-				member = "n";
-			}
-			System.out.println(customer.getCustomerId() + "\t" + customer.getName() + "\t" + customer.getPhone() + "\t" + customer.isMember());
-		}
+		this.listOfCustomer = customerList;
 	}
 	
-	// function to add customer object to list of customer
-	public void addCustomer(int customerId, String name, String phone, String member) {
-		Customer newCustomer = new Customer();
-		newCustomer.setCustomerId(customerId);
-		newCustomer.setName(name);
-		newCustomer.setPhone(phone);
-		if(member.equals("y")) {
-			newCustomer.setMember(true);
-		}
-		else {
-			newCustomer.setMember(false);
-		}
-		ListOfCustomer.add(newCustomer);
-	}
-
-	// returns the last customer id in the list
-	public int getLastCustomerId() {
-		int lastCustomerId = 0;
-		for (Customer customer : ListOfCustomer) {
-			if (customer.getCustomerId() > lastCustomerId) {
-				lastCustomerId = customer.getCustomerId();
-			}
-		}
-		return lastCustomerId;
-	}
-
-	// remove customer object from the list of customer, store into a temp ArrayList if customer id is not CustomerIdemoval
-	public void removeCustomer(int customerIdToRemove) {
-		ArrayList<Customer> tempList = new ArrayList<Customer>();
-		for (Customer customer : ListOfCustomer) {
-			if (customer.getCustomerId() != customerIdToRemove) {
-				tempList.add(customer);
-			}
-		}
-		ListOfCustomer.clear();
-		ListOfCustomer.addAll(tempList);
-
-		System.out.println("Customer removed..");
-		displayCustomerList();
-	}
-
-
-	// save customer list to csv file
-	public void saveCustomerList(String fileName) {
-		PrintWriter pw = null;
-		try {
-			pw = new PrintWriter(new File(fileName));
-			pw.print("");
-			pw.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	// public void load() {
+	// 	// TODO - implement Menu.load
+	// 	try{
+	// 	    FileInputStream readData = new FileInputStream("customerList.txt");
+	// 	    ObjectInputStream readStream = new ObjectInputStream(readData);
+	// 	    ListOfCustomer = (ArrayList<Customer>) readStream.readObject();
+	// 	    readStream.close();
+	// 	    //System.out.println(listOfMenuItems.toString());
+	// 	}catch (Exception e) {
+	// 	    e.printStackTrace();
+	// 	}
 		
-		
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
-			// write header row
-			bw.write("CustomerId,Name,Phone,Member");
-			bw.newLine();
-			
-			// write each customer object into the file
-			for (Customer customer : ListOfCustomer) {
-				String member = "";
-				if (customer.isMember()) {
-					member = "y";
-				} else {
-					member = "n";
-				}
-				bw.write(customer.getCustomerId() + "," + customer.getName() + "," + customer.getPhone() + "," + member);
-				bw.newLine();
-			}
-			bw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	// pass in an CustomerId integer and return the customer object
-	public Customer getCustomerObj(int customerId) {
-		Customer customer = new Customer();
-		for (Customer c : ListOfCustomer) {
-			if (c.getCustomerId() == customerId) {
-				customer = c;
-			}
-		}
-		return customer;
-	}
+	// }
 	
-	public void load() {
-		// TODO - implement Menu.load
-		try{
-		    FileInputStream readData = new FileInputStream("customerList.txt");
-		    ObjectInputStream readStream = new ObjectInputStream(readData);
-		    ListOfCustomer = (ArrayList<Customer>) readStream.readObject();
-		    readStream.close();
-		    //System.out.println(listOfMenuItems.toString());
-		}catch (Exception e) {
-		    e.printStackTrace();
-		}
-		
-	}
-	
-	public void save() {
-		// TODO - implement Menu.save
-		try {
-		    FileOutputStream fos = new FileOutputStream("customerList.txt");
-		    ObjectOutputStream oos = new ObjectOutputStream(fos);   
-		    oos.writeObject(ListOfCustomer); // write List of customer to ObjectOutputStream
-		    oos.close(); 
-		} catch(Exception ex) {
-		    ex.printStackTrace();
-		}
-	}
+	// public void save() {
+	// 	// TODO - implement Menu.save
+	// 	try {
+	// 	    FileOutputStream fos = new FileOutputStream("customerList.txt");
+	// 	    ObjectOutputStream oos = new ObjectOutputStream(fos);   
+	// 	    oos.writeObject(ListOfCustomer); // write List of customer to ObjectOutputStream
+	// 	    oos.close(); 
+	// 	} catch(Exception ex) {
+	// 	    ex.printStackTrace();
+	// 	}
+	// }
 }

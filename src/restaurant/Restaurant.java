@@ -270,8 +270,8 @@ public class Restaurant {
 		
 		}while(choice != 8); //Exiting
 		menuMgr.save();
-		staffMgr.saveStaffList("staffList.txt");
-		customerMgr.saveCustomerList("customerList.txt");
+		staffMgr.save();
+		customerMgr.save();
 	}	
 
 }

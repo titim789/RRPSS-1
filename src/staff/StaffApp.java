@@ -7,5 +7,5 @@ public class StaffApp {
 
 		staffmgr.init();
 
-
+		staffmgr.save();
 }}
