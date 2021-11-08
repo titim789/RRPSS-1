@@ -9,12 +9,11 @@ public class CustomerUI {
 
     public int mainMenu() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Do you want to \n"
+        System.out.println("\nDo you want to \n"
         + "1 - Display Customer List\n"
         + "2 - Add Customer\n"
         + "3 - Remove Customer\n"
-        + "4 - Back to main menu\n"
-        + "5 - Quit");
+        + "4 - Back to main menu");
         
         int option = sc.nextInt();
         return option;

@@ -56,16 +56,15 @@ public class CustomerMgr {
 				break;
 			case 4:
 				// removeCustomer();
-				saveCustomerList("customerList.txt");
-				break;
-			case 5:
-				// saveCustomer();
+				// saveCustomerList("customerList.txt");
+				System.out.println("Returning to main menu..");
+
 				break;
 			default:
-				System.out.println("Invalid choice");
+				System.out.println("Invalid choice, return to main menu..");
 				break;
 			}
-		} while (choice != 5);
+		} while (choice != 4);
 
 		
 	}

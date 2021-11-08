@@ -28,7 +28,7 @@ public class StaffMgr {
 		StaffUI staffui = new StaffUI();
 		int choice;
 		
-		while((choice = staffui.displayMenu()) != 5) {
+		while((choice = staffui.displayMenu()) != 4) {
 			switch(choice) {
 			// Display staff
 			case 1:
@@ -70,18 +70,16 @@ public class StaffMgr {
 			
 			case 4:
 				// insert function to go back one level
-				// save ArrayList of Staff to csv file
 
-				System.out.println("StaffList saved to file");
-				displayStaffList();
-				saveStaffList("StaffList.txt");
+				// save ArrayList of Staff to csv file
+				// System.out.println("StaffList saved to file");
+				// displayStaffList();
+				// saveStaffList("StaffList.txt");
+				System.out.println("Returning to Main Menu...");
 				break;
-				
-			// quit
-			case 5:
-				choice = 5;
-				System.out.println("Program Terminated");
-				break;
+			
+			default:
+			System.out.println("Invalid choice, Returning to Main Menu...");
 		}
 		
 	}}
@@ -101,7 +99,7 @@ public class StaffMgr {
 	}
 	
 	// remove staff based on staffId, store into a temp ArrayList if staddId is not StaffIdRemoval
-	private void removeStaff(int staffIdRemoval) {
+	public void removeStaff(int staffIdRemoval) {
 		ArrayList<Staff> tempList = new ArrayList<Staff>();
 		
 		// for each staff in listOfStaff, add to a temp list if staffId is not StaffIdRemoval
@@ -127,7 +125,7 @@ public class StaffMgr {
 		}
 
 	// save staff list to csv file
-	private void saveStaffList(String fileName) {
+	public void saveStaffList(String fileName) {
 		// empty content in file fileName, then write new content, attributes of ListOfStaff2, then close the file
 		PrintWriter pw = null;
 		try {
