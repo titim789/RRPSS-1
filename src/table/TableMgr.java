@@ -2,14 +2,12 @@ package table;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 public class TableMgr {
 	
@@ -18,8 +16,7 @@ public class TableMgr {
 	private ArrayList<Table> listOfTables = new ArrayList<Table>();
 	
 	//-----------------Display Table-------------------------//
-	private DisplayTable displayTable= new DisplayTable();
-	
+	private TableUI tableUI = new TableUI();
 	
 	//-----------------Constructor-------------------------//
 	public TableMgr(){
@@ -45,28 +42,23 @@ public class TableMgr {
 	
 	//----------------------Display----------------------------//
 	public void displayTbl() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("\nSelect Which Type of Table Status to view?");
-		System.out.println("0 : Vacant");
-		System.out.println("1 : Occupied");
-		System.out.println("2 : Reserved");
-		System.out.print("Enter your choice : ");
-		int n = sc.nextInt();
-
+		
+		int n = tableUI.getDisplayType();
+		
 		switch(n) {
 			case 0: 
 			if(checkVacant())
-				displayTable.displayTableVacant(listOfTables);
+				tableUI.displayTableVacant(listOfTables);
 			else System.out.println("No tables are Vacant!");
 			break;
 			case 1: 
 			if(checkOccupied())
-				displayTable.displayTableOccupied(listOfTables);
+				tableUI.displayTableOccupied(listOfTables);
 			else System.out.println("No tables are Occupied!");
 			break;
 			case 2: 
 			if(checkReserve())
-				displayTable.displayTableReserved(listOfTables);
+				tableUI.displayTableReserved(listOfTables);
 			else System.out.println("No tables are Reserved!");
 			break;
 		}
