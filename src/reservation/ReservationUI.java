@@ -94,28 +94,28 @@ public class ReservationUI {
 	
 	public String getTimeFromUser() {
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter Date : ");
+		System.out.print("Enter Time : ");
 		String n = sc.next();
 		return n;
 	}
 	
 	public int getPaxFromUser() {
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter Date : ");
+		System.out.print("Enter Number Of People : ");
 		int n = sc.nextInt();
 		return n;
 	}
 	
 	public String getNameFromUser() {
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter Date : ");
+		System.out.print("Enter Customer Name : ");
 		String n = sc.next();
 		return n;
 	}
 	
 	public String getContactFromUser() {
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter Date : ");
+		System.out.print("Enter Contact Number : ");
 		String n = sc.next();
 		return n;
 	}
