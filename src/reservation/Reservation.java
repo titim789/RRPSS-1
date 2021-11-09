@@ -17,7 +17,7 @@ public class Reservation implements Serializable{
 	private String contact;
 
 	private static final SimpleDateFormat sdf = 
-			new SimpleDateFormat("dd/MM/yyyy,HH:mm");
+			new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 	public Reservation(){}
 
