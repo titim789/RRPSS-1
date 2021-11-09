@@ -139,6 +139,26 @@ public class CustomerMgr{
 		return false;
 	}
 
+	// pass in customerId and returns customer phone attribtue
+	public String getCustomerPhone(int customerId) {
+		for (Customer customer : listOfCustomer) {
+			if (customer.getCustomerId() == customerId) {
+				return customer.getPhone();
+			}
+		}
+		return null;
+	}
+
+	// pass in customerId and returns customer name attribute
+	public String getCustomerName(int customerId) {
+		for (Customer customer : listOfCustomer) {
+			if (customer.getCustomerId() == customerId) {
+				return customer.getName();
+			}
+		}
+		return null;
+	}
+
 	// pass in an CustomerId integer and return the customer object
 	public Customer getCustomerObj(int customerId) {
 		Customer customer = new Customer();
