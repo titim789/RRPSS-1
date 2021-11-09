@@ -129,6 +129,15 @@ public class CustomerMgr{
 		displayCustomerList();
 	}
 
+	// pass in int customerId check if exist in the ArrayList Customer
+	public boolean isCustomerExist(int customerId) {
+		for (Customer customer : listOfCustomer) {
+			if (customer.getCustomerId() == customerId) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	// pass in an CustomerId integer and return the customer object
 	public Customer getCustomerObj(int customerId) {
