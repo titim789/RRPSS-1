@@ -1,11 +1,12 @@
 package reservation;
 
 import java.util.Calendar;
+import java.io.Serializable;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class Reservation {
+public class Reservation implements Serializable{
 
 	private int reservationId;
 	private int tableId;

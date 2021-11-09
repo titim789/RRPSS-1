@@ -20,7 +20,7 @@ public class ReservationMgr {
 	private TableMgr tableManager = new TableMgr();
 	
 	//-----------------Reservations -------------------------//
-	private ArrayList<Reservation> listOfReservations = new ArrayList<Reservation>();
+	private ArrayList<Reservation> listOfReservations;
 		
 	//-----------------Date Time Format-------------------------//
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy,HH:mm");
@@ -29,6 +29,7 @@ public class ReservationMgr {
 	private ReservationUI reservationUI = new ReservationUI();
 	
 	public ReservationMgr(){
+		listOfReservations = new ArrayList<Reservation>();
 		load();
 	}
 	
@@ -239,7 +240,7 @@ public class ReservationMgr {
   	public void save() {
   		tableManager.save();
   		try {
-  		    FileOutputStream fos = new FileOutputStream("reservation.txt");
+  		    FileOutputStream fos = new FileOutputStream("reservations.txt");
   		    ObjectOutputStream oos = new ObjectOutputStream(fos);   
   		    oos.writeObject(listOfReservations);
   		    oos.close(); 
@@ -253,7 +254,7 @@ public class ReservationMgr {
   	public void load() {
   		tableManager.load();
   		try{
-  		    FileInputStream readData = new FileInputStream("reservation.txt");
+  		    FileInputStream readData = new FileInputStream("reservations.txt");
   		    ObjectInputStream readStream = new ObjectInputStream(readData);
   		  listOfReservations = (ArrayList<Reservation>) readStream.readObject();
   		    readStream.close();
