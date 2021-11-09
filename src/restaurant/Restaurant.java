@@ -202,20 +202,30 @@ public class Restaurant {
 						reserveManager.checkAvail();
 						break;
 					case 2:
+						String name, contact, date, time;
+						int tableId, customerId, noOfPax;
 						Scanner scan = new Scanner(System.in);
 						System.out.print("Enter Table ID to be assigned : ");
-						int tableId = scan.nextInt();
+						tableId = scan.nextInt();
 						System.out.print("Enter Customer ID: ");
-						int customerId = scan.nextInt();
-						System.out.print("Enter Date and Time in (dd/MM/yyyy,HH:mm) format: ");
-						String calen = scan.next();
+						customerId = scan.nextInt();
+						System.out.print("Enter Date in (dd/MM/yyyy) format: ");
+						date = scan.next();
+						System.out.print("Enter Time in (HH:mm) format: ");
+						time = scan.next();
 						System.out.print("Enter Number of people: ");
-						int noOfPax = scan.nextInt();
-						System.out.print("Enter Customer Name : ");
-						String name = scan.next();
-						System.out.print("Enter Contact Number : ");
-						String contact = scan.next();
-						reserveManager.newReservation(tableId,customerId,calen,noOfPax,name,contact);
+						noOfPax = scan.nextInt();
+						if(customerMgr.isCustomerExist(customerId)) {
+							name = customerMgr.getCustomerName(customerId);
+							contact = customerMgr.getCustomerPhone(customerId);
+						}
+						else {
+							System.out.print("Enter Customer Name : ");
+							name = scan.next();
+							System.out.print("Enter Contact Number : ");
+							contact = scan.next();
+						}
+						reserveManager.newReservation(tableId,customerId,date+" "+time,noOfPax,name,contact);
 						break;
 					case 3:
 						Scanner scan1 = new Scanner(System.in);
