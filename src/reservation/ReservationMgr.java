@@ -1,6 +1,5 @@
 package reservation;
 
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -23,7 +22,7 @@ public class ReservationMgr {
 	private ArrayList<Reservation> listOfReservations;
 		
 	//-----------------Date Time Format-------------------------//
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy,HH:mm");
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
 	//-----------------Reservation Display---------------------------//
 	private ReservationUI reservationUI = new ReservationUI();
@@ -109,9 +108,9 @@ public class ReservationMgr {
 	}
 	
 	//-----------------Display Reservation---------------------------//
-    public void displayResv(int n) {
+    	public void displayResv(int n) {
     	
-    	removeReservationTime(); // remove reservation the past 10 mins of current time
+    		removeReservationTime(); // remove reservation the past 15 mins of current time
     	
 		switch(n) {
 			case 0: 
@@ -147,7 +146,7 @@ public class ReservationMgr {
 		}
 	}
     
-    //-----------------Check Customer Reservation---------------------------//
+    	//-----------------Check Customer Reservation---------------------------//
   	public boolean checkCustResv(int customerId){
   		for(Reservation resv : listOfReservations) {
   			if (resv.getCustomerId() == customerId) {
@@ -157,7 +156,7 @@ public class ReservationMgr {
   		return false;
   	}
     
-    //-----------------Update Existing reservations---------------------------//
+    	//-----------------Update Existing reservations---------------------------//
   	public void updateReservation(int editTerm) {
 		
 		if(checkCustResv(editTerm)) {
@@ -167,44 +166,44 @@ public class ReservationMgr {
 			int resvTerm = reservationUI.getReservationIdFromUser();
 		
 			int choice;
-			int tableId = -1; int cusId = -1;String date = "";int noPax = -1;String cName = "";String contactNo = "";
+			int tableId = -1; int cusId = -1;String date = "";String time ="";int noPax = -1;String cName = "";String contactNo = "";
 			do{
 				choice = reservationUI.updateReservationDisplay();
 				switch(choice){
 					case 1:
-						System.out.print("Enter new Table ID : ");
-						tableId = scan.nextInt();
+						tableId = reservationUI.getTableIdFromUser();
 						break;
 					case 2:
-						System.out.print("Enter new Customer ID : ");
-						cusId = scan.nextInt();
+						cusId = reservationUI.getCustomerIdFromUser();
 						break;
 					case 3:
-						System.out.print("Enter new Date Time in (dd/MM/yyyy,HH:mm) format : ");
-						date = scan.next();
+						date = reservationUI.getDateFromUser();
 						break;
 					case 4:
-						System.out.print("Enter new Number of People : ");
-						noPax = scan.nextInt();
+						time = reservationUI.getTimeFromUser();
 						break;
 					case 5:
-						System.out.print("Enter new Customer Name : ");
-						cName = scan.next();
+						noPax = reservationUI.getPaxFromUser();
 						break;
 					case 6:
-						System.out.print("Enter new Contact Number : ");
-						contactNo = scan.next();
+						cName = reservationUI.getNameFromUser();
+						break;
+					case 7:
+						contactNo = reservationUI.getContactFromUser();
 						break;
 				}
-			}while(choice != 7);
+			}while(choice != 8);
 			
-			int tid = -1; int cid = -1;String dt = "";int pax = -1;String name = "";String contact = "";
+			int tid = -1; int cid = -1;String dt = "";String d = "";String t = "";int pax = -1;String name = "";String contact = "";
 			
 			for(Reservation resv : listOfReservations) {
 				
 				tid = resv.getTableId();
 				cid = resv.getCustomerId();
 				dt = resv.getDateTime();
+				String[] part = dt.split(" ");
+				d = part[0];
+				t = part[1];
 				pax = resv.getNoOfPax();
 				name = resv.getCustomerName();
 				contact = resv.getContact();
@@ -212,7 +211,8 @@ public class ReservationMgr {
 				if (resv.getReservationId() == resvTerm && resv.getCustomerId() == editTerm) {
 					if(tableId == -1) tableId = tid;
 					if(cusId == -1) cusId = cid;
-					if(date == "") date = dt;
+					if(date == "") date = d;
+					if(time == "") time = t;
 					if(noPax == -1) noPax = pax;
 					if(cName == "") cName = name;
 					if(contactNo == "") contactNo = contact;
@@ -223,7 +223,7 @@ public class ReservationMgr {
 					}
 					resv.setTableId(tableId);
 					resv.setCustomerId(cusId);
-					resv.setDateTime(date);
+					resv.setDateTime(date+" "+time);
 					resv.setNoOfPax(noPax);
 					resv.setCustomerName(cName);
 					resv.setContact(contactNo);
