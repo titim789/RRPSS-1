@@ -130,7 +130,7 @@ public class TableMgr {
 	@SuppressWarnings("unchecked")
 	public void load() {
 		try{
-		    FileInputStream readData = new FileInputStream("table.txt");
+		    FileInputStream readData = new FileInputStream("tables.txt");
 		    ObjectInputStream readStream = new ObjectInputStream(readData);
 		    listOfTables = (ArrayList<Table>) readStream.readObject();
 		    readStream.close();

@@ -1,6 +1,8 @@
 package table;
 
-public class Table {
+import java.io.Serializable;
+
+public class Table implements Serializable{
 
 	public enum TABLESTATUS {
 		RESERVED,
