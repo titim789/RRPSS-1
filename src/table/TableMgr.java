@@ -99,6 +99,16 @@ public class TableMgr {
 		return false;
 	}
 	
+	//-----------------Check people more than TableSize---------------------------//
+	public boolean sizeMoreTableSize(int pax, int tableId){
+		for(Table table : listOfTables) {
+			if ((table.getTableStatus()).equals("VACANT") && table.getNoOfPax() < pax && table.getTableId() == tableId) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	//-----------------Check Size Of Table---------------------------//
 	public boolean checkAvailability(int pax){
 		for(Table table : listOfTables) {
