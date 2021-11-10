@@ -38,8 +38,8 @@ public class ReservationMgr {
 	}
 	
 	//-----------------Check Availability---------------------------//
-	public void checkAvail(){
-		tableManager.checkAvailability();
+	public void checkAvail(int n){
+		tableManager.checkAvailability(n);
 	}
 	
 	
