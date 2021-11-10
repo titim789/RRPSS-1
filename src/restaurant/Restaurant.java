@@ -199,7 +199,10 @@ public class Restaurant {
 						reserveManager.displayTableDetails();
 						break;
 					case 1:
-						reserveManager.checkAvail();
+						Scanner sc1 = new Scanner(System.in);
+						System.out.print("Enter Size of Table : ");
+						int pax = sc1.nextInt();
+						reserveManager.checkAvail(pax);
 						break;
 					case 2:
 						String name, contact, date, time;
