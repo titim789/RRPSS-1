@@ -54,19 +54,24 @@ public class ReservationMgr {
 		int minutes = cal.get(Calendar.MINUTE);
 		int i = year*10000 + month*10000 + day*100 + hours*minutes ;
 		
-		Reservation reservation = new Reservation();
-		reservation.setReservationId(i);
-		reservation.setTableId(tableId);
-		reservation.setCustomerId(customerId);
-		reservation.setDateTime(calen);
-		reservation.setNoOfPax(noOfPax);
-		reservation.setCustomerName(name);
-		reservation.setContact(contact);
-		
-		listOfReservations.add(reservation);
-		tableManager.editTableDetail(tableId,"RESERVED");
-		
-		System.out.println("New Reservation "+ i +" has been added.");
+		if(!tableManager.sizeMoreTableSize(noOfPax,tableId)) {
+			Reservation reservation = new Reservation();
+			reservation.setReservationId(i);
+			reservation.setTableId(tableId);
+			reservation.setCustomerId(customerId);
+			reservation.setDateTime(calen);
+			reservation.setNoOfPax(noOfPax);
+			reservation.setCustomerName(name);
+			reservation.setContact(contact);
+			
+			listOfReservations.add(reservation);
+			tableManager.editTableDetail(tableId,"RESERVED");
+			
+			System.out.println("New Reservation "+ i +" has been added.");
+		}
+		else {
+			System.out.println("Reservation Not added as number of people exceed table size.");
+		}
 	}
 	
 	//-----------------Remove Reservation By ID---------------------------//
