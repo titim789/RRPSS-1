@@ -21,7 +21,7 @@ public class TableMgr {
 	//-----------------Constructor-------------------------//
 	public TableMgr(){
 		load();
-		/*if(listOfTables.isEmpty()){
+		if(listOfTables.isEmpty()){
 			Random rand = new Random();
 			for(int i=0;i<30;i++){
 				int randomElement = tableSize.get(rand.nextInt(tableSize.size()));
@@ -30,9 +30,6 @@ public class TableMgr {
 			}
 			save();
 		}
-		else {
-			System.out.println("Array is not empty ...");	
-		}*/
 	}
 	
 	//---------------------Get Table Array-------------------------//
