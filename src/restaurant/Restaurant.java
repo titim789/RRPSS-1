@@ -227,6 +227,7 @@ public class Restaurant {
 							name = scan.next();
 							System.out.print("Enter Contact Number : ");
 							contact = scan.next();
+							customerMgr.addCustomer(customerMgr.getLastCustomerId()+1, name, contact, "n");
 						}
 						reserveManager.newReservation(tableId,customerId,date+" "+time,noOfPax,name,contact);
 						break;
