@@ -63,6 +63,12 @@ public class TableMgr {
 			break;
 		}
 	}
+	
+	//-----------------print Size Of Table---------------------------//
+	public void displaySizeVacant(int pax){
+		tableUI.displayTablePax(listOfTables, pax);
+	}
+	
 	//-----------------Check Vacant---------------------------//
 	public boolean checkVacant(){
 		for(Table table : listOfTables) {
@@ -73,7 +79,7 @@ public class TableMgr {
 		return false;
 	}
 	
-	//-----------------Check Vacant---------------------------//
+	//-----------------Check Occupied---------------------------//
 	public boolean checkOccupied(){
 		for(Table table : listOfTables) {
 			if ((table.getTableStatus()).equals("OCCUPIED")) {
@@ -83,7 +89,7 @@ public class TableMgr {
 		return false;
 	}
 		
-	//-----------------Check Vacant---------------------------//
+	//-----------------Check Reserved---------------------------//
 	public boolean checkReserve(){
 		for(Table table : listOfTables) {
 			if ((table.getTableStatus()).equals("RESERVED")) {
@@ -93,8 +99,8 @@ public class TableMgr {
 		return false;
 	}
 	
-	public boolean checkAvailability(){
-		int pax = tableUI.getSizeCheck();
+	//-----------------Check Size Of Table---------------------------//
+	public boolean checkAvailability(int pax){
 		for(Table table : listOfTables) {
 			if ((table.getTableStatus()).equals("VACANT") && table.getNoOfPax() == pax) {
 				tableUI.displayTablePax(listOfTables, pax);
