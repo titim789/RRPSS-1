@@ -120,7 +120,6 @@ public class TableMgr {
 		return false;
 	}
 	
-	
 	//-----------------Update Table---------------------------//
 	public void editTableDetail(int num, String newstatus){
 		for(Table table : listOfTables) {
@@ -146,7 +145,7 @@ public class TableMgr {
 	@SuppressWarnings("unchecked")
 	public void load() {
 		try{
-		    FileInputStream readData = new FileInputStream("tables.txt");
+		    FileInputStream readData = new FileInputStream("table.txt");
 		    ObjectInputStream readStream = new ObjectInputStream(readData);
 		    listOfTables = (ArrayList<Table>) readStream.readObject();
 		    readStream.close();
