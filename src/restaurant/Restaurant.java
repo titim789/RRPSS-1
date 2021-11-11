@@ -208,16 +208,17 @@ public class Restaurant {
 						String name, contact, date, time;
 						int tableId, customerId, noOfPax;
 						Scanner scan = new Scanner(System.in);
+						System.out.print("Enter Number of people: ");
+						noOfPax = scan.nextInt();
+						reserveManager.checkAvail(noOfPax);
 						System.out.print("Enter Table ID to be assigned : ");
 						tableId = scan.nextInt();
-						System.out.print("Enter Customer ID: ");
+						System.out.print("Enter Customer ID(-1 for new customer): ");
 						customerId = scan.nextInt();
 						System.out.print("Enter Date in (dd/MM/yyyy) format: ");
 						date = scan.next();
 						System.out.print("Enter Time in (HH:mm) format: ");
 						time = scan.next();
-						System.out.print("Enter Number of people: ");
-						noOfPax = scan.nextInt();
 						if(customerMgr.isCustomerExist(customerId)) {
 							name = customerMgr.getCustomerName(customerId);
 							contact = customerMgr.getCustomerPhone(customerId);
@@ -227,8 +228,10 @@ public class Restaurant {
 							name = scan.next();
 							System.out.print("Enter Contact Number : ");
 							contact = scan.next();
-							customerMgr.addCustomer(customerMgr.getLastCustomerId()+1, name, contact, "n");
+							customerId = customerMgr.getLastCustomerId()+1;
+							customerMgr.addCustomer(customerId, name, contact, "n");
 							System.out.println(name + " has been added to Customer table.");
+							customerMgr.displayCustomerList();
 						}
 						reserveManager.newReservation(tableId,customerId,date+" "+time,noOfPax,name,contact);
 						break;
