@@ -96,10 +96,10 @@ public class TableMgr {
 		return false;
 	}
 	
-	//-----------------Check people more than TableSize---------------------------//
+	//-----------------Check people fit TableSize---------------------------//
 	public boolean sizeMoreTableSize(int pax, int tableId){
 		for(Table table : listOfTables) {
-			if ((table.getTableStatus()).equals("VACANT") && table.getNoOfPax() < pax && table.getTableId() == tableId) {
+			if ((table.getTableStatus()).equals("VACANT") && table.getNoOfPax() <= pax && table.getTableId() == tableId) {
 				return true;
 			}
 		}
@@ -109,7 +109,7 @@ public class TableMgr {
 	//-----------------Check Size Of Table---------------------------//
 	public boolean checkAvailability(int pax){
 		for(Table table : listOfTables) {
-			if ((table.getTableStatus()).equals("VACANT") && table.getNoOfPax() == pax) {
+			if (table.getNoOfPax() <= pax && table.getTableStatus().equals("VACANT")) {
 				tableUI.displayTablePax(listOfTables, pax);
 				return true;
 			}
