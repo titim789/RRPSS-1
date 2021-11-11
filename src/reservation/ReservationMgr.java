@@ -43,14 +43,14 @@ public class ReservationMgr {
 	}
 	
 	//-----------------Cusomter arrive delete reservation change to occupied---------------------------//
-	public void customerArrive(int customerId, int reservationId) {
+	public void customerArrive(int reservationId) {
 		int i;
 		for(i=0; i<listOfReservations.size();i++)
 		{
-			if(listOfReservations.get(i).getReservationId() == reservationId && listOfReservations.get(i).getCustomerId() == customerId) {
+			if(listOfReservations.get(i).getReservationId() == reservationId) {
 				tableManager.editTableDetail(listOfReservations.get(i).getTableId(),"OCCUPIED");
+				System.out.println("Customer "+ listOfReservations.get(i).getCustomerName() +" has arrived!");
 				listOfReservations.remove(i);
-				System.out.println("Customer "+ customerId +" has arrived!");
 				return;
 			}
 		}
@@ -136,7 +136,7 @@ public class ReservationMgr {
 	//-----------------Display Reservation---------------------------//
     	public void displayResv(int n) {
     	
-    		removeReservationTime(); // remove reservation the past 15 mins of current time
+    	removeReservationTime(); // remove reservation the past 15 mins of current time
     	
 		switch(n) {
 			case 0: 
@@ -148,13 +148,40 @@ public class ReservationMgr {
 						removeReservationId();
 						break;
 					case 1:
+						int resvId = reservationUI.getReservationIdFromUser();
+						customerArrive(resvId);
+						break;	
+					case 2:
 						break;
 				}
 			}
 			else System.out.println("There are no Reservations!!");
 			break;
-			
 			case 1: 
+			Calendar cal = Calendar.getInstance();
+			int year = cal.get(Calendar.YEAR);
+			int month = cal.get(Calendar.MONTH)+1;
+			int day = cal.get(Calendar.DAY_OF_MONTH);
+			String date = day+"/"+month+"/"+year;
+			if(checkDateResv(date)) {
+				reservationUI.reservationDisplayDate(listOfReservations, date);
+				int m = reservationUI.removeReservationDisplay();
+				switch(m){
+					case 0:
+						removeReservationId();
+						break;
+					case 1:
+						int resvId = reservationUI.getReservationIdFromUser();
+						customerArrive(resvId);
+						break;	
+					case 2:
+						break;
+				}
+			}
+			else System.out.println("No reservations for "+date+"!!");
+			break;
+			
+			case 2: 
 			int term = reservationUI.getCustomerIdFromUser();
 			if(checkCustResv(term)) {
 				reservationUI.reservationDisplayCustomer(listOfReservations, term);
@@ -164,6 +191,10 @@ public class ReservationMgr {
 						removeReservationId();
 						break;
 					case 1:
+						int resvId = reservationUI.getReservationIdFromUser();
+						customerArrive(resvId);
+						break;	
+					case 2:
 						break;
 				}
 			}
@@ -171,11 +202,25 @@ public class ReservationMgr {
 			break;
 		}
 	}
-    
+	
     	//-----------------Check Customer Reservation---------------------------//
   	public boolean checkCustResv(int customerId){
   		for(Reservation resv : listOfReservations) {
   			if (resv.getCustomerId() == customerId) {
+  				return true;
+  			}
+  		}
+  		return false;
+  	}
+	
+	//-----------------Check Date Reservation---------------------------//
+	public boolean checkDateResv(String date){
+  		String dt,d;
+  		for(Reservation resv : listOfReservations) {
+  			dt = resv.getDateTime();
+			String[] part = dt.split(" ");
+			d = part[0];
+  			if (d.equals(date)) {
   				return true;
   			}
   		}
