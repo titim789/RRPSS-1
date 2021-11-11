@@ -22,6 +22,27 @@ public class ReservationUI {
         	}
     	}
 	
+	public void reservationDisplayDate(ArrayList<Reservation>listOfReservations,String date){
+    	
+		String dt,d;
+		
+        	System.out.printf("%n%-20s", "Reservation ID");
+		System.out.printf("%-20s", "Table ID");
+		System.out.printf("%-20s", "Customer ID");
+		System.out.printf("%-20s", "Date time");
+        	System.out.printf("%-20s", "Number of People");
+        	System.out.printf("%-20s", "Customer Name");
+		System.out.printf("%-20s%n", "Contact Number");
+
+        	for(Reservation reservation : listOfReservations){
+        		dt = reservation.getDateTime();
+			String[] part = dt.split(" ");
+			d = part[0];
+  			if (d.equals(date))
+               			reservation.displayStatus();
+        }
+    }
+	
 	public void reservationDisplayAll(ArrayList<Reservation>listOfReservations){
     	
     		System.out.printf("%n%-20s", "Reservation ID");
