@@ -239,7 +239,8 @@ public class Restaurant {
 						Scanner scan1 = new Scanner(System.in);
 						System.out.println("\nSelect Which Type of Reservation?");
 						System.out.println("0 : All Reservations");
-						System.out.println("1 : Customer Id");
+						System.out.println("1 : Reservations By Day");
+						System.out.println("2 : Customer Id");
 						System.out.print("Enter your choice : ");
 						int n = scan1.nextInt();
 						reserveManager.displayResv(n);
