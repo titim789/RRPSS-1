@@ -59,7 +59,7 @@ public class ReservationMgr {
 	
 	//-----------------Customer paid and leave change to vacant---------------------------//
 	public void customerLeave(int tableId) {
-		tableManager.tableVacant(tableId);
+		tableManager.editTableDetail(tableId,"VACANT");
 	}
 	
 	
