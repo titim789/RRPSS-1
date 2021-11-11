@@ -42,6 +42,26 @@ public class ReservationMgr {
 		tableManager.checkAvailability(n);
 	}
 	
+	//-----------------Cusomter arrive delete reservation change to occupied---------------------------//
+	public void customerArrive(int customerId, int reservationId) {
+		int i;
+		for(i=0; i<listOfReservations.size();i++)
+		{
+			if(listOfReservations.get(i).getReservationId() == reservationId && listOfReservations.get(i).getCustomerId() == customerId) {
+				tableManager.editTableDetail(listOfReservations.get(i).getTableId(),"OCCUPIED");
+				listOfReservations.remove(i);
+				System.out.println("Customer "+ customerId +" has arrived!");
+				return;
+			}
+		}
+		System.out.println("reservationID: " + reservationId +" not found.");
+	}
+	
+	//-----------------Customer paid and leave change to vacant---------------------------//
+	public void customerLeave(int tableId) {
+		tableManager.tableVacant(tableId);
+	}
+	
 	
 	//-----------------Add New Reservation---------------------------//
 	public void newReservation(int tableId, int customerId, String calen, int noOfPax, String name, String contact){
