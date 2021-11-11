@@ -88,6 +88,7 @@ public class ReservationMgr {
 			tableManager.editTableDetail(tableId,"RESERVED");
 			
 			System.out.println("New Reservation "+ i +" has been added.");
+			System.out.println(name + " has made a new reservation.");
 		}
 		else {
 			System.out.println("Reservation Not added as number of people exceed table size.");
