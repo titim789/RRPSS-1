@@ -91,7 +91,7 @@ public class ReservationMgr {
 			System.out.println(name + " has made a new reservation.");
 		}
 		else {
-			System.out.println("Reservation Not added as number of people exceed table size.");
+			System.out.println("Reservation not created as number of people exceed table size.");
 		}
 	}
 	
