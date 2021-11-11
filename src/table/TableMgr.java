@@ -99,7 +99,7 @@ public class TableMgr {
 	//-----------------Check people fit TableSize---------------------------//
 	public boolean sizeMoreTableSize(int pax, int tableId){
 		for(Table table : listOfTables) {
-			if ((table.getTableStatus()).equals("VACANT") && table.getNoOfPax() <= pax && table.getTableId() == tableId) {
+			if ((table.getTableStatus()).equals("VACANT") && table.getNoOfPax() < pax && table.getTableId() == tableId) {
 				return true;
 			}
 		}
