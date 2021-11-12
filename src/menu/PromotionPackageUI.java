@@ -49,8 +49,7 @@ public class PromotionPackageUI {
 	
 	public PromotionPackage getAddOption() {
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Please enter Package ID: ");
-		int packageId = sc.nextInt();
+		int packageId = PromotionPackageMgr.getAvailablePromotionId();
 		System.out.print("Please enter Package Name: ");
 		String packageName = sc.next();
 		packageName += sc.nextLine();
