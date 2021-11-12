@@ -97,13 +97,13 @@ public class TableMgr {
 	}
 	
 	//-----------------Check people fit TableSize---------------------------//
-	public boolean sizeMoreTableSize(int pax, int tableId){
+	public int sizeMoreTableSize(int pax){
 		for(Table table : listOfTables) {
-			if ((table.getTableStatus()).equals("VACANT") && table.getNoOfPax() < pax && table.getTableId() == tableId) {
-				return true;
+			if ((table.getTableStatus()).equals("VACANT") && table.getNoOfPax() >= pax) {
+				return table.getTableId();
 			}
 		}
-		return false;
+		return -1;
 	}
 	
 	//-----------------Check Size Of Table---------------------------//
