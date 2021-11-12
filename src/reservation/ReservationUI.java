@@ -2,10 +2,18 @@ package reservation;
 
 import java.util.*;
 
+/**
+ * ReservationUI class for capturing user inputs and displaying reservation options
+ */
 public class ReservationUI {
 	
 	public ReservationUI() {}
 	
+	/** 
+	 * Displays the reservations made by a specific customer
+	 * @param listOfReservations - An ArrayList of the reservation objects
+	 * @param n - An integer holding the customer ID
+	 */
 	public void reservationDisplayCustomer(ArrayList<Reservation>listOfReservations,int n){
     	
         	System.out.printf("%n%-20s", "Reservation ID");
@@ -22,6 +30,11 @@ public class ReservationUI {
         	}
     	}
 	
+	/** 
+	 * Displays the reservations on a specific Date
+	 * @param listOfReservations - An ArrayList of the reservation objects
+	 * @param date - A String that contains a date
+	 */
 	public void reservationDisplayDate(ArrayList<Reservation>listOfReservations,String date){
     	
 		String dt,d;
@@ -43,6 +56,10 @@ public class ReservationUI {
         	}
     	}
 	
+	/** 
+	 * Displays all the reservation
+	 * @param listOfReservations - An ArrayList of the reservation objects
+	 */
 	public void reservationDisplayAll(ArrayList<Reservation>listOfReservations){
     	
     		System.out.printf("%n%-20s", "Reservation ID");
@@ -58,6 +75,11 @@ public class ReservationUI {
         	}
     	}
 	
+	
+	/** 
+	 * Displays the Update Menu of Reservation and prompting user for his/her input
+	 * @return int choice of user
+	 */
 	public int updateReservationDisplay(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\nSelect Parameter you want to change?");
@@ -74,6 +96,10 @@ public class ReservationUI {
 		return choice;
     	}
 	
+	/** 
+	 * Displays the Remove Menu of Reservation and prompting user for his/her input
+	 * @return int choice of user
+	 */
 	public int removeReservationDisplay() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\nWant to Remove Reservation?");
@@ -85,13 +111,20 @@ public class ReservationUI {
 		return m;
 	}
 	
+	/** 
+	 * Prompt for user's reservation Id
+	 * @return int choice of user
+	 */
 	public int getReservationIdFromUser() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Reservation Id : ");
 		int n = sc.nextInt();
 		return n;
 	}
-	
+	/** 
+	 * Prompt for user's Table Id
+	 * @return int choice of user
+	 */
 	public int getTableIdFromUser() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Table Id : ");
@@ -99,6 +132,10 @@ public class ReservationUI {
 		return n;
 	}
 	
+	/** 
+	 * Prompt for customer's Id
+	 * @return int choice of user
+	 */
 	public int getCustomerIdFromUser() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Customer Id : ");
@@ -106,6 +143,10 @@ public class ReservationUI {
 		return n;
 	}
 	
+	/** 
+	 * Prompt for a date
+	 * @return String date input
+	 */
 	public String getDateFromUser() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Date : ");
@@ -113,6 +154,10 @@ public class ReservationUI {
 		return n;
 	}
 	
+	/** 
+	 * Prompt for a time
+	 * @return String time input
+	 */
 	public String getTimeFromUser() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Time : ");
@@ -120,6 +165,10 @@ public class ReservationUI {
 		return n;
 	}
 	
+	/** 
+	 * Prompt for number of people
+	 * @return int number of people input
+	 */
 	public int getPaxFromUser() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Number Of People : ");
@@ -127,6 +176,10 @@ public class ReservationUI {
 		return n;
 	}
 	
+	/** 
+	 * Prompt for name
+	 * @return String name input
+	 */
 	public String getNameFromUser() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Customer Name : ");
@@ -134,6 +187,10 @@ public class ReservationUI {
 		return n;
 	}
 	
+	/** 
+	 * Prompt for contact number
+	 * @return String contact number input
+	 */
 	public String getContactFromUser() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Contact Number : ");

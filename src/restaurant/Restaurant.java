@@ -16,16 +16,45 @@ import staff.StaffMgr;
 
 import java.util.*;
 
-
+/**
+ * Restaurant class used to start the application
+ * Contains main ui to call other classes for a functioning application
+ */
 public class Restaurant {
-
+	
+	/**
+	 * Overall reservation manager of restaurant
+	 */
 	private static ReservationMgr reserveManager;
+	
+	/**
+	 * Overall menu manager of restaurant
+	 */
 	private static MenuMgr menuMgr;
+	
+	/**
+	 * Overall order manager of restaurant
+	 */
 	private static OrderMgr orderMgr;
+	
+	/**
+	 * Overall invoice manager of restaurant
+	 */
 	private static InvoiceMgr invoiceMgr;
+	
+	/**
+	 * Overall customer manager of restaurant
+	 */
 	private static CustomerMgr customerMgr;
+	
+	/**
+	 * Overall staff manager of restaurant
+	 */
 	private static StaffMgr staffMgr;
 	
+	/**
+	 * Main function to run the application
+	 */
 	public static void main(String[] args){
 		reserveManager = new ReservationMgr();
 		menuMgr = new MenuMgr();
