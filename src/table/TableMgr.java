@@ -9,16 +9,32 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class is used to manage the table.
+ */
 public class TableMgr {
 	
 	//-----------------Tables -------------------------//
+	/**
+	 * The list of table sizes
+	 */
 	private List<Integer> tableSize = Arrays.asList(2,4,6,8,10);
+	
+	/**
+	  * An array list of table objects 
+	*/
 	private ArrayList<Table> listOfTables = new ArrayList<Table>();
 	
+	/**
+	 * Table UI for capturing users inputs 
+	*/
 	//-----------------Display Table-------------------------//
 	private TableUI tableUI = new TableUI();
 	
 	//-----------------Constructor-------------------------//
+	/** 
+	 * Constructor for the table manager
+	 */
 	public TableMgr(){
 		load();
 		/*if(listOfTables.isEmpty()){
@@ -33,11 +49,17 @@ public class TableMgr {
 	}
 	
 	//---------------------Get Table Array-------------------------//
+	/**
+	 * returns list of table objects
+	 */
 	public ArrayList<Table> getTableList(){
 		return listOfTables;
 	}
 	
 	//----------------------Display----------------------------//
+	/**
+	 * Depending on the input, displays the table list with corresponding table status
+	 */
 	public void displayTbl() {
 		
 		int n = tableUI.getDisplayType();
@@ -62,6 +84,9 @@ public class TableMgr {
 	}
 	
 	//-----------------Get Available Table---------------------------//
+	/**
+	 * get the available table object based on number of pax pass in
+	 */
 	public int getAvailableTable(int pax) {
 		for(Table table : listOfTables) {
 			if(table.getNoOfPax() == pax && (table.getTableStatus()).equals("VACANT")) return table.getTableId();			
@@ -74,11 +99,19 @@ public class TableMgr {
 	
 	
 	//-----------------print Size Of Table---------------------------//
+	/**
+	 * print the size of the table
+	 * @param pax number of pax for vacant
+	 */
 	public void displaySizeVacant(int pax){
 		tableUI.displayTablePax(listOfTables, pax);
 	}
 	
 	//-----------------Check Vacant---------------------------//
+	/**
+	 * check if there is any vacant table, returns true if there is
+	 * @return boolean true if there is vacant table
+	*/
 	public boolean checkVacant(){
 		for(Table table : listOfTables) {
 			if ((table.getTableStatus()).equals("VACANT")) {
@@ -89,6 +122,10 @@ public class TableMgr {
 	}
 	
 	//-----------------Check Occupied---------------------------//
+	/**
+	 * check if there is any occupied table, returns true if there is
+	 * @return boolean true if there is occupied table
+	*/
 	public boolean checkOccupied(){
 		for(Table table : listOfTables) {
 			if ((table.getTableStatus()).equals("OCCUPIED")) {
@@ -99,6 +136,10 @@ public class TableMgr {
 	}
 		
 	//-----------------Check Reserved---------------------------//
+	/**
+	 * check if there is any reserved table, returns true if there is
+	 * @return boolean true if there is reserved table
+	 */
 	public boolean checkReserve(){
 		for(Table table : listOfTables) {
 			if ((table.getTableStatus()).equals("RESERVED")) {
@@ -109,6 +150,11 @@ public class TableMgr {
 	}
 	
 	//-----------------Check people fit TableSize---------------------------//
+	/**
+	 * checks if number of pax fits the table size of all tables
+	 * @param pax number of pax
+	 * @return table ID if can a table that fits, -1 if cannot fit
+	 */
 	public int sizeMoreTableSize(int pax){
 		for(Table table : listOfTables) {
 			if ((table.getTableStatus()).equals("VACANT") && table.getNoOfPax() >= pax) {
@@ -119,6 +165,11 @@ public class TableMgr {
 	}
 	
 	//-----------------Check Size Of Table---------------------------//
+	/**
+	 * check if there is any table that fits the pax, returns true if there is
+	 * @param pax number of pax
+	 * @return boolean true if there is a table that fits
+	 */
 	public boolean checkAvailability(int pax){
 		for(Table table : listOfTables) {
 			if (table.getNoOfPax() >= pax && table.getTableStatus().equals("VACANT")) {
@@ -129,6 +180,9 @@ public class TableMgr {
 	}
 	
 	//-----------------Update Table---------------------------//
+	/**
+	 *  pass in table ID, and update table status
+	*/
 	public void editTableDetail(int num, String newstatus){
 		for(Table table : listOfTables) {
 			if (table.getTableId() == num) {
@@ -138,6 +192,9 @@ public class TableMgr {
 	}
 	
 	//-----------------Save--------------------------//
+	/**
+	 * save the list of table objects to the file
+	*/
 	public void save() {
 		try {
 		    FileOutputStream fos = new FileOutputStream("table.txt");
@@ -150,6 +207,9 @@ public class TableMgr {
 	}
 	
 	//-----------------Load---------------------------//
+	/**
+	 * load the list of table objects from the file
+	 */
 	@SuppressWarnings("unchecked")
 	public void load() {
 		try{
