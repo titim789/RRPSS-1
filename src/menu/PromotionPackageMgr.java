@@ -60,7 +60,23 @@ public class PromotionPackageMgr {
 	public static ArrayList<PromotionPackage> getListOfPromotion() {
 		return listOfPromotion;
 	}
+	
+	public static PromotionPackage getItemPromotionPackage(int packageId) {
+		int i;
+		for(i=0;i<listOfPromotion.size();i++) {
+			if(listOfPromotion.get(i).getPackageId() == packageId) {
+				return listOfPromotion.get(i);
+			}
+		}
+		return null;
+	}
 
+	public static int getAvailablePromotionId() {
+		int i = 1;
+		while(getItemPromotionPackage(i) != null) i++;
+		return i;
+	}
+	
 	public void viewPackages() {
 		// TODO - implement Menu.viewPackages
 		promotionPackageUI.displayPackages();
@@ -241,6 +257,8 @@ public class PromotionPackageMgr {
 		}
 		System.out.println(packageId+" not found.");
 	}
+	
+	
 	
 	public void load() {
 		// TODO - implement Menu.load
