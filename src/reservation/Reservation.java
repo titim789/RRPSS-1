@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 /**
  * A reservation entity is created when a customer makes a reservation with the restaurant.
  * It contains the customer's name and contact number, pax, table id, reservation id, and the time for which the reservation is made for
- * @author 
+ * @author Zhi Kai
  *
  */
 public class Reservation implements Serializable{

@@ -4,6 +4,12 @@ import menu.MenuItem;
 
 import menu.MenuItem.TYPE_OF_MENU;
 
+/**
+ * This is an extention of menu item, 
+ * which includes the quantity ordered, as well as its price multiplied by the quantity
+ * @author Trevor
+ *
+ */
 public class OrderMenuItem extends MenuItem{
 
 	/**

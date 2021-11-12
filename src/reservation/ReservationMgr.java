@@ -16,7 +16,7 @@ import table.TableMgr;
 /**
  * The control class for reservation entities.
  * Contains the list of reservations
- * @author 
+ * @author Zhi Kai
  *
  */
 public class ReservationMgr {

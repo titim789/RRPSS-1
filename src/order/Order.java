@@ -281,7 +281,7 @@ public class Order implements Serializable{
 	
 	/**
 	 * Prints the items without the price
-	 * @param n
+	 * @param n The menu item object to be printed
 	 */
 	public void printItemNoPrice(MenuItem n){
 		System.out.println("\t" + n.getItemId() + "\t" +
@@ -292,7 +292,7 @@ public class Order implements Serializable{
 	
 	/**
 	 * Prints the items in a promotion package
-	 * @param p
+	 * @param p The order promotion package object to be printed
 	 */
 	public void printPack(OrderPromotionPackage p){
 		System.out.println(String.format("%-10s", "PackID") + 

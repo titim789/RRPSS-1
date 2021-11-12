@@ -1,6 +1,11 @@
 package order;
 import java.util.Scanner;
 
+/**
+ * This is the UI that prints displays for order manager class
+ * @author Trevor
+ *
+ */
 public class OrderUI {
 	/**
 	 * The UI for the order class
