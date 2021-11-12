@@ -3,9 +3,17 @@ package menu;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * MenuItemUI class for capturing user inputs and displaying menu options
+ */
 public class MenuItemUI {
 	public MenuItemUI() {}
 	
+	
+	/** 
+	 * Displays the menu options, returns the user's choice
+	 * @return int user's choice
+	 */
 	public int getEditOption() {
 		System.out.println("Choose Edit:\n"
 				+ "1)\tAdd Menu Item\n"
@@ -18,6 +26,11 @@ public class MenuItemUI {
 		return choice;
 	}
 	
+	
+	/** 
+	 * Displays the menu options for adding menu items
+	 * @return MenuItem Menu Item object
+	 */
 	public MenuItem getAddOption() {
 		int id;
 		String name;
@@ -54,6 +67,11 @@ public class MenuItemUI {
 		return temp;
 	}
 	
+	
+	/** 
+	 * Gets the menu options for removing menu items
+	 * @return int item ID to remove
+	 */
 	public int getRemoveOption() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter Menu Item to Remove:");
@@ -61,6 +79,11 @@ public class MenuItemUI {
 		return id;
 	}
 	
+	
+	/** 
+	 * Gets the menu options for updating menu items
+	 * @return int user's choice of updating menu item details
+	 */
 	public int getUpdateOption() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter choice of Update:\n"
@@ -73,6 +96,11 @@ public class MenuItemUI {
 		return choice;
 	}
 	
+	
+	/** 
+	 * get the menu item ID from user
+	 * @return int item ID user entered
+	 */
 	public int getID() {
 		System.out.print("Enter the item ID:");
 		Scanner sc = new Scanner(System.in);
@@ -80,6 +108,11 @@ public class MenuItemUI {
 		return id;
 	}
 	
+	
+	/** 
+	 * get the menu item name from user
+	 * @return String item name user entered
+	 */
 	public String getName() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Name of New Item:");
@@ -88,6 +121,11 @@ public class MenuItemUI {
 		return name;
 	}
 	
+	
+	/** 
+	 * get the menu item description from user
+	 * @return String item description user entered
+	 */
 	public String getDescription() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Name of New Item:");
@@ -96,6 +134,11 @@ public class MenuItemUI {
 		return description;
 	}
 	
+	
+	/** 
+	 * get the menu item price from user
+	 * @return double item price user entered
+	 */
 	public double getPrice() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Name of New Item:");
@@ -103,6 +146,11 @@ public class MenuItemUI {
 		return price;
 	}
 	
+	
+	/** 
+	 * get the menu item type from user
+	 * @return TYPE_OF_MENU item type user entered
+	 */
 	public MenuItem.TYPE_OF_MENU getMenuType() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Type of New Item:\n"
@@ -119,6 +167,9 @@ public class MenuItemUI {
 		return menuType;
 	}
 	
+	/**
+	 * Displays the menu item details
+	 */
 	public void displayMenuItems() {
 		ArrayList<MenuItem> listOfMenuItems = MenuItemMgr.getListOfMenuItems();
 		int i;

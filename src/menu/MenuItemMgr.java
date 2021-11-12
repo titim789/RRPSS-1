@@ -7,16 +7,33 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This is controllers class to manage the menu items.
+ * @author Titus, Wei Xiang
+ */
 public class MenuItemMgr {
+	/**
+	 * This is a static array list of menu item objects.
+	*/
 	private static ArrayList<MenuItem> listOfMenuItems;
+	
+	/**
+	 * This is an instance of MenuUI class, to capture user inputs
+	*/
 	private MenuItemUI menuItemUI;
 	
 	//constructor
+	/**
+	 * This is a constructor of MenuItemMgr class, loads menuItems from file.
+	*/
 	public MenuItemMgr() {
 		listOfMenuItems = new ArrayList<MenuItem>();
 		menuItemUI = new MenuItemUI();
 	}
 	
+	/**
+	 * This is a method to add/remove/update item, depending on what user input to UI.
+	*/
 	public void edit() {		
 		int choice = menuItemUI.getEditOption();
 		if(choice == 1) {
@@ -55,26 +72,31 @@ public class MenuItemMgr {
 		}
 	}
 	
+	/**
+	 * This is a method to return the static list of menu items.
+	 */
 	public static ArrayList<MenuItem> getListOfMenuItems() {
 		return listOfMenuItems;
 	}
 	
 	
-
+	/**
+	 * this is a method to view the UI related to Menu Items
+	 */
 	public void viewMenuItems() {
 		// TODO - implement Menu.viewMenuItems
 		menuItemUI.displayMenuItems();
 	}
 	
 	/**
-	 * 
-	 * @param item_id
-	 * @param name
-	 * @param description
-	 * @param price
-	 * @param menutype
+	 * This is a method to add new menu item to the list of menu items.
 	 * Returns 0 if failed to add
 	 * Returns 1 if added Successfully
+	 * @param item_id - the id of the menu item
+	 * @param name 	- the name of the menu item
+	 * @param description 	- the description of the menu item
+	 * @param price - the price of the menu item
+	 * @param menutype - the type of the menu item
 	 */
 	public int addNewMenuItem(int itemId, String name, String description, double price, MenuItem.TYPE_OF_MENU menuType) {
 		// TODO - implement Menu.addNewItem
@@ -100,8 +122,8 @@ public class MenuItemMgr {
 	}
 	
 	/**
-	 * 
-	 * @param item_id
+	 * Method to remove menu item from the list of menu items, based on ID passed in
+	 * @param item_id - the id of the menu item to be removed
 	 */
 	public void removeItem(int itemId) {
 		// TODO - implement Menu.removeItem
@@ -118,9 +140,9 @@ public class MenuItemMgr {
 	}
 	
 	/**
-	 * 
-	 * @param item_id
-	 * @param newName
+	 * Method to update the Id and name of the menu item.
+	 * @param item_id - the id of the menu item to be updated
+	 * @param newName - the new name of the menu item
 	 */
 	public void updateItemName(int itemId, String newName) {
 		// TODO - implement Menu.updateItemName
@@ -141,9 +163,9 @@ public class MenuItemMgr {
 	}
 	
 	/**
-	 * 
-	 * @param item_id
-	 * @param newPrice
+	 * Method to update the item price based on Item ID passed in
+	 * @param item_id - the id of the menu item to be updated
+	 * @param newPrice - the new price of the menu item
 	 */
 	public void updateItemPrice(int itemId, double newPrice) {
 		// TODO - implement Menu.UpdateItemPrice
@@ -164,9 +186,9 @@ public class MenuItemMgr {
 	}
 	
 	/**
-	 * 
-	 * @param item_id
-	 * @param newDesc
+	 * Method to update the item description based on Item ID passed in
+	 * @param item_id - the id of the menu item to be updated
+	 * @param newDesc - the new description of the menu item
 	 */
 	public void updateItemDescription(int itemId, String newDesc) {
 		// TODO - implement Menu.updateItemDescription
@@ -183,9 +205,9 @@ public class MenuItemMgr {
 	}
 	
 	/**
-	 * 
-	 * @param item_id
-	 * @param menuType
+	 * Method to update the item type based on Item ID passed in
+	 * @param item_id - the id of the menu item to be updated
+	 * @param menuType - the new type of the menu item
 	 */
 	public void updateItemMenuType(int itemId, MenuItem.TYPE_OF_MENU menuType) {
 		// TODO - implement Menu.updateItemDescription
@@ -201,6 +223,11 @@ public class MenuItemMgr {
 		System.out.println(itemId+" not found.");
 	}
 	
+	/**
+	 * Method to get the list of menu items object
+	 * @param itemId - the id of the menu item to get
+	 * @return - the menu item object, or null if not found
+	 */
 	public static MenuItem getItemMenu(int itemId) {
 		int i;
 		for(i=0;i<listOfMenuItems.size();i++) {
@@ -211,12 +238,19 @@ public class MenuItemMgr {
 		return null;
 	}
 	
+	/**
+	 * Method to get the available ID for a new menu item
+	 * @return - the available ID for a new menu item
+	 */
 	public static int getAvailableItemId() {
 		int i = 1;
 		while(getItemMenu(i) != null) i++;
 		return i;
 	}
 	
+	/**
+	 * Method to load the menu items from the database file
+	 */
 	public void load() {
 		// TODO - implement Menu.load
 		try{
@@ -232,6 +266,9 @@ public class MenuItemMgr {
 		
 	}
 	
+	/**
+	 * Method to save the menu items to the database file
+	 */
 	public void save() {
 		// TODO - implement Menu.save
 		try {
