@@ -29,54 +29,14 @@ public class CustomerMgr{
 		load();
 	}
 
-	public void init(){
-		CustomerUI customerui = new CustomerUI();
-				
-		int choice;
-		do {
-			choice = customerui.mainMenu();
-			switch (choice) {
-			case 1:
-				displayCustomerList();
-				break;
-			case 2:
-				// add customer
-				int customerId = getLastCustomerId() + 1;
-				System.out.println("Customer Id to insert:" + customerId);
-				
-				// launch customerUI to get customer info
-				String customerName = customerui.getCustomerName();
-				String customerPhone = customerui.getCustomerPhone();
-				String customrMember = customerui.getCustomerMember();
-
-				// create new customer
-				addCustomer(customerId, customerName, customerPhone, customrMember);
-				System.out.println("\nCustomer added..");
-				displayCustomerList();
-				break;
-			case 3:
-				// remove customer object from the ArrayList of customer
-				int customerIdToRemove = customerui.getRemoveId();
-				removeCustomer(customerIdToRemove);
-				break;
-			case 4:
-				// removeCustomer();
-				// saveCustomerList("customerList.txt");
-				System.out.println("Returning to main menu..");
-
-				break;
-			default:
-				System.out.println("Invalid choice, return to main menu..");
-				break;
-			}
-		} while (choice != 4);
-
-		
-	}
-
 	// pass in an ArrayList<Customer> and display all customers in the list
 	public void displayCustomerList() {
-		System.out.printf("CustId\tName\tPhone\t\tMember\n");
+		System.out.println(String.format("|%-10s", "ID")
+		+"|"+String.format("%-20s", "Customer Name")
+		+"|"+String.format("%-20s", "Phone")
+		+"|"+String.format("%-10s", "Member?")
+		);
+
 		for (Customer customer : listOfCustomer) {
 			String member = "";
 			if (customer.isMember()) {
@@ -84,12 +44,40 @@ public class CustomerMgr{
 			} else {
 				member = "n";
 			}
-			System.out.println(customer.getCustomerId() + "\t" + customer.getName() + "\t" + customer.getPhone() + "\t" + customer.isMember());
+			System.out.println(String.format("|%-10s", customer.getCustomerId())
+			+"|"+String.format("%-20s", customer.getCustomerId())
+			+"|"+String.format("%-20s", customer.getPhone())
+			+"|"+String.format("%-20s", member));		
 		}
 	}
 	
-	// function to add customer object to list of customer
 	public void addCustomer(int customerId, String name, String phone, String member) {
+		Customer newCustomer = new Customer();
+		newCustomer.setCustomerId(customerId);
+		newCustomer.setName(name);
+		newCustomer.setPhone(phone);
+		if(member.equals("y")) {
+			newCustomer.setMember(true);
+		}
+		else {
+			newCustomer.setMember(false);
+		}
+		listOfCustomer.add(newCustomer);
+	}
+
+	// function to add customer object to list of customer
+	public void addCustomerInit() {
+		// int customerId, String name, String phone, String member
+
+		int customerId = getLastCustomerId() + 1;
+		System.out.println("Customer Id to insert:" + customerId);
+
+		CustomerUI customerui = new CustomerUI();
+
+		String name = customerui.getCustomerName();
+		String phone = customerui.getCustomerPhone();				
+		String member = customerui.getCustomerMember();
+
 		Customer newCustomer = new Customer();
 		newCustomer.setCustomerId(customerId);
 		newCustomer.setName(name);
@@ -115,7 +103,10 @@ public class CustomerMgr{
 	}
 
 	// remove customer object from the list of customer, store into a temp ArrayList if customer id is not CustomerIdemoval
-	public void removeCustomer(int customerIdToRemove) {
+	public void removeCustomer() {
+		CustomerUI customerui = new CustomerUI();
+		int customerIdToRemove = customerui.getRemoveId();
+
 		ArrayList<Customer> tempList = new ArrayList<Customer>();
 		for (Customer customer : listOfCustomer) {
 			if (customer.getCustomerId() != customerIdToRemove) {

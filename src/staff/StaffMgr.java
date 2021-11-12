@@ -18,65 +18,6 @@ public class StaffMgr{
 		load();
 	}
 	
-	public void init() {
-		StaffUI staffui = new StaffUI();
-		int choice;
-		
-		while((choice = staffui.displayMenu()) != 4) {
-			switch(choice) {
-			// Display staff
-			case 1:
-				displayStaffList();
-				break;
-			
-			// Add staff
-			case 2:	
-				// an mgr function to get new staffId to be inserted
-				int staffId = getLastId()+1;
-				System.out.println("staffID to insert:"+staffId);
-				
-				// launch StaffUI to get staff info
-				String name = staffui.getStaffName();
-				String gender = staffui.getStaffGender();				
-				String title = staffui.getStaffTitle();
-				
-				addStaff(staffId, name, gender, title);				
-
-				System.out.println("Staff List Updated..");
-				displayStaffList();
-				break;
-			
-			
-			// remove staff
-			case 3:
-			
-			displayStaffList();
-			
-			// remove staff object from the ArrayList of Staff
-			int staffIdRemoval = staffui.getRemoveId();			
-			removeStaff(staffIdRemoval);
-
-			// show what's after removal
-			System.out.println("Staff List Updated..");
-			displayStaffList();
-			
-			break;
-			
-			case 4:
-				// insert function to go back one level
-
-				// save ArrayList of Staff to csv file
-				// System.out.println("StaffList saved to file");
-				// displayStaffList();
-				// saveStaffList("StaffList.txt");
-				System.out.println("Returning to Main Menu...");
-				break;
-			
-			default:
-			System.out.println("Invalid choice, Returning to Main Menu...");
-		}
-		
-	}}
 
 	// checks if the staffId is already in the ArrayList, if yes, return true
 	public boolean checkStaffId(int staffId) {
@@ -92,7 +33,11 @@ public class StaffMgr{
 	}
 	
 	// remove staff based on staffId, store into a temp ArrayList if staddId is not StaffIdRemoval
-	public void removeStaff(int staffIdRemoval) {
+	public void removeStaff() {
+		StaffUI staffui = new StaffUI();
+		// remove staff object from the ArrayList of Staff
+		int staffIdRemoval = staffui.getRemoveId();			
+		displayStaffList();
 		ArrayList<Staff> tempList = new ArrayList<Staff>();
 		
 		// for each staff in listOfStaff, add to a temp list if staffId is not StaffIdRemoval
@@ -105,15 +50,26 @@ public class StaffMgr{
 		listOfStaff.clear();
 		listOfStaff.addAll(tempList);
 		
-		System.out.println("Staff Removed..");
-		displayStaffList();
+			// show what's after removal
+			System.out.println("Staff List Updated..");
+			displayStaffList();
 	}
 
 	// function to display the list of staff
 	public void displayStaffList() {
+		System.out.println(String.format("|%-10s", "ID")
+		+"|"+String.format("%-20s", "Staff Name")
+		+"|"+String.format("%-20s", "Gender")
+		+"|"+String.format("%-20s", "Staff Title")
+		);
+
 		for(Staff staff : listOfStaff) {
 			// print out staff object's attributes
-			System.out.println(staff.getStaffId() + " " + staff.getStaffName() + " " + staff.getGender() + " " + staff.getJobTitle());
+			System.out.println(String.format("|%-10s", staff.getStaffId())
+			+"|"+String.format("%-20s", staff.getStaffName())
+			+"|"+String.format("%-20s", staff.getGender())
+			+"|"+String.format("%-20s", staff.getJobTitle())
+			);
 		}
 		}
 
@@ -152,45 +108,21 @@ public class StaffMgr{
 		}
 
 	}
-
-	// pass in a file name, and returns a list of <staff> objects
-	// public ArrayList<Staff> load(String fileName){
-		// try {
-		// 	BufferedReader br = new BufferedReader(new FileReader(fileName));
-		// 	//to store a line
-		// 	String line = "";
-			
-		// 	// to consume the header row of csv
-		// 	String headerLine = "";
-		// 	headerLine = br.readLine();
-			
-		// 	// keeps instanciating staff object until no more rows
-		// 	while((line = br.readLine()) != null) {			
-		// 		// split a line of string into an array
-		// 		// [0] is id, [1] is name etc...
-		// 		String[] values = line.split(",");
-				
-		// 		// append this staff object into the the array list of staff
-		// 		listOfStaff.add(new Staff(Integer.parseInt(values[0]),values[1], values[2],  values[3]));
-		// 	}
-		// } 
-		// // catch blocks for reading csv or if not will throw error
-		// catch (FileNotFoundException e) {
-		// 	// TODO Auto-generated catch block
-		// 	e.printStackTrace();
-		// } catch (IOException e) {
-		// 	// catch IO exception for br.readline()
-		// 	e.printStackTrace();
-		// }
-		// return listOfStaff;
-	// }
-	
-
 	
 	// function to add staff object to the list of staff
-	public void addStaff(int staffId, String name, String gender, String title) {
-		listOfStaff.add(new Staff(staffId, name, gender, title));
+	public void addStaff() {
+		StaffUI staffui = new StaffUI();
+		int staffId = getLastId()+1;
+		System.out.println("staffID to insert:"+staffId);
+		
+		// launch StaffUI to get staff info
+		String name = staffui.getStaffName();
+		String gender = staffui.getStaffGender();				
+		String title = staffui.getStaffTitle();		
 
+		System.out.println("Staff List Updated..");
+		listOfStaff.add(new Staff(staffId, name, gender, title));
+		displayStaffList();
 	}
 
 	// returns the last auto increment staff id in the list

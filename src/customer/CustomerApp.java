@@ -8,7 +8,7 @@ public class CustomerApp {
 		// sysout(customermgr.isCustomerExist(20));
 		System.out.println(customermgr.getCustomerPhone(10));
 		System.out.println(customermgr.getCustomerName(10));
-		customermgr.init();
+		// customermgr.init();
 		
 		// customermgr.save();
 	}
