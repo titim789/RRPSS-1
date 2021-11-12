@@ -20,6 +20,7 @@ public class StaffUI {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Staff Name");
 		String name = sc.next();
+		name += sc.nextLine();
 		return name;
 	}
 	
