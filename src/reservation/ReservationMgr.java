@@ -69,7 +69,7 @@ public class ReservationMgr {
 	
 	
 	//-----------------Add New Reservation---------------------------//
-	public void newReservation(int tableId, int customerId, String calen, int noOfPax, String name, String contact){
+	public void newReservation(int customerId, String calen, int noOfPax, String name, String contact){
 		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
@@ -79,7 +79,9 @@ public class ReservationMgr {
 		int minutes = cal.get(Calendar.MINUTE);
 		int i = year*10000 + month*10000 + day*100 + hours*minutes ;
 		
-		if(!tableManager.sizeMoreTableSize(noOfPax,tableId)) {
+		int tableId = tableManager.sizeMoreTableSize(noOfPax);
+		
+		if(tableId != -1) {
 			Reservation reservation = new Reservation();
 			reservation.setReservationId(i);
 			reservation.setTableId(tableId);
@@ -96,7 +98,7 @@ public class ReservationMgr {
 			System.out.println(name + " has made a new reservation.");
 		}
 		else {
-			System.out.println("Reservation not created as number of people exceed table size.");
+			System.out.println("Reservation Not added as no available tables meet the capacity.");
 		}
 	}
 	
