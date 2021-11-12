@@ -2,21 +2,46 @@ package menu;
 import java.util.ArrayList;
 import java.io.Serializable;
 
+/**
+ * A promotion package contains two or more menu items, packaged together in a deal.
+ * Customers may order this instead of the ala carte items it contains for a cheaper price
+ * @author yes
+ *
+ */
 public class PromotionPackage implements Serializable{
 
+	/**
+	 * The ID of the promotion package
+	 */
 	private int packageId;
+	
+	/**
+	 * The name of the package
+	 */
 	private String packageName;
+	
+	/**
+	 * The price of the package
+	 */
 	private double packagePrice;
+	
+	/**
+	 * The description of the packages
+	 */
 	private String packageDescription;
+	
+	/**
+	 * The list of ala carte menu items contained in this promotion package
+	 */
 	private ArrayList<MenuItem> listOfMenuItem;
 
 	/**
-	 * 
-	 * @param package_id
-	 * @param package_name
-	 * @param package_price
-	 * @param package_description
-	 * @param listOfMenuItem
+	 * This creates a promotion package, containing a list of ala carte menu items
+	 * @param package_id The ID of the package
+	 * @param package_name The name of the package
+	 * @param package_price The price of the package
+	 * @param package_description The description of the package
+	 * @param listOfMenuItem The list of ala carte menu items contained in the promotion package
 	 */
 	public PromotionPackage(int packageId, String packageName, double packagePrice, String packageDescription, ArrayList<MenuItem> listOfMenuItem)  {
 		// TODO - implement Promotion_Package.Promotion
@@ -28,63 +53,83 @@ public class PromotionPackage implements Serializable{
 		
 	}
 
+	/**
+	 * Gets the ID of this promotion package
+	 * @return The ID of this promotion package
+	 */
 	public int getPackageId() {
 		// TODO - implement Promotion_Package.getPackage_id
 		return packageId;
 	}
 
 	/**
-	 * 
-	 * @param package_id
+	 * Sets the ID of this promotion package
+	 * @param package_id The ID of this promotion package
 	 */
 	public void setPackageId(int packageId) {
 		this.packageId = packageId;
 	}
 
+	/**
+	 * Gets the name of this promotion package
+	 * @return The name of this promotion package
+	 */
 	public String getPackageName() {
 		return this.packageName;
 	}
 
 	/**
-	 * 
-	 * @param package_name
+	 * Sets the name of this promotion package
+	 * @param package_name The name of this promotion package to be set
 	 */
 	public void setPackageName(String packageName) {
 		this.packageName = packageName;
 	}
 
+	/**
+	 * Gets the price of this promotion package
+	 * @return The price of this promotion package
+	 */
 	public double getPackagePrice() {
 		return this.packagePrice;
 	}
 
 	/**
-	 * 
-	 * @param package_price
+	 * Sets the price of this promotion package
+	 * @param package_price The price to set this promotion package to
 	 */
 	public void setPackagePrice(double packagePrice) {
 		this.packagePrice = packagePrice;
 	}
 
+	/**
+	 * Gets the description of this promotion package
+	 * @return The description of this promotion package
+	 */
 	public String getPackageDesc() {
 		return this.packageDescription;
 	}
 
 	/**
-	 * 
-	 * @param package_description
+	 * Sets the description of this promotion package
+	 * @param package_description The description to set this promotion package to
 	 */
 	public void setPackageDesc(String packageDescription) {
 		this.packageDescription = packageDescription;
 	}
 
+	/**
+	 * Get the list of ala carte menu items this promotion package contains
+	 * @return The list of ala carte menu items this promotion package contains
+	 */
 	public ArrayList<MenuItem> getListOfMenuItem() {
 		// TODO - implement Promotion_Package.getListOfMenuItem
 		return listOfMenuItem;
 	}
 
 	/**
-	 * 
-	 * @param item
+	 * Adds a menu item to this promotion package
+	 * @param item The menu item to add to this promotion package
 	 */
 	public void addMenuItem(MenuItem item) {
 		// TODO - implement Promotion_Package.addMenu_Item		
@@ -92,8 +137,8 @@ public class PromotionPackage implements Serializable{
 	}
 
 	/**
-	 * 
-	 * @param item_id
+	 * Removes a menu item from the promotion package
+	 * @param item_id The ID of the item to remove from this promotion package
 	 */
 	public void removeMenuItem(int itemId) {
 		// TODO - implement Promotion_Package.removeMenu_Item
@@ -106,9 +151,10 @@ public class PromotionPackage implements Serializable{
 		}
 		System.out.println("Item ID is not in this Promotion Package.");
 	}
+	
 	/**
-	 * 
 	 * Gets the number of items in the package
+	 * @return The number of items in the package
 	 */
 	public int getNumberOfItems() {
 		return listOfMenuItem.size();
