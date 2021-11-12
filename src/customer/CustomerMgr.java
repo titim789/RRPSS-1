@@ -41,7 +41,7 @@ public class CustomerMgr{
 
 	/**
 	 * This method is used to display the list of customers in current list of customers.
-	 * @param customer
+	 * @param customer The customer object to be displayed.
 	 */
 	// pass in an ArrayList<Customer> and display all customers in the list
 	public void displayCustomerList() {
@@ -138,7 +138,7 @@ public class CustomerMgr{
 
 	/** 
 	 * returns the last customer id in the list
-	 * @return int
+	 * @return integer of the last customer id in the list
 	 */
 	// returns the last customer id in the list
 	public int getLastCustomerId() {
@@ -153,8 +153,8 @@ public class CustomerMgr{
 	
 	/** 
 	 * pass in int customerId check if exist in the ArrayList Customer
-	 * @param customerId
-	 * @return boolean
+	 * @param customerId the customer id of the customer to be checked
+	 * @return boolean if exist in the ArrayList Customer, return true if exist
 	 */
 	// pass in int customerId check if exist in the ArrayList Customer
 	public boolean isCustomerExist(int customerId) {
@@ -168,8 +168,8 @@ public class CustomerMgr{
 
 		/** 
 	 * pass in an CustomerId integer and return the customer object
-	 * @param customerId
-	 * @return Customer
+	 * @param customerId the customer id of the customer object to be returned
+	 * @return Customer customer object if found, else return null
 	 */
 	// pass in an CustomerId integer and return the customer object
 	public Customer getCustomerObj(int customerId) {
@@ -184,8 +184,8 @@ public class CustomerMgr{
 	
 	/**
 	 *  pass in customerId and returns customer phone attribtue
-	 * @param customerId
-	 * @return String
+	 * @param customerId the customer id to search for phone number
+	 * @return String customer phone attribute if found, else return null
 	 */
 	// pass in customerId and returns customer phone attribtue
 	public String getCustomerPhone(int customerId) {
@@ -200,8 +200,8 @@ public class CustomerMgr{
 	
 	/** 
 	 * pass in customerId and returns customer name attribtue
-	 * @param customerId
-	 * @return String
+	 * @param customerId the customer id to search for name
+	 * @return String customer name attribute if found, else return null
 	 */
 	// pass in customerId and returns customer name attribute
 	public String getCustomerName(int customerId) {
