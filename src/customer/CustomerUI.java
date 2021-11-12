@@ -2,24 +2,23 @@ package customer;
 
 import java.util.Scanner;
 
+/**
+ * This class is the UI for the customer, for capturing user input for staff details and passing it to the customerMgr class
+ * 
+ * @author Marcus
+ * @version 1.0
+ */
 public class CustomerUI {
 
 	// empty constructor
 	public CustomerUI() {}
 
-    public int mainMenu() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("\nDo you want to \n"
-        + "1 - Display Customer List\n"
-        + "2 - Add Customer\n"
-        + "3 - Remove Customer\n"
-        + "4 - Back to main menu");
-        
-        int option = sc.nextInt();
-        return option;
-    }
 
-    public String getCustomerName() {
+	/** 
+	 * This method is used to display the menu for the customer
+	 * @return String - the customer's name
+	 */
+	public String getCustomerName() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Customer Name");
 		String name = sc.next();
@@ -27,6 +26,11 @@ public class CustomerUI {
 		return name;
 	}
 	
+	
+	/** 
+	 * This method is used ask user for phone number of new customer object
+	 * @return String
+	 */
 	public String getCustomerPhone() {
 		Scanner sc2 = new Scanner(System.in);
 		System.out.println("Enter Customer Phone");
@@ -34,6 +38,11 @@ public class CustomerUI {
 		return phone;
 	}
 	
+	
+	/** 
+	 * This method is used to ask user whether new customer object is member or not
+	 * @return String
+	 */
 	public String getCustomerMember() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("is customer member y/n");
@@ -41,6 +50,11 @@ public class CustomerUI {
 		return member;
 	}
 	
+	
+	/**
+	 * This method is to ask user for the ID of customer object to be removed 
+	 * @return int
+	 */
 	public int getRemoveId() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Customer id to remove");

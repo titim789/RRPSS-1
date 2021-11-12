@@ -10,15 +10,29 @@ import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.lang.String;
 
+/**
+ * This is the controller class for the staff members.
+ * @author Ng Li Wang
+ * @version 1.0
+ */
 public class StaffMgr{
 	private static ArrayList<Staff> listOfStaff;
 	
+	/**
+	 * Constructor for StaffMgr, initializes the listOfStaff ArrayList, and loads the data from the file
+	 */
 	public StaffMgr() {
 		listOfStaff = new ArrayList<Staff>();
 		load();
 	}
 	
 
+	
+	/**
+	 * checks if the staffId is already in the ArrayList, if yes, return true
+	 * @param staffId the id of the staff member to be searched for
+	 * @return boolean true if the staff member is found, false otherwise
+	 */
 	// checks if the staffId is already in the ArrayList, if yes, return true
 	public boolean checkStaffId(int staffId) {
 
@@ -33,6 +47,9 @@ public class StaffMgr{
 	}
 	
 	// remove staff based on staffId, store into a temp ArrayList if staddId is not StaffIdRemoval
+	/**
+	 * Method to remove staff, which calls UI to prompt user for removal ID
+	 */
 	public void removeStaff() {
 		StaffUI staffui = new StaffUI();
 		// remove staff object from the ArrayList of Staff
@@ -55,6 +72,9 @@ public class StaffMgr{
 			displayStaffList();
 	}
 
+	/**
+	 * Method to display the list of staff
+	 */
 	// function to display the list of staff
 	public void displayStaffList() {
 		System.out.println(String.format("|%-10s", "ID")
@@ -73,6 +93,11 @@ public class StaffMgr{
 		}
 		}
 
+	
+	/** 
+	 * save the list of staff into the file
+	 * @param fileName the database file name to save to
+	 */
 	// save staff list to csv file
 	public void save(String fileName) {
 		// empty content in file fileName, then write new content, attributes of ListOfStaff2, then close the file
@@ -110,6 +135,9 @@ public class StaffMgr{
 	}
 	
 	// function to add staff object to the list of staff
+	/**
+	 * Method to add staff, which calls UI to check for added staff's ID
+	 */
 	public void addStaff() {
 		StaffUI staffui = new StaffUI();
 		int staffId = getLastId()+1;
@@ -125,6 +153,11 @@ public class StaffMgr{
 		displayStaffList();
 	}
 
+	
+	/** 
+	 * returns the last ID in the staff list
+	 * @return int returns the last staff ID in the staff list
+	 */
 	// returns the last auto increment staff id in the list
 	public int getLastId() {
 		int lastId = 0;
@@ -136,6 +169,9 @@ public class StaffMgr{
 		return lastId;
 	}
 
+	/**
+	 * Method to load the staff list from the database file
+	 */
 	public void load(){
    		// TODO - to impelemnt staffmgr.load
 		   ArrayList<Staff> listOfStaff = new ArrayList<Staff>();
@@ -170,6 +206,9 @@ public class StaffMgr{
 		this.listOfStaff = listOfStaff;
  	}
 
+	/**
+	 * Method to save the staff list to the database file 
+	 */
 	public void save(){
 		// TODO - implement staffmgr.save
 			
@@ -209,29 +248,4 @@ public class StaffMgr{
 			}	
 	}
 
-	// public void load() {
-	// 	// TODO - implement Menu.load
-	// 	try{
-	// 	    FileInputStream readData = new FileInputStream("staffList.txt");
-	// 	    ObjectInputStream readStream = new ObjectInputStream(readData);
-	// 	    listOfStaff = (ArrayList<Staff>) readStream.readObject();
-	// 	    readStream.close();
-	// 	    //System.out.println(listOfMenuItems.toString());
-	// 	}catch (Exception e) {
-	// 	    e.printStackTrace();
-	// 	}
-		
-	// }
-	
-	// public void save() {
-	// 	// TODO - implement Menu.save
-	// 	try {
-	// 	    FileOutputStream fos = new FileOutputStream("staffList.txt");
-	// 	    ObjectOutputStream oos = new ObjectOutputStream(fos);   
-	// 	    oos.writeObject(listOfStaff); // write List of customer to ObjectOutputStream
-	// 	    oos.close(); 
-	// 	} catch(Exception ex) {
-	// 	    ex.printStackTrace();
-	// 	}
-	// }
 }
