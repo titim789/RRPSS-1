@@ -101,8 +101,8 @@ public class PromotionPackageMgr {
 	}
 
 	/**
-	 * Gets ???
-	 * @return
+	 * Gets an empty ID slot from the promotion package list
+	 * @return An ID slot that is empty and available from the the promotion package list
 	 */
 	public static int getAvailablePromotionId() {
 		int i = 1;
