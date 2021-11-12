@@ -96,6 +96,11 @@ public class ReservationMgr {
 		System.out.println("reservationID: " + reservationId +" not found.");
 	}
 	
+	/**
+	 * Checks whether there is table available for a number of pax
+	 * @param noOfPax Number of pax for walk in customers
+	 * @return 1 if there is a table available for the number of pax, -1 if don't have a table
+	 */
 	public int customerWalkin(int noOfPax) {
 		int tableId;
 		tableId = tableManager.getAvailableTable(noOfPax);
