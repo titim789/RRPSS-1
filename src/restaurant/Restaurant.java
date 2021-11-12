@@ -231,7 +231,6 @@ public class Restaurant {
 							customerId = customerMgr.getLastCustomerId()+1;
 							customerMgr.addCustomer(customerId, name, contact, "n");
 							System.out.println(name + " has been added to Customer table.");
-							customerMgr.displayCustomerList();
 						}
 						reserveManager.newReservation(tableId,customerId,date+" "+time,noOfPax,name,contact);
 						break;
