@@ -11,8 +11,20 @@ public class Table implements Serializable{
 	 * an enumeration of possible table status (reserved, vacant, occupied)
 	*/
 	public enum TABLESTATUS {
+		
+		/**
+		 * For reserved tables
+		 */
 		RESERVED,
+		
+		/**
+		 * For vacant tables
+		 */
 		VACANT,
+		
+		/**
+		 * For occupied tables
+		 */
 		OCCUPIED
 	}
 
@@ -38,6 +50,8 @@ public class Table implements Serializable{
 
 	/**
 	 * constructor of table object, with table ID, number of pax for table size, status default to vacant
+	 * @param id of table to add
+	 * @param noOfPax number of pax table can accommodate
 	 */
 	public Table(int tableId,int noOfPax) {
 		this.tableId = tableId;
@@ -47,6 +61,7 @@ public class Table implements Serializable{
 
 	/**
 	 * get the number of seats for this table object
+	 * @return number of pax for table object
 	*/
 	public int getNoOfPax() {
 		return this.noOfPax;
