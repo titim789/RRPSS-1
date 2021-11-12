@@ -6,12 +6,13 @@ import java.util.Date;
 
 import order.Order;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 
 
-public class Invoice {
+public class Invoice implements Serializable{
 
 	private int invoiceId;
 	private Order ord;

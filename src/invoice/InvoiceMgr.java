@@ -50,7 +50,7 @@ public class InvoiceMgr {
 			}
 		}
 		
-		System.out.println("Total Revenue: $"+ revenue);
+		System.out.printf("Total Revenue: $%.2f\n\n",revenue);
 	}
 	
 	
@@ -93,7 +93,7 @@ public class InvoiceMgr {
 			
 		}
 		
-		System.out.println("Total revenue for this period: $"+ revenue);
+		System.out.printf("Total revenue for this period: $%.2f", revenue);
 	}
 	
 	/*
@@ -147,10 +147,9 @@ public class InvoiceMgr {
 		listOfInvoice.get(invoiceId).getOrder().viewOrder();
 		System.out.println("------------------");
 		System.out.println("Total Price: "+listOfInvoice.get(invoiceId).getTotalPrice());
-		System.out.println("Tax: "+ listOfInvoice.get(invoiceId).getTax());
-		System.out.println("Discount: "+ listOfInvoice.get(invoiceId).getDiscount());
-		System.out.println("GRAND TOTAL: "+ listOfInvoice.get(invoiceId).getGrandTotal() 
-				+ "\n");
+		System.out.printf("Tax: %.2f\n", listOfInvoice.get(invoiceId).getTax());
+		System.out.printf("Discount: %.2f\n", listOfInvoice.get(invoiceId).getDiscount());
+		System.out.printf("GRAND TOTAL: %.2f\n\n", listOfInvoice.get(invoiceId).getGrandTotal());
 	}
 
 	
@@ -159,7 +158,7 @@ public class InvoiceMgr {
 		    FileOutputStream writeData = new FileOutputStream("invoice.txt");
 		    ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
 		    writeStream.writeObject(listOfInvoice);
-		    writeStream.flush();
+		    //writeStream.flush();
 		    writeStream.close();
 
 		}catch (IOException e) {
@@ -168,6 +167,7 @@ public class InvoiceMgr {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void load(){
 		try{
 		    FileInputStream readData = new FileInputStream("invoice.txt");

@@ -273,10 +273,9 @@ public class Restaurant {
 				System.out.println("What do you want to do? \n"
 				        + "1 - Create New Invoice\n"
 				        + "2 - Print Invoice\n"
-				        + "3 - Generate Sales Report\n"
-				        + "4 - Save Invoices to File\n"
-				        + "5 - Load Invoices From File\n"
-				        + "6 - Quit");
+				        + "3 - Save Invoices to File\n"
+				        + "4 - Load Invoices From File\n"
+				        + "5 - Quit");
 				int invchoice = sc.nextInt();
 				switch(invchoice) {
 					case 1:
@@ -298,7 +297,6 @@ public class Restaurant {
 						invoiceMgr.load();
 						System.out.println("Invoices loaded from invoice.txt file");
 						break;
-					case 5:
 					default:
 						//pass
 						break;

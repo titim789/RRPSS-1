@@ -7,10 +7,11 @@ import java.util.Date;
 import menu.MenuItem;
 import menu.PromotionPackage;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class Order {
+public class Order implements Serializable{
 
 	private int orderId;
 	private int staffId;
@@ -142,11 +143,6 @@ public class Order {
 			}
 			if(listOfOrderPromotions.size()>0) {
 				System.out.println("\nPromotion Package items: ");
-				System.out.println(String.format("%-10s", "PackID") + 
-						String.format("%-20s", "Package name") +
-						String.format("%-10s", "Quantity") + 
-						String.format("%-20s","Package price (each)")
-						);
 				listOfOrderPromotions.forEach((n) -> printPack(n));
 				System.out.println("\n");	
 			}
@@ -164,7 +160,7 @@ public class Order {
 	}
 	
 	public void printItemNoPrice(MenuItem n){
-		System.out.println(n.getItemId() + "\t" +
+		System.out.println("\t" + n.getItemId() + "\t" +
 						n.getName() + "\t" +
 						(n.getMenuType().toString())
 						);
@@ -172,15 +168,21 @@ public class Order {
 	
 	//for package
 	public void printPack(OrderPromotionPackage p){
+		System.out.println(String.format("%-10s", "PackID") + 
+				String.format("%-20s", "Package name") +
+				String.format("%-10s", "Quantity") + 
+				String.format("%-20s","Package price (each)")
+				);
 		System.out.println(String.format("%-10s", p.getPackageId() )+ 
 				String.format("%-20s", p.getPackageName() )+
 				String.format("%-10s", p.getQty() )+ 
-				String.format("%-20s", p.getPackagePrice() )
+				String.format("%-20s", p.getPackagePrice())
 				);
 		
 		ArrayList<MenuItem> temp = p.getListOfMenuItem();
-		System.out.println("Package contents: ");
+		System.out.println("\t" + "Package contents: ");
 		temp.forEach((foo) -> printItemNoPrice(foo));
+		System.out.println();
 		//^ but without the item price
 		
 	}
