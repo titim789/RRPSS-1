@@ -1,8 +1,4 @@
-/invoice/
-/order/
-/customer/
-/menu/
-/restaurant/
-/staff/
 /reservation/
+/restaurant/
 /table/
+/menu/

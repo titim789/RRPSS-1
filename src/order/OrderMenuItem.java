@@ -5,7 +5,7 @@ import menu.MenuItem;
 import menu.MenuItem.TYPE_OF_MENU;
 
 public class OrderMenuItem extends MenuItem{
-	
+
 	/**
 	 * The quantity of this particular menu item ordered
 	 */
