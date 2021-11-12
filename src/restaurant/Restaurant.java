@@ -312,6 +312,7 @@ public class Restaurant {
 				switch(invchoice) {
 					case 1:
 						int invOrderId = orderMgr.ensureId("Please enter order ID to create invoice for: ");
+						reserveManager.customerLeave(orderMgr.getOrder(invOrderId).getTableId());
 						int tempy = invoiceMgr.currentSize();
 						invoiceMgr.newInvoice(orderMgr.getOrder(invOrderId), (customerMgr.getCustomerObj((orderMgr.getOrder(invOrderId)).getCustomerId())).isMember());
 						System.out.println("Invoice ID "+tempy+" created.");

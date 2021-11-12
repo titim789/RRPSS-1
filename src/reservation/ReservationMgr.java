@@ -77,6 +77,7 @@ public class ReservationMgr {
 	//-----------------Customer paid and leave change to vacant---------------------------//
 	public void customerLeave(int tableId) {
 		tableManager.editTableDetail(tableId,"VACANT");
+		System.out.println("Table ID "+tableId+" has been made Vacant.");
 	}
 	
 	
