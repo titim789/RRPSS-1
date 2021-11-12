@@ -3,7 +3,7 @@ import java.io.Serializable;
 
 public class MenuItem implements Serializable {
 
-	public enum TYPEOFMENU {
+	public enum TYPE_OF_MENU {
 		MAIN_COURSE,
 		DRINK,
 		DESSERT
@@ -12,7 +12,7 @@ public class MenuItem implements Serializable {
 	private String name;
 	private String description;
 	private double price;
-	private TYPEOFMENU menuType;
+	private TYPE_OF_MENU menuType;
 	
 
 	/**
@@ -23,7 +23,7 @@ public class MenuItem implements Serializable {
 	 * @param price
 	 * @param menutype
 	 */
-	public MenuItem(int itemId, String name, String description, double price, TYPEOFMENU menuType) {
+	public MenuItem(int itemId, String name, String description, double price, TYPE_OF_MENU menuType) {
 		// TODO - implement Menu_Item.Menu_Item
 		this.itemId = itemId;
 		this.name = name;
@@ -80,7 +80,7 @@ public class MenuItem implements Serializable {
 		this.price = price;
 	}
 
-	public TYPEOFMENU getMenuType() {
+	public TYPE_OF_MENU getMenuType() {
 		return this.menuType;
 	}
 
@@ -88,7 +88,7 @@ public class MenuItem implements Serializable {
 	 * 
 	 * @param menutype
 	 */
-	public void setMenuType(TYPEOFMENU menuType) {
+	public void setMenuType(TYPE_OF_MENU menuType) {
 		this.menuType = menuType;
 	}
 	
