@@ -11,6 +11,9 @@ import java.util.Scanner;
 public class CustomerUI {
 
 	// empty constructor
+	/**
+	 * This is the constructor for the CustomerUI class
+	 */
 	public CustomerUI() {}
 
 
