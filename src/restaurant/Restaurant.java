@@ -218,14 +218,12 @@ public class Restaurant {
 						reserveManager.checkAvail(pax);
 						break;
 					case 2:
-						String name, contact, date, time;
-						int tableId, customerId, noOfPax;
+						String name="", contact, date, time;
+						int customerId, noOfPax;
 						Scanner scan = new Scanner(System.in);
 						System.out.print("Enter Number of people: ");
 						noOfPax = scan.nextInt();
 						reserveManager.checkAvail(noOfPax);
-						System.out.print("Enter Table ID to be assigned : ");
-						tableId = scan.nextInt();
 						System.out.print("Enter Customer ID(-1 for new customer): ");
 						customerId = scan.nextInt();
 						System.out.print("Enter Date in (dd/MM/yyyy) format: ");
@@ -238,14 +236,15 @@ public class Restaurant {
 						}
 						else {
 							System.out.print("Enter Customer Name : ");
-							name = scan.next();
+							name = scan.nextLine();
+							name +=scan.nextLine();
 							System.out.print("Enter Contact Number : ");
 							contact = scan.next();
 							customerId = customerMgr.getLastCustomerId()+1;
 							customerMgr.addCustomer(customerId, name, contact, "n");
 							System.out.println(name + " has been added to Customer table.");
 						}
-						reserveManager.newReservation(tableId,customerId,date+" "+time,noOfPax,name,contact);
+						reserveManager.newReservation(customerId,date+" "+time,noOfPax,name,contact);
 						break;
 					case 3:
 						Scanner scan1 = new Scanner(System.in);
