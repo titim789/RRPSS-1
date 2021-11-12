@@ -83,23 +83,23 @@ public class test {
 		
 		//Adding MenuItems into menuitems.txt
 		MenuItemMgr menuItemMgr = new MenuItemMgr();
-		menuItemMgr.addNewMenuItem(1,"Carbonara","A creamy bacon infused pasta",8.7,TYPEOFMENU.MAIN_COURSE); 
-		menuItemMgr.addNewMenuItem(2,"Vongole","Creamy pasta with clams",9.5,TYPEOFMENU.MAIN_COURSE) ;
-		menuItemMgr.addNewMenuItem(3,"Aglio Olio","Pasta tossed in olive oil and garlic",7.2,TYPEOFMENU.MAIN_COURSE) ;
-		menuItemMgr.addNewMenuItem(4,"Pizza Margherita","Simple pizza with basil, tomatoes, and cheese",12.4,TYPEOFMENU.MAIN_COURSE) ;
-		menuItemMgr.addNewMenuItem(5,"Lasagne","Layered pasta sheets with cheese and meat",8.5,TYPEOFMENU.MAIN_COURSE) ;
-		menuItemMgr.addNewMenuItem(6,"Risotto","Rice dish cooked with creamy broth",7.4,TYPEOFMENU.MAIN_COURSE) ;
-		menuItemMgr.addNewMenuItem(7,"Pasta Bottarga","Pasta sprinkled with Cured Fish Roe",7.3,TYPEOFMENU.MAIN_COURSE) ;
-		menuItemMgr.addNewMenuItem(8,"Focaccia","Flat Italian bread topped with meat",5.8,TYPEOFMENU.MAIN_COURSE) ;
-		menuItemMgr.addNewMenuItem(9,"Beer","Bubbly goodness",5,TYPEOFMENU.DRINK) ;
-		menuItemMgr.addNewMenuItem(10,"Coffee","Energy boost",2,TYPEOFMENU.DRINK) ;
-		menuItemMgr.addNewMenuItem(11,"Tea","Soothing energy",2,TYPEOFMENU.DRINK) ;
-		menuItemMgr.addNewMenuItem(12,"Soft Drink","In-house on tap",3,TYPEOFMENU.DRINK) ;
-		menuItemMgr.addNewMenuItem(13,"Cheese Cake","Cake made of cream cheese and crackers",5.6,TYPEOFMENU.DESSERT) ;
-		menuItemMgr.addNewMenuItem(14,"Tiramisu","Coffee-flavoured dessert",5.6,TYPEOFMENU.DESSERT) ;
-		menuItemMgr.addNewMenuItem(15,"Gelato","Frozen dessert",2.1,TYPEOFMENU.DESSERT);
-		menuItemMgr.getListOfMenuItems();
-		menuItemMgr.viewMenuItems();
+		menuItemMgr.addNewMenuItem(1,"Carbonara","A creamy bacon infused pasta",8.7,MenuItem.TYPEOFMENU.MAIN_COURSE); 
+		menuItemMgr.addNewMenuItem(2,"Vongole","Creamy pasta with clams",9.5,MenuItem.TYPEOFMENU.MAIN_COURSE) ;
+		menuItemMgr.addNewMenuItem(3,"Aglio Olio","Pasta tossed in olive oil and garlic",7.2,MenuItem.TYPEOFMENU.MAIN_COURSE) ;
+		menuItemMgr.addNewMenuItem(4,"Pizza Margherita","Simple pizza with basil, tomatoes, and cheese",12.4,MenuItem.TYPEOFMENU.MAIN_COURSE) ;
+		menuItemMgr.addNewMenuItem(5,"Lasagne","Layered pasta sheets with cheese and meat",8.5,MenuItem.TYPEOFMENU.MAIN_COURSE) ;
+		menuItemMgr.addNewMenuItem(6,"Risotto","Rice dish cooked with creamy broth",7.4,MenuItem.TYPEOFMENU.MAIN_COURSE) ;
+		menuItemMgr.addNewMenuItem(7,"Pasta Bottarga","Pasta sprinkled with Cured Fish Roe",7.3,MenuItem.TYPEOFMENU.MAIN_COURSE) ;
+		menuItemMgr.addNewMenuItem(8,"Focaccia","Flat Italian bread topped with meat",5.8,MenuItem.TYPEOFMENU.MAIN_COURSE) ;
+		menuItemMgr.addNewMenuItem(9,"Beer","Bubbly goodness",5,MenuItem.TYPEOFMENU.DRINK) ;
+		menuItemMgr.addNewMenuItem(10,"Coffee","Energy boost",2,MenuItem.TYPEOFMENU.DRINK) ;
+		menuItemMgr.addNewMenuItem(11,"Tea","Soothing energy",2,MenuItem.TYPEOFMENU.DRINK) ;
+		menuItemMgr.addNewMenuItem(12,"Soft Drink","In-house on tap",3,MenuItem.TYPEOFMENU.DRINK) ;
+		menuItemMgr.addNewMenuItem(13,"Cheese Cake","Cake made of cream cheese and crackers",5.6,MenuItem.TYPEOFMENU.DESSERT) ;
+		menuItemMgr.addNewMenuItem(14,"Tiramisu","Coffee-flavoured dessert",5.6,MenuItem.TYPEOFMENU.DESSERT) ;
+		menuItemMgr.addNewMenuItem(15,"Gelato","Frozen dessert",2.1,MenuItem.TYPEOFMENU.DESSERT);
+		//menuItemMgr.getListOfMenuItems();
+		//menuItemMgr.viewMenuItems();
 		
 		try {
 		    FileOutputStream fos = new FileOutputStream("menuitems.txt");
@@ -121,7 +121,7 @@ public class test {
 		}
 		
 		System.out.println(listOfMenuItems.get(0).toString());
-		
+		*/
 		//Adding Promotion Package into promotionpackage.txt
 		ArrayList<MenuItem> menuItem1 = new ArrayList<MenuItem>(); 
 		ArrayList<MenuItem> menuItem2 = new ArrayList<MenuItem>(); 
@@ -129,7 +129,7 @@ public class test {
 		ArrayList<MenuItem> menuItem4 = new ArrayList<MenuItem>(); 
 		ArrayList<MenuItem> menuItem5 = new ArrayList<MenuItem>();
 		PromotionPackageMgr promotionPackageMgr = new PromotionPackageMgr();
-		//MenuItemMgr menuItemMgr = new MenuItemMgr();
+		MenuItemMgr menuItemMgr = new MenuItemMgr();
 		menuItemMgr.load();
 
 		promotionPackageMgr.addNewPromotion(1,"Carbonara Meal","Carbonara + Tea + Cheese Cake",13,menuItem1); 
@@ -138,26 +138,26 @@ public class test {
 		promotionPackageMgr.addNewPromotion(4,"Lasagna Meal","Lasagne + Soft Drink + Gelato",10.9,menuItem4); 
 		promotionPackageMgr.addNewPromotion(5,"Pasta Bottarga Meal","Pasta Bottarga + Beer + Gelato",11.5,menuItem5); 
 		
-		promotionPackageMgr.addItemToPackage(1,1,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(1,11,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(1,13,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(2,3,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(2,10,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(2,14,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(3,4,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(3,12,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(3,12,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(4,5,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(4,12,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(4,15,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(5,7,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(5,9,menuItemMgr.getListOfMenuItems()); 
-		promotionPackageMgr.addItemToPackage(5,15,menuItemMgr.getListOfMenuItems());
+		promotionPackageMgr.addItemToPackage(1,1,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(1,11,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(1,13,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(2,3,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(2,10,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(2,14,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(3,4,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(3,12,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(3,12,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(4,5,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(4,12,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(4,15,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(5,7,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(5,9,MenuItemMgr.getListOfMenuItems()); 
+		promotionPackageMgr.addItemToPackage(5,15,MenuItemMgr.getListOfMenuItems());
 		
 		try {
 		    FileOutputStream fos = new FileOutputStream("promotionpackages.txt");
 		    ObjectOutputStream oos = new ObjectOutputStream(fos);   
-		    oos.writeObject(promotionPackageMgr.getListOfPromotion()); // write MenuArray to ObjectOutputStream
+		    oos.writeObject(PromotionPackageMgr.getListOfPromotion()); // write MenuArray to ObjectOutputStream
 		    oos.close(); 
 		} catch(Exception ex) {
 		    ex.printStackTrace();
@@ -176,9 +176,10 @@ public class test {
 		
 		System.out.println(listOfPromoPack.get(0).getPackageName());
 		
-	}
-	*/
+	
 		
-		MenuMgr mgr = new MenuMgr();
+		//MenuMgr mgr = new MenuMgr();
+		
+		
 	}
 }

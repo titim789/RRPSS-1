@@ -1,6 +1,7 @@
 package menu;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class MenuItemUI {
 	public MenuItemUI() {}
@@ -116,5 +117,18 @@ public class MenuItemUI {
 		else if(type == 3) menuType = MenuItem.TYPEOFMENU.DESSERT;
 		else menuType = MenuItem.TYPEOFMENU.MAIN_COURSE;
 		return menuType;
+	}
+	
+	public void displayMenuItems() {
+		ArrayList<MenuItem> listOfMenuItems = MenuItemMgr.getListOfMenuItems();
+		int i;
+		System.out.println(String.format("%-20s", "Name")
+				+"|"+String.format("%-50s", "Description")
+				+"|"+"Price"+"\t|");
+		for(i=0; i<listOfMenuItems.size(); i++) {
+			System.out.println(String.format("%-20s", listOfMenuItems.get(i).getName())
+					+"|"+String.format("%-50s", listOfMenuItems.get(i).getDescription())
+					+"|"+listOfMenuItems.get(i).getPrice()+"\t|");
+		}
 	}
 }

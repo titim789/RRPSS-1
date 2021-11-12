@@ -22,12 +22,8 @@ public class MenuMgr{
 	}
 	
 	public void editMenu() {
-		System.out.println("Choose Menu Type:\n"
-				+ "1)\tMenu\n"
-				+ "2)\tPromotions\n"
-				+ "3)\tExit");
-		Scanner sc = new Scanner(System.in);
-		int choice = sc.nextInt();
+		MenuUI menuUI = new MenuUI();
+		int choice = menuUI.getMenuTypeOption();
 		if(choice == 1) {
 			menuItemMgr.edit();
 		}

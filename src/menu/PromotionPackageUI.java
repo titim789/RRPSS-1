@@ -20,6 +20,33 @@ public class PromotionPackageUI {
 		return choice;
 	}
 	
+	public void displayPackages() {
+		ArrayList<PromotionPackage> listOfPromotion = PromotionPackageMgr.getListOfPromotion();
+		int i;
+	    for(i=0; i<listOfPromotion.size(); i++){
+	        System.out.println("Package ID\t"+listOfPromotion.get(i).getPackageId());
+	        System.out.println("Package Name\t"+listOfPromotion.get(i).getPackageName());
+	        System.out.println("Package Price\t"+listOfPromotion.get(i).getPackagePrice());
+	        System.out.println("Package Desc\t"+listOfPromotion.get(i).getPackageDesc());
+	        System.out.println("Package Menu Items");
+	        System.out.println(String.format("%-20s", "Name")
+					+"|"+String.format("%-50s", "Description")
+					+"|"+"Original Price"+"\t|");
+	        displayItemsInPackage(listOfPromotion.get(i));
+	        System.out.println("\n");
+	    }
+	}
+	
+	public void displayItemsInPackage(PromotionPackage promotionPackage) {
+		int j;
+		for(j=0; j<promotionPackage.getNumberOfItems();j++){
+			System.out.println(String.format("%-20s", promotionPackage.getListOfMenuItem().get(j).getName())
+						+"|"+String.format("%-50s", promotionPackage.getListOfMenuItem().get(j).getDescription())
+						+"|"+promotionPackage.getListOfMenuItem().get(j).getPrice()+"\t\t|");
+		}
+		
+	}
+	
 	public PromotionPackage getAddOption() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Please enter Package ID: ");

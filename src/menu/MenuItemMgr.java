@@ -9,14 +9,15 @@ import java.util.Scanner;
 
 public class MenuItemMgr {
 	private static ArrayList<MenuItem> listOfMenuItems;
+	private MenuItemUI menuItemUI;
 	
 	//constructor
 	public MenuItemMgr() {
 		listOfMenuItems = new ArrayList<MenuItem>();
+		menuItemUI = new MenuItemUI();
 	}
 	
-	public void edit() {
-		MenuItemUI menuItemUI = new MenuItemUI();
+	public void edit() {		
 		int choice = menuItemUI.getEditOption();
 		if(choice == 1) {
 			MenuItem newItem = menuItemUI.getAddOption();
@@ -54,21 +55,13 @@ public class MenuItemMgr {
 		}
 	}
 	
-	public ArrayList<MenuItem> getListOfMenuItems() {
+	public static ArrayList<MenuItem> getListOfMenuItems() {
 		return listOfMenuItems;
 	}
 
 	public void viewMenuItems() {
 		// TODO - implement Menu.viewMenuItems
-		int i;
-		System.out.println(String.format("%-20s", "Name")
-				+"|"+String.format("%-50s", "Description")
-				+"|"+"Price"+"\t|");
-		for(i=0; i<listOfMenuItems.size(); i++) {
-			System.out.println(String.format("%-20s", listOfMenuItems.get(i).getName())
-					+"|"+String.format("%-50s", listOfMenuItems.get(i).getDescription())
-					+"|"+listOfMenuItems.get(i).getPrice()+"\t|");
-		}
+		menuItemUI.displayMenuItems();
 	}
 	
 	/**
@@ -225,7 +218,8 @@ public class MenuItemMgr {
 		    readStream.close();
 		    //System.out.println(listOfMenuItems.toString());
 		}catch (Exception e) {
-		    e.printStackTrace();
+		    //e.printStackTrace();
+			System.out.println("Error loading menuitems.txt");
 		}
 		
 	}
