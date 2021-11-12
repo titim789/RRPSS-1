@@ -12,8 +12,19 @@ public class MenuItem implements Serializable {
 	 * An enumeration of the menu item type, which is either a main couse, drink or dessert
 	 */
 	public enum TYPE_OF_MENU {
+		/**
+		 * For main course menu items
+		 */
 		MAIN_COURSE,
+		
+		/**
+		 * For drink menu items
+		 */
 		DRINK,
+		
+		/**
+		 * For dessert menu items
+		 */
 		DESSERT
 	}
 
