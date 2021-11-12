@@ -151,7 +151,7 @@ public class TableMgr {
 	
 	//-----------------Check people fit TableSize---------------------------//
 	/**
-	 * checks if number of pax fits the table size of all tables
+	 * returns an table ID that fits that number of pax pass in
 	 * @param pax number of pax
 	 * @return table ID if can a table that fits, -1 if cannot fit
 	 */
