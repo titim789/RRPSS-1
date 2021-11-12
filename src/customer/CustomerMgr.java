@@ -27,8 +27,14 @@ import java.io.FileReader;
  */
 public class CustomerMgr{
 
+	/**
+	 * This is a static list of customer objects.
+	 */
 	private static ArrayList<Customer> listOfCustomer;
 	
+	/**
+	 * This is the constructor of the class.
+	 */
 	public CustomerMgr() {
 		load();
 	}
@@ -59,9 +65,29 @@ public class CustomerMgr{
 		}
 	}
 	
+
+	/**
+	 * Get user input to about new customer to be added
+	 */
+	// function to add customer object to list of customer
+	public void addCustomerOption() {
+		// int customerId, String name, String phone, String member
+
+		int customerId = getLastCustomerId() + 1;
+		System.out.println("Customer Id to insert:" + customerId);
+
+		CustomerUI customerui = new CustomerUI();
+
+		String name = customerui.getCustomerName();
+		String phone = customerui.getCustomerPhone();				
+		String member = customerui.getCustomerMember();
+
+		addCustomer(customerId, name, phone, member);
+	}
 	
+
 	/** 
-	 * This method is used to add a new customer to the list of customers.
+	 * This method is used to add a new customer to the static list of customers.
 	 * @param customerId the customer id of the new customer
 	 * @param name 	the name of the new customer
 	 * @param phone	the phone number of the new customer
@@ -82,35 +108,34 @@ public class CustomerMgr{
 	}
 
 	/**
-	 * This method is used to add a new customer, by calling the customerUI to get the customer information
+	 * This method is to get the customer ID to be removed
+	 * @param customerId the customer id of the customer to be removed
 	 */
-	// function to add customer object to list of customer
-	public void addCustomerInit() {
-		// int customerId, String name, String phone, String member
-
-		int customerId = getLastCustomerId() + 1;
-		System.out.println("Customer Id to insert:" + customerId);
-
+	public void removeCustomerOption(){
 		CustomerUI customerui = new CustomerUI();
-
-		String name = customerui.getCustomerName();
-		String phone = customerui.getCustomerPhone();				
-		String member = customerui.getCustomerMember();
-
-		Customer newCustomer = new Customer();
-		newCustomer.setCustomerId(customerId);
-		newCustomer.setName(name);
-		newCustomer.setPhone(phone);
-		if(member.equals("y")) {
-			newCustomer.setMember(true);
-		}
-		else {
-			newCustomer.setMember(false);
-		}
-		listOfCustomer.add(newCustomer);
+		int customerIdToRemove = customerui.getRemoveId();
+		removeCustomer(customerIdToRemove);
 	}
 
-	
+	/**
+	 * This method is used to remove a new customer based on ID passed in
+	 * @param customerId the customer id of the customer to be removed
+	 */
+	// remove customer object from the list of customer, store into a temp ArrayList if customer id is not CustomerIdemoval
+	public void removeCustomer(int customerIdToRemove) {
+		ArrayList<Customer> tempList = new ArrayList<Customer>();
+		for (Customer customer : listOfCustomer) {
+			if (customer.getCustomerId() != customerIdToRemove) {
+				tempList.add(customer);
+			}
+		}
+		listOfCustomer.clear();
+		listOfCustomer.addAll(tempList);
+
+		System.out.println("Customer removed..");
+		displayCustomerList();
+	}
+
 	/** 
 	 * returns the last customer id in the list
 	 * @return int
@@ -125,28 +150,6 @@ public class CustomerMgr{
 		}
 		return lastCustomerId;
 	}
-
-	/**
-	 * This method is used to remove a new customer, by calling the customerUI to get the customer information
-	 */
-	// remove customer object from the list of customer, store into a temp ArrayList if customer id is not CustomerIdemoval
-	public void removeCustomer() {
-		CustomerUI customerui = new CustomerUI();
-		int customerIdToRemove = customerui.getRemoveId();
-
-		ArrayList<Customer> tempList = new ArrayList<Customer>();
-		for (Customer customer : listOfCustomer) {
-			if (customer.getCustomerId() != customerIdToRemove) {
-				tempList.add(customer);
-			}
-		}
-		listOfCustomer.clear();
-		listOfCustomer.addAll(tempList);
-
-		System.out.println("Customer removed..");
-		displayCustomerList();
-	}
-
 	
 	/** 
 	 * pass in int customerId check if exist in the ArrayList Customer
@@ -163,6 +166,21 @@ public class CustomerMgr{
 		return false;
 	}
 
+		/** 
+	 * pass in an CustomerId integer and return the customer object
+	 * @param customerId
+	 * @return Customer
+	 */
+	// pass in an CustomerId integer and return the customer object
+	public Customer getCustomerObj(int customerId) {
+		Customer customer = new Customer();
+		for (Customer c : listOfCustomer) {
+			if (c.getCustomerId() == customerId) {
+				customer = c;
+			}
+		}
+		return customer;
+	}
 	
 	/**
 	 *  pass in customerId and returns customer phone attribtue
@@ -195,22 +213,6 @@ public class CustomerMgr{
 		return null;
 	}
 
-	
-	/** 
-	 * pass in an CustomerId integer and return the customer object
-	 * @param customerId
-	 * @return Customer
-	 */
-	// pass in an CustomerId integer and return the customer object
-	public Customer getCustomerObj(int customerId) {
-		Customer customer = new Customer();
-		for (Customer c : listOfCustomer) {
-			if (c.getCustomerId() == customerId) {
-				customer = c;
-			}
-		}
-		return customer;
-	}
 
 	/**
 	 * save the customer list to a list of customer database file
