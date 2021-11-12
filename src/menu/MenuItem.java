@@ -60,7 +60,7 @@ public class MenuItem implements Serializable {
 	 * @param name 	name of this particular menu item
 	 * @param description 	description of this particular menu item
 	 * @param price	price of this particular menu item
-	 * @param menutype	type of this particular menu item, main course, drink or dessert
+	 * @param menuType	type of this particular menu item, main course, drink or dessert
 	 */
 	public MenuItem(int itemId, String name, String description, double price, TYPE_OF_MENU menuType) {
 		// TODO - implement Menu_Item.Menu_Item
@@ -100,7 +100,7 @@ public class MenuItem implements Serializable {
 
 	/**
 	 * Method for setting the name of this particular menu item
-	 * @param name
+	 * @param name name of Menu Item
 	 */
 	public void setName(String name) {
 		this.name = name;

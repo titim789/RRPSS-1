@@ -41,7 +41,6 @@ public class CustomerMgr{
 
 	/**
 	 * This method is used to display the list of customers in current list of customers.
-	 * @param customer The customer object to be displayed.
 	 */
 	// pass in an ArrayList<Customer> and display all customers in the list
 	public void displayCustomerList() {
@@ -109,7 +108,6 @@ public class CustomerMgr{
 
 	/**
 	 * This method is to get the customer ID to be removed
-	 * @param customerId the customer id of the customer to be removed
 	 */
 	public void removeCustomerOption(){
 		CustomerUI customerui = new CustomerUI();
@@ -119,7 +117,7 @@ public class CustomerMgr{
 
 	/**
 	 * This method is used to remove a new customer based on ID passed in
-	 * @param customerId the customer id of the customer to be removed
+	 * @param customerIdToRemove the customer id of the customer to be removed
 	 */
 	// remove customer object from the list of customer, store into a temp ArrayList if customer id is not CustomerIdemoval
 	public void removeCustomer(int customerIdToRemove) {

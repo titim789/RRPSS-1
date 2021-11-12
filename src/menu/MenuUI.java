@@ -2,6 +2,12 @@ package menu;
 
 import java.util.Scanner;
 
+/**
+ * UI for MenuMgr
+ * @author titus
+ * @author Wei Xiang
+ *
+ */
 public class MenuUI {
 	
 	/**

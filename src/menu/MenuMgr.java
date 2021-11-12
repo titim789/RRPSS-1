@@ -4,6 +4,12 @@ package menu;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Manager for Menu
+ * @author titus
+ * @author Wei Xiang
+ *
+ */
 public class MenuMgr{
 	
 	/**

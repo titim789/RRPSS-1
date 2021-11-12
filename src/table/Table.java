@@ -50,7 +50,7 @@ public class Table implements Serializable{
 
 	/**
 	 * constructor of table object, with table ID, number of pax for table size, status default to vacant
-	 * @param id of table to add
+	 * @param tableId of table to add
 	 * @param noOfPax number of pax table can accommodate
 	 */
 	public Table(int tableId,int noOfPax) {

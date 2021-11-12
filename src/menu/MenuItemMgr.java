@@ -74,6 +74,7 @@ public class MenuItemMgr {
 	
 	/**
 	 * This is a method to return the static list of menu items.
+	 * @return a list of Menu Items
 	 */
 	public static ArrayList<MenuItem> getListOfMenuItems() {
 		return listOfMenuItems;
@@ -94,7 +95,7 @@ public class MenuItemMgr {
 	 * @param name 	- the name of the menu item
 	 * @param description 	- the description of the menu item
 	 * @param price - the price of the menu item
-	 * @param menutype - the type of the menu item
+	 * @param menuType - the type of the menu item
 	 * @return 0 for fail, 1 for successful
 	 */
 	public int addNewMenuItem(int itemId, String name, String description, double price, MenuItem.TYPE_OF_MENU menuType) {

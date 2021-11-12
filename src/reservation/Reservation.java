@@ -193,7 +193,7 @@ public class Reservation implements Serializable{
 
 	/**
 	 * Sets the contact number of the customer making the reservation
-	 * @return The contact number of the customer making the reservation
+	 * @param contact The contact number of the customer making the reservation
 	 */
 	public void setContact(String contact) {
 		this.contact = contact;

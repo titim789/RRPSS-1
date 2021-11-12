@@ -5,8 +5,13 @@ import java.util.ArrayList;
 
 /**
  * MenuItemUI class for capturing user inputs and displaying menu options
+ * @author Titus
+ * @author Wei Xiang
  */
 public class MenuItemUI {
+	/**
+	 * Constructor for MenuItemUI
+	 */
 	public MenuItemUI() {}
 	
 	
