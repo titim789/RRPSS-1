@@ -58,6 +58,8 @@ public class MenuItemMgr {
 	public static ArrayList<MenuItem> getListOfMenuItems() {
 		return listOfMenuItems;
 	}
+	
+	
 
 	public void viewMenuItems() {
 		// TODO - implement Menu.viewMenuItems
@@ -207,6 +209,12 @@ public class MenuItemMgr {
 			}
 		}
 		return null;
+	}
+	
+	public static int getAvailableItemId() {
+		int i = 1;
+		while(getItemMenu(i) != null) i++;
+		return i;
 	}
 	
 	public void load() {

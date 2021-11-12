@@ -25,10 +25,10 @@ public class MenuItemUI {
 		double price;
 		MenuItem.TYPEOFMENU menuType;
 		Scanner sc = new Scanner(System.in);
-		System.out.print("ID of New Item:");
-		id = sc.nextInt();
+		id = MenuItemMgr.getAvailableItemId();
 		System.out.print("Name of New Item:");
 		name = sc.next();
+		name += sc.nextLine();
 		System.out.print("Description of New Item:");
 		description = sc.next();
 		description += sc.nextLine();
