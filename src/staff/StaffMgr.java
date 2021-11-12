@@ -23,7 +23,7 @@ public class StaffMgr{
 	public boolean checkStaffId(int staffId) {
 
 		for(int i = 0; i < listOfStaff.size(); i++) {
-			System.out.println("staffId: "+listOfStaff.get(i).getStaffId());
+			// System.out.println("staffId: "+listOfStaff.get(i).getStaffId());
 			if(listOfStaff.get(i).getStaffId() == staffId) {
 				return true;
 			}

@@ -40,12 +40,12 @@ public class CustomerMgr{
 		for (Customer customer : listOfCustomer) {
 			String member = "";
 			if (customer.isMember()) {
-				member = "y";
+				member = "yes";
 			} else {
-				member = "n";
+				member = "no";
 			}
 			System.out.println(String.format("|%-10s", customer.getCustomerId())
-			+"|"+String.format("%-20s", customer.getCustomerId())
+			+"|"+String.format("%-20s", customer.getName())
 			+"|"+String.format("%-20s", customer.getPhone())
 			+"|"+String.format("%-20s", member));		
 		}

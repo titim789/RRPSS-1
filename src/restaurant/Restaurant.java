@@ -336,11 +336,65 @@ public class Restaurant {
 			}
 			
 			else if(choice == 6) {
-				staffMgr.init();
+				int option = 0;
+				do{
+					System.out.println("\nDo you want to \n"
+					+ "1 - Display Staff\n"
+					+ "2 - Add Staff\n"
+					+ "3 - Remove Staff\n"
+					+ "4 - Back to main menu");
+					option = sc.nextInt();
+					if (option == 1) {
+						staffMgr.displayStaffList();
+					}
+					else if (option == 2) {
+						staffMgr.addStaff();
+					}
+					else if (option == 3) {
+						staffMgr.removeStaff();
+					}
+					else if (option == 4) {
+						//pass
+						System.out.println("Returning to Main Menu...");
+					}
+					else {
+						System.out.println("Invalid Choice.\nReturning to Main Menu...");
+						break;
+					}
+
+				}while(option != 4);
 			}
 
 			else if (choice == 7){
-				customerMgr.init();
+								// customerMgr.init();
+								int option = 0;
+
+								do{
+									System.out.println("\nDo you want to \n"
+									+ "1 - Display Customer List\n"
+									+ "2 - Add Customer\n"
+									+ "3 - Remove Customer\n"
+									+ "4 - Back to main menu");
+									option = sc.nextInt();
+									if (option == 1) {
+										customerMgr.displayCustomerList();
+									}
+									else if (option == 2) {
+										customerMgr.addCustomerInit();
+									}
+									else if (option == 3) {
+										customerMgr.removeCustomer();
+									}
+									else if (option == 4) {
+										//pass
+										System.out.println("Returning to Main Menu...");
+									}
+									else {
+										System.out.println("Invalid Choice.\nReturning to Main Menu...");
+										break;
+									}
+				
+								}while(option != 4);
 			}
 		
 		}while(choice != 8); //Exiting
