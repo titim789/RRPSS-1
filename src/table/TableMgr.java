@@ -25,10 +25,11 @@ public class TableMgr {
 	*/
 	private ArrayList<Table> listOfTables = new ArrayList<Table>();
 	
+	
+	//-----------------Display Table-------------------------//
 	/**
 	 * Table UI for capturing users inputs 
 	*/
-	//-----------------Display Table-------------------------//
 	private TableUI tableUI = new TableUI();
 	
 	//-----------------Constructor-------------------------//
@@ -85,7 +86,9 @@ public class TableMgr {
 	
 	//-----------------Get Available Table---------------------------//
 	/**
-	 * get the available table object based on number of pax pass in
+	 * get the available table id based on number of pax pass in
+	 * @param pax number of pax to compare with
+	 * @return table id of available table
 	 */
 	public int getAvailableTable(int pax) {
 		for(Table table : listOfTables) {
@@ -181,8 +184,10 @@ public class TableMgr {
 	
 	//-----------------Update Table---------------------------//
 	/**
-	 *  pass in table ID, and update table status
-	*/
+	 * pass in table ID, and update table status
+	 * @param num table id to update
+	 * @param newstatus status to update table to
+	 */
 	public void editTableDetail(int num, String newstatus){
 		for(Table table : listOfTables) {
 			if (table.getTableId() == num) {
