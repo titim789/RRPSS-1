@@ -7,17 +7,32 @@ import java.util.Scanner;
 import menu.MenuItem;
 import menu.PromotionPackage;
 
-
+/**
+ * The control class of the order entities
+ * Contains the list of orders
+ * For information on each order in the list, please visit order
+ * @author Trevor
+ *
+ */
 public class OrderMgr {
+	/**
+	 * The list of orders that this control class manages
+	 */
 	private ArrayList<Order> listOfOrders;
 
-	//private AddNewOrder addNewOrder = new AddNewOrder();
-	
+	/**
+	 * When instantiating this manager, it will create a list of orders
+	 */
 	public OrderMgr() {
 		listOfOrders = new ArrayList<Order>();
 	}
 	
-	
+	/**
+	 * Creating a new order
+	 * @param staffId The ID of the staff creaing this new order
+	 * @param customerId The ID of the customer making an order
+	 * @param tableId The ID that this order is being made for
+	 */
 	public void newOrder(int staffId, int customerId, int tableId) {
 		int orderId = listOfOrders.size();
 		Calendar caley = Calendar.getInstance();
@@ -26,14 +41,26 @@ public class OrderMgr {
 	    //print menu and call add items method in the restaurant boundary
 	}
 	
+	/**
+	 * Finds number of existing orders
+	 * @return The number of existing orders
+	 */
 	public int currentSize() {
 		return listOfOrders.size();
 	}
 	
+	/**
+	 * Gets the order object corresponding to the order ID 
+	 * @param orderId The ID of the order we're looking for
+	 * @return The order object corresponding to the order ID input
+	 */
 	public Order getOrder(int orderId) {
 		return listOfOrders.get(orderId);
 	}
 	
+	/**
+	 * Views the item contents of the order
+	 */
 	public void viewItemInOrder() {
 		OrderUI orderUI = new OrderUI();
 		int orderId = orderUI.getOrderId();
@@ -46,10 +73,21 @@ public class OrderMgr {
 		}
 	}
 	
+	/**
+	 * Adds an item to the order
+	 * @param orderId The ID to which to add an item to
+	 * @param item The item to add to the order
+	 */
 	public void addItem(int orderId, OrderMenuItem item) {
 		listOfOrders.get(orderId).addOrderItem(item);
 	}
 	
+	/**
+	 * Removes an item from an order
+	 * @param orderId The ID from which to remove an item from
+	 * @param item The item to remove from the order
+	 * @param qty The quantity of the item to remove
+	 */
 	public void removeItem(int orderId, OrderMenuItem item, int qty) {
 		//check qty > qty
 		//get qty of that item
@@ -72,11 +110,22 @@ public class OrderMgr {
 		}
 	}
 	
+	/**
+	 * Adds a promotion package to the order
+	 * @param orderId The ID of the order to which to add the promotion package to
+	 * @param pack The promotion package to add to the order
+	 */
 	public void addPackage(int orderId, OrderPromotionPackage pack) {
 
 		listOfOrders.get(orderId).addPromotion(pack);
 	}
 	
+	/**
+	 * Removes a promotion package from an order
+	 * @param orderId The ID of the order form which to remove a promotion package from
+	 * @param pack The promotion package to remove from the order
+	 * @param qty The quantity of the package to remove from the order
+	 */
 	public void removePackage(int orderId, OrderPromotionPackage pack, int qty) {
 		int realQty = listOfOrders.get(orderId).getOrderPromotionPackage(pack.getPackageId()).getQty();
 		if(realQty == qty) {
@@ -98,6 +147,11 @@ public class OrderMgr {
 	}
 
 	
+	/**
+	 * Ensures the order ID input is valid
+	 * @param prompt The string prompt that the UI will print to ask for
+	 * @return A valid ID input from the user
+	 */
 	public int ensureId(String prompt) {
 		Scanner sc = new Scanner(System.in);
 		boolean ordE = false;
@@ -109,9 +163,12 @@ public class OrderMgr {
 		}while(ordE==false);
 		return orderId;
 	}
-	//cannot as println will be different for different cases.
-	
-	
+
+	/**
+	 * Checks if an order ID exists
+	 * @param orderId The order ID for which to check for existence
+	 * @return True if it exists, False if it does not exist
+	 */
 	public boolean exists(int orderId) {
 		for(int i=0; i<listOfOrders.size(); i++) {
 			if(listOfOrders.get(i).getOrderId() == orderId) {
@@ -125,8 +182,4 @@ public class OrderMgr {
 		*/
 		return false;
 	}
-	
-	
-
-	
 }

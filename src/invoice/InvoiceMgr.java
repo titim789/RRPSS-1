@@ -18,19 +18,30 @@ import java.io.ObjectOutputStream;
 //import java.text.SimpleDateFormat;
 
 
-
+/**
+ * The control class of invoice entities. 
+ * Contains the list of invoices.
+ * For information on each invoice in the list, please visit invoice
+ * @author Trevor
+ *
+ */
 public class InvoiceMgr {
-	
+	/**
+	 * The list of invoices that this control class manages
+	 */
 	private ArrayList<Invoice> listOfInvoice;
-	//private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy,HH:mm");
 	
-	//private static final SimpleDateFormat justDates = new SimpleDateFormat("dd/MM/yyyy");
-	
+	/**
+	 * When instantiating this manager, it will create a list of invoices
+	 */
 	public InvoiceMgr() {
 		listOfInvoice = new ArrayList<Invoice>();
 	}
 	
-	
+	/**
+	 * This generates the sales report for the current month,
+	 * comprising the invoices created in this month, together with their order contents and the total revenue for this period
+	 */
 	public void generateSalesReport(){
 		Date dte = new Date();
 		Calendar tdy = Calendar.getInstance();
@@ -53,10 +64,13 @@ public class InvoiceMgr {
 		System.out.printf("Total Revenue: $%.2f\n\n",revenue);
 	}
 	
-	
+	/**
+	 * This generates the sales report for a certain period,
+	 * comprising the invoices created in this period, together with their order contents and the total revenue for this period
+	 * @param str The start date for which to include invoices
+	 * @param s The end date for which to include invoices
+	 */
 	public void generateSalesReport(String str, String s){
-		//to do: check if invalid input.
-		
 		//splitting into date month year
 		String[] stringarray = str.split("/");
 		int sd,sm,sy;
@@ -96,13 +110,11 @@ public class InvoiceMgr {
 		System.out.printf("Total revenue for this period: $%.2f", revenue);
 	}
 	
-	/*
-	 * not necessary to update invoices? Printed = customer paid and left alr.
-	public void updateInvoice(int invoiceId) {
-		
-	}
-	*/
-	
+	/**
+	 * Checks if an invoice for a given ID exists.
+	 * @param invId The ID for which to check if an invoice exists for
+	 * @return True if the invoice exists, False otherwise.
+	 */
 	public boolean isExists(int invId) {
 		if(invId>=listOfInvoice.size()) {
 			return false;
@@ -110,10 +122,20 @@ public class InvoiceMgr {
 		return true;
 	}
 	
+	/**
+	 * Gets the current number of invoices in the list
+	 * @return The number of invoices in the list
+	 */
 	public int currentSize() {
 		return listOfInvoice.size();
 	}
 	
+	/**
+	 * Creates a new invoice for a specific order.
+	 * Also applies the appropriate discount (10% if they are a member)
+	 * @param ord The order for which this invoice will be created for
+	 * @param isMember Whether the customer is a member
+	 */
 	public void newInvoice(Order ord, boolean isMember) {
 		int invoiceId = listOfInvoice.size();
 		int orderId = ord.getOrderId();
@@ -132,6 +154,10 @@ public class InvoiceMgr {
 		listOfInvoice.add(inv);		
 	}
 	
+	/**
+	 * Prints the invoice if it exists
+	 * @param invoiceId The ID for which to print the invoice
+	 */
 	public void printInvoice(int invoiceId) {
 		if(invoiceId>=listOfInvoice.size()) {
 			System.out.println("Invoice does not exist. Create before printing.");
@@ -152,7 +178,9 @@ public class InvoiceMgr {
 		System.out.printf("GRAND TOTAL: %.2f\n\n", listOfInvoice.get(invoiceId).getGrandTotal());
 	}
 
-	
+	/**
+	 * Saves the invoices in the list to a file that can be stored even if the system has shut down
+	 */
 	public void save(){
 		try{
 		    FileOutputStream writeData = new FileOutputStream("invoice.txt");
@@ -167,6 +195,9 @@ public class InvoiceMgr {
 		
 	}
 	
+	/**
+	 * Loads the invoices that have been previously saved to a file
+	 */
 	@SuppressWarnings("unchecked")
 	public void load(){
 		try{
@@ -180,17 +211,6 @@ public class InvoiceMgr {
 		}
 		
 	}
-	
-	
-/*
-	catch(FileNotFoundException e){
-		e.printStackTrace();
-	}
-	catch(IOException e) {
-		e.printStackTrace();
-	}
-*/
-	
 }
 
 
