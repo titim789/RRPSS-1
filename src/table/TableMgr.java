@@ -109,8 +109,7 @@ public class TableMgr {
 	//-----------------Check Size Of Table---------------------------//
 	public boolean checkAvailability(int pax){
 		for(Table table : listOfTables) {
-			if (table.getNoOfPax() <= pax && table.getTableStatus().equals("VACANT")) {
-				tableUI.displayTablePax(listOfTables, pax);
+			if (table.getNoOfPax() >= pax && table.getTableStatus().equals("VACANT")) {
 				return true;
 			}
 		}
