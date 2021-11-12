@@ -116,9 +116,9 @@ public class InvoiceMgr {
 	
 	public void newInvoice(Order ord, boolean isMember) {
 		int invoiceId = listOfInvoice.size();
-		int orderId = ord.getorderId();
-		int tableId = ord.gettableId();
-		double totalPrice = ord.getorderPrice();
+		int orderId = ord.getOrderId();
+		int tableId = ord.getTableId();
+		double totalPrice = ord.getOrderPrice();
 		double discount=0;
 
 		if(isMember) {
@@ -158,7 +158,6 @@ public class InvoiceMgr {
 		try{
 		    FileOutputStream writeData = new FileOutputStream("invoice.txt");
 		    ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
-
 		    writeStream.writeObject(listOfInvoice);
 		    writeStream.flush();
 		    writeStream.close();

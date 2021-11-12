@@ -3,12 +3,16 @@ package restaurant;
 import customer.CustomerMgr;
 import invoice.InvoiceMgr;
 import menu.MenuMgr;
+import menu.MenuItem;
+import menu.PromotionPackage;
 import order.Order;
 import order.OrderMgr;
-import order.orderMenuItem;
-import order.orderPromotionPackage;
+import order.OrderMenuItem;
+import order.OrderPromotionPackage;
 import reservation.ReservationMgr;
 import staff.StaffMgr;
+//import test.MenuItem;
+//import test.OrderMenuItem;
 
 import java.util.*;
 
@@ -77,43 +81,50 @@ public class Restaurant {
 				switch(ordOption){
 					case 1:
 						System.out.println("\n---Creating new order---\n");
-						System.out.println("Enter staffId: ");
-						int staffId = sc.nextInt();
-						System.out.println("Enter customerId: ");
-						int customerId = sc.nextInt();
+						boolean staffExist = false;
+						int staffId;
+						do{System.out.println("Enter staffId: ");
+						staffId = sc.nextInt();
+						staffExist = staffMgr.checkStaffId(staffId);
+						//checking staff id prints staff id. To remove?
+						if(!staffExist) {System.out.println("Invalid Staff ID.");}
+						}while(staffExist==false);
+						
+						boolean customerExist = false;
+						int customerId;
+						do{System.out.println("Enter customerId: ");
+						customerId = sc.nextInt();
+						customerExist = customerMgr.isCustomerExist(customerId);
+						if(!customerExist) {System.out.println("Invalid Customer ID.");}
+						}while(customerExist==false);
+
 						System.out.println("Enter tableId: ");
 						int tableId = sc.nextInt();
 						int temp = orderMgr.currentSize();
-						orderMgr.newOrder(staffId, customerId, tableId);
 						
+						orderMgr.newOrder(staffId, customerId, tableId);
 						//print for ref
 						System.out.println("Your OrderID: "+temp+"\n");
-						
 						break;
 					case 2:
-						System.out.println("\nEnter order ID: ");
-						int viewOrderId = sc.nextInt();
-						if(orderMgr.exists(viewOrderId)) {
-							orderMgr.viewItemInOrder(viewOrderId);
-						}
-						else {
-							System.out.println("Order ID does not exists.");
-						}
+						orderMgr.viewItemInOrder();
 						break;
 					case 3:
-						System.out.println("Enter order ID: ");
-						int addOrderId = sc.nextInt();
-						//check if exists
-						//wanna display just items menu anot?
-						menuMgr.seeMenu();
+						int addOrderId = orderMgr.ensureId("Enter order ID to add items to: ");
+						//menuMgr.seeMenu();
 						System.out.println("Enter item ID to add: ");
 						int addItemId = sc.nextInt();
-						//hmmm can check if exists first? Rather than just println and return null if not exists
+						MenuItem hurr = menuMgr.getMenuItem(addItemId);
+						while(hurr==null) {
+							System.out.println("Item ID does not exist.");
+							System.out.println("Enter item ID to add: ");
+							addItemId = sc.nextInt();
+							hurr = menuMgr.getMenuItem(addItemId);
+						}
 						System.out.println("Enter quantity to add: ");
 						int addQty = sc.nextInt();
-						
 						//creating a new orderMenuItem
-						orderMenuItem ord = new orderMenuItem(addItemId, menuMgr.getMenuItem(addItemId).getName(),
+						OrderMenuItem ord = new OrderMenuItem(addItemId, menuMgr.getMenuItem(addItemId).getName(),
 								menuMgr.getMenuItem(addItemId).getDescription(), menuMgr.getMenuItem(addItemId).getPrice(),
 								menuMgr.getMenuItem(addItemId).getMenuType(), addQty);
 						//adding it.
@@ -121,39 +132,40 @@ public class Restaurant {
 						System.out.println("\nadded.\n");
 						break;
 					case 4:
-						System.out.println("Enter order ID: ");
-						int addPackOrderId = sc.nextInt();
-						//check if exists
-						//wanna display just package menu anot?
-						menuMgr.seeMenu();
+						int addPackOrderId = orderMgr.ensureId("Enter order ID to add package to: ");
+						//menuMgr.seeMenu();
 						System.out.println("Enter Package ID to add: ");
 						int addPackId = sc.nextInt();
-						//hmmm can check if exists first? Rather than just println and return null if not exists
+						PromotionPackage asdf = menuMgr.getPromotionPackage(addPackId);
+						while(asdf==null) {
+							System.out.println("Package ID does not exist.");
+							System.out.println("Enter Package ID to add: ");
+							addPackId = sc.nextInt();
+							asdf = menuMgr.getPromotionPackage(addPackId);
+						}
 						System.out.println("Enter quantity to add: ");
 						int addPackQty = sc.nextInt();
 						
-						//menuMgr.getPromotionPackage(addPackId);
-						
 						//creating a new orderPromoPackage obj
-						orderPromotionPackage pak = new orderPromotionPackage(addPackId, menuMgr.getPromotionPackage(addPackId).getPackageName(),
+						OrderPromotionPackage pak = new OrderPromotionPackage(addPackId, menuMgr.getPromotionPackage(addPackId).getPackageName(),
 								menuMgr.getPromotionPackage(addPackId).getPackagePrice(), menuMgr.getPromotionPackage(addPackId).getPackageDesc(),
 								menuMgr.getPromotionPackage(addPackId).getListOfMenuItem(), addPackQty);
-						
+						//adding it.
 						orderMgr.addPackage(addPackOrderId, pak);
 						System.out.println("\nadded.\n");
 						break;
 					case 5:
-						System.out.println("Enter order ID: ");
-						int removeOrderId = sc.nextInt();
-						//check if exists
-						//wanna display just package menu anot?
+						int removeOrderId = orderMgr.ensureId("Enter order ID to remove items from: ");
 						//menuMgr.seeMenu();
 						System.out.println("Enter item ID to remove: ");
 						int removeItemId = sc.nextInt();
-						//hmmm can check if exists first? Rather than just println and return null if not exists
+						OrderMenuItem ordMenIt = orderMgr.getOrder(removeOrderId).getOrderMenuItem(removeItemId);
+						if(ordMenIt==null) {
+							System.out.println("This order does not contain this item");
+							break;
+						}
 						System.out.println("Enter quantity to remove: ");
 						int removeItemIdQty = sc.nextInt();
-						
 						
 						orderMgr.removeItem(removeOrderId,
 								( (orderMgr.getOrder(removeOrderId)).getOrderMenuItem(removeItemId) ),
@@ -161,14 +173,15 @@ public class Restaurant {
 						//System.out.println("\nremoved.\n");
 						break;
 					case 6:
-						System.out.println("Enter order ID: ");
-						int removePackId = sc.nextInt();
-						//check if exists
-						//wanna display just package menu anot?
+						int removePackId = orderMgr.ensureId("Enter order ID to remove package from: ");
 						//menuMgr.seeMenu();
 						System.out.println("Enter package ID to remove: ");
 						int removePackageId = sc.nextInt();
-						//hmmm can check if exists first? Rather than just println and return null if not exists
+						OrderPromotionPackage ordProPac = orderMgr.getOrder(removePackId).getOrderPromotionPackage(removePackageId);
+						if(ordProPac==null) {
+							System.out.println("This order does not contain this package");
+							break;
+						}
 						System.out.println("Enter quantity to remove: ");
 						int removePackIdQty = sc.nextInt();
 						
@@ -268,11 +281,9 @@ public class Restaurant {
 				int invchoice = sc.nextInt();
 				switch(invchoice) {
 					case 1:
-						System.out.println("Please enter order ID to create invoice for: ");
-						int invOrderId = sc.nextInt();
-						//to check if ord id exists
+						int invOrderId = orderMgr.ensureId("Please enter order ID to create invoice for: ");
 						int tempy = invoiceMgr.currentSize();
-						invoiceMgr.newInvoice(orderMgr.getOrder(invOrderId), (customerMgr.getCustomerObj((orderMgr.getOrder(invOrderId)).getcustomerId())).isMember());
+						invoiceMgr.newInvoice(orderMgr.getOrder(invOrderId), (customerMgr.getCustomerObj((orderMgr.getOrder(invOrderId)).getCustomerId())).isMember());
 						System.out.println("Invoice ID "+tempy+" created.");
 						break;
 					case 2:
