@@ -45,7 +45,7 @@ public class MenuItem implements Serializable {
 
 	/**
 	 * Method for instantciating new menu item object
-	 * @param item_id item id of this particular menu item
+	 * @param itemId item id of this particular menu item
 	 * @param name 	name of this particular menu item
 	 * @param description 	description of this particular menu item
 	 * @param price	price of this particular menu item
@@ -72,7 +72,7 @@ public class MenuItem implements Serializable {
 	/**
 	 * 
 	 * Method for setting the item id of this particular menu item
-	 * @param item_id item id of this particular menu item to be set
+	 * @param itemId item id of this particular menu item to be set
 	 */
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
@@ -140,7 +140,7 @@ public class MenuItem implements Serializable {
 
 	/**
 	 * Method for setting the type of this particular menu item, main course, drink or dessert
-	 * @param menutype type of this particular menu item to be set
+	 * @param menuType type of this particular menu item to be set
 	 */
 	public void setMenuType(TYPE_OF_MENU menuType) {
 		this.menuType = menuType;
