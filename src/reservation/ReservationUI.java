@@ -17,8 +17,8 @@ public class ReservationUI {
 		System.out.printf("%-20s%n", "Contact Number");
 
         	for(Reservation reservation : listOfReservations){
-           		if(n == reservation.getCustomerId())
-                		reservation.displayStatus();
+            		if(n == reservation.getCustomerId())
+                	reservation.displayStatus();
         	}
     	}
 	
@@ -39,9 +39,9 @@ public class ReservationUI {
 			String[] part = dt.split(" ");
 			d = part[0];
   			if (d.equals(date))
-               			reservation.displayStatus();
-        }
-    }
+                		reservation.displayStatus();
+        	}
+    	}
 	
 	public void reservationDisplayAll(ArrayList<Reservation>listOfReservations){
     	
@@ -56,7 +56,6 @@ public class ReservationUI {
         	for(Reservation reservation : listOfReservations){
             		reservation.displayStatus();
         	}
-        
     	}
 	
 	public int updateReservationDisplay(){
@@ -79,7 +78,8 @@ public class ReservationUI {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\nWant to Remove Reservation?");
 		System.out.println("0 : Want Remove Reservations");
-		System.out.println("1 : Do Not want to Remove Reservation");
+		System.out.println("1 : Customer Arrive");
+		System.out.println("2 : Back to Main Menu");
 		System.out.print("Enter your choice : ");
 		int m = sc.nextInt();
 		return m;

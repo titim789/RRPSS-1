@@ -2,22 +2,21 @@ package menu;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class PromotionPackageMgr {
-	private ArrayList<PromotionPackage> listOfPromotion;
+	private static ArrayList<PromotionPackage> listOfPromotion;
+	private PromotionPackageUI promotionPackageUI;
 	
 	//constructor
 	public PromotionPackageMgr() {
 		listOfPromotion = new ArrayList<PromotionPackage>();
+		promotionPackageUI = new PromotionPackageUI();
 	}
 	
 	public void edit(ArrayList<MenuItem> listOfMenuItems) {
-	    PromotionPackageUI promotionPackageUI = new PromotionPackageUI();
 	    int choice = promotionPackageUI.getEditOption();
 	    if(choice == 1){
 	        PromotionPackage temp = promotionPackageUI.getAddOption(); 
@@ -58,25 +57,13 @@ public class PromotionPackageMgr {
 	    }
 	}
 	
-	public ArrayList<PromotionPackage> getListOfPromotion() {
-		return this.listOfPromotion;
+	public static ArrayList<PromotionPackage> getListOfPromotion() {
+		return listOfPromotion;
 	}
 
 	public void viewPackages() {
 		// TODO - implement Menu.viewPackages
-		int i;
-	    for(i=0; i<listOfPromotion.size(); i++){
-	        System.out.println("Package ID\t"+listOfPromotion.get(i).getPackageId());
-	        System.out.println("Package Name\t"+listOfPromotion.get(i).getPackageName());
-	        System.out.println("Package Price\t"+listOfPromotion.get(i).getPackagePrice());
-	        System.out.println("Package Desc\t"+listOfPromotion.get(i).getPackageDesc());
-	        System.out.println("Package Menu Items");
-	        System.out.println(String.format("%-20s", "Name")
-					+"|"+String.format("%-50s", "Description")
-					+"|"+"Original Price"+"\t|");
-	        viewItemsInPackage(listOfPromotion.get(i).getPackageId());
-	        System.out.println("\n");
-	    }
+		promotionPackageUI.displayPackages();
 	}
 
 	/**
@@ -248,11 +235,7 @@ public class PromotionPackageMgr {
 		{
 			if(listOfPromotion.get(i).getPackageId() == packageId) {
 				PromotionPackage temp = listOfPromotion.get(i);
-				for(j=0; j<temp.getNumberOfItems();j++){
-					System.out.println(String.format("%-20s", temp.getListOfMenuItem().get(j).getName())
-								+"|"+String.format("%-50s", temp.getListOfMenuItem().get(j).getDescription())
-								+"|"+temp.getListOfMenuItem().get(j).getPrice()+"\t\t|");
-				}
+				promotionPackageUI.displayItemsInPackage(temp);
 				return;
 			}
 		}
@@ -269,6 +252,7 @@ public class PromotionPackageMgr {
 		    //System.out.println(listOfMenuItems.toString());
 		}catch (Exception e) {
 		    e.printStackTrace();
+			System.out.println("Error loading promotionpackages.txt");
 		}
 		
 	}
