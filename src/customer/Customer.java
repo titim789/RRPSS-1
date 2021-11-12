@@ -7,11 +7,29 @@ import java.io.Serializable;
  * @author Ng Li Wang
  */
 public class Customer implements Serializable{
+	/**
+	 * customer id of this customer object
+	*/
 	private int customerId;
+
+	/**
+	 * customer name of this customer object
+	*/
 	private String name;
+	
+	/**
+	 * phone number of this customer object
+	*/
 	private String phone;
+
+	/**
+	 * boolean value of whether this customer object is a member
+	 */
 	private boolean member;
 	
+	/**
+	 * Constructor of Customer class
+	*/
 	public Customer() {}
 	
 	/**

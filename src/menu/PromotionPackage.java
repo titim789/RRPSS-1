@@ -37,10 +37,10 @@ public class PromotionPackage implements Serializable{
 
 	/**
 	 * This creates a promotion package, containing a list of ala carte menu items
-	 * @param package_id The ID of the package
-	 * @param package_name The name of the package
-	 * @param package_price The price of the package
-	 * @param package_description The description of the package
+	 * @param packageId The ID of the package
+	 * @param packageName The name of the package
+	 * @param packagePrice The price of the package
+	 * @param packageDescription The description of the package
 	 * @param listOfMenuItem The list of ala carte menu items contained in the promotion package
 	 */
 	public PromotionPackage(int packageId, String packageName, double packagePrice, String packageDescription, ArrayList<MenuItem> listOfMenuItem)  {
@@ -64,7 +64,7 @@ public class PromotionPackage implements Serializable{
 
 	/**
 	 * Sets the ID of this promotion package
-	 * @param package_id The ID of this promotion package
+	 * @param packageId The ID of this promotion package
 	 */
 	public void setPackageId(int packageId) {
 		this.packageId = packageId;
@@ -80,7 +80,7 @@ public class PromotionPackage implements Serializable{
 
 	/**
 	 * Sets the name of this promotion package
-	 * @param package_name The name of this promotion package to be set
+	 * @param packageName The name of this promotion package to be set
 	 */
 	public void setPackageName(String packageName) {
 		this.packageName = packageName;
@@ -96,7 +96,7 @@ public class PromotionPackage implements Serializable{
 
 	/**
 	 * Sets the price of this promotion package
-	 * @param package_price The price to set this promotion package to
+	 * @param packagePrice The price to set this promotion package to
 	 */
 	public void setPackagePrice(double packagePrice) {
 		this.packagePrice = packagePrice;
@@ -112,7 +112,7 @@ public class PromotionPackage implements Serializable{
 
 	/**
 	 * Sets the description of this promotion package
-	 * @param package_description The description to set this promotion package to
+	 * @param packageDescription The description to set this promotion package to
 	 */
 	public void setPackageDesc(String packageDescription) {
 		this.packageDescription = packageDescription;
@@ -138,7 +138,7 @@ public class PromotionPackage implements Serializable{
 
 	/**
 	 * Removes a menu item from the promotion package
-	 * @param item_id The ID of the item to remove from this promotion package
+	 * @param itemId The ID of the item to remove from this promotion package
 	 */
 	public void removeMenuItem(int itemId) {
 		// TODO - implement Promotion_Package.removeMenu_Item

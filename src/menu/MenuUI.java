@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class MenuUI {
 	
+	/**
+	 * constructor for menu UI class
+	 */
 	public MenuUI() {}
 	
 	/**

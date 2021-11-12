@@ -120,10 +120,10 @@ public class PromotionPackageMgr {
 
 	/**
 	 * Adds a new promotion package to the list
-	 * @param package_id The ID of the promotion package to add
-	 * @param package_name The name of the promotion package to add
-	 * @param package_description The description of the promotion package to add
-	 * @param package_price The price of the promotion package to add
+	 * @param packageId The ID of the promotion package to add
+	 * @param packageName The name of the promotion package to add
+	 * @param packageDescription The description of the promotion package to add
+	 * @param packagePrice The price of the promotion package to add
 	 * @param listOfMenuItem The contents, in menuItems, of the promotion package
 	 */
 	public void addNewPromotion(int packageId, String packageName, String packageDescription, double packagePrice, ArrayList<MenuItem> listOfMenuItem) {
@@ -148,7 +148,7 @@ public class PromotionPackageMgr {
 
 	/**
 	 * Removes a promotion package from the list
-	 * @param package_id The ID of the promotion package to be removed
+	 * @param packageId The ID of the promotion package to be removed
 	 */
 	public void removePromotion(int packageId) {
 		// TODO - implement Menu.removePromotion
@@ -166,7 +166,7 @@ public class PromotionPackageMgr {
 
 	/**
 	 * Updates the name of a promotion package
-	 * @param package_id The ID of the promotion package to edit. If the ID cannot be found, the user will be notified
+	 * @param packageId The ID of the promotion package to edit. If the ID cannot be found, the user will be notified
 	 * @param newName The new name of the promotion package to be changed to. If the name is invalid, the user will be notified
 	 */
 	public void updatePackageName(int packageId, String newName) {
@@ -189,7 +189,7 @@ public class PromotionPackageMgr {
 
 	/**
 	 * Updates the description of the package
-	 * @param package_id The ID of the package whose description shall be updated. If the ID does not exist, the user will be notified
+	 * @param packageId The ID of the package whose description shall be updated. If the ID does not exist, the user will be notified
 	 * @param newDesc The new description to set 
 	 */
 	public void updatePackageDescription(int packageId, String newDesc) {
@@ -208,7 +208,7 @@ public class PromotionPackageMgr {
 
 	/**
 	 * Updates the price of the package
-	 * @param package_id The ID of the package whose price shall be updated. If the ID does not exist, the user will be notified
+	 * @param packageId The ID of the package whose price shall be updated. If the ID does not exist, the user will be notified
 	 * @param newPrice The new price to set. This value cannot be less than or equal to 0
 	 */
 	public void updatePackagePrice(int packageId, double newPrice) {
@@ -231,8 +231,8 @@ public class PromotionPackageMgr {
 
 	/**
 	 * Adds an item to an existing package
-	 * @param package_id The ID of the package we want to add an item to. The user will be notified if the ID does not exist
-	 * @param item_id The ID of the item to add to the package. If the item does not exist, the user will be notified
+	 * @param packageId The ID of the package we want to add an item to. The user will be notified if the ID does not exist
+	 * @param itemId The ID of the item to add to the package. If the item does not exist, the user will be notified
 	 * @param listOfMenuItems The full list of menu items
 	 */
 	public void addItemToPackage(int packageId, int itemId, ArrayList<MenuItem> listOfMenuItems) {
@@ -259,8 +259,8 @@ public class PromotionPackageMgr {
 
 	/**
 	 * Removes an item from a package
-	 * @param package_id The ID of the package from which we will remove an item from
-	 * @param item_id The ID of the item to be removed from the package
+	 * @param packageId The ID of the package from which we will remove an item from
+	 * @param itemId The ID of the item to be removed from the package
 	 */
 	public void removeItemFromPackage(int packageId, int itemId) {
 		// TODO - implement Menu.removeItemfromPackage
@@ -278,7 +278,7 @@ public class PromotionPackageMgr {
 
 	/**
 	 * Prints the item contents of a package
-	 * @param package_id The ID of the package we want to view
+	 * @param packageId The ID of the package we want to view
 	 */
 	public void viewItemsInPackage(int packageId) {
 		// TODO - implement Menu.viewItemsinPackage
