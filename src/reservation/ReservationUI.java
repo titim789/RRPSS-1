@@ -7,6 +7,9 @@ import java.util.*;
  */
 public class ReservationUI {
 	
+	/**
+	 * ReservationUI Constructor
+	 */
 	public ReservationUI() {}
 	
 	/** 

@@ -90,14 +90,16 @@ public class MenuItemMgr {
 	
 	/**
 	 * This is a method to add new menu item to the list of menu items.
+	 * Returns 0 if failed to add
+	 * Returns 1 if added Successfully
 	 * @param itemId - the id of the menu item
 	 * @param name 	- the name of the menu item
 	 * @param description 	- the description of the menu item
 	 * @param price - the price of the menu item
 	 * @param menutype - the type of the menu item
-	 * @return 0 if fail, 1 if successful
 	 */
 	public int addNewMenuItem(int itemId, String name, String description, double price, MenuItem.TYPE_OF_MENU menuType) {
+		// TODO - implement Menu.addNewItem
 		int i;
 		for(i=0; i<listOfMenuItems.size();i++)
 		{
@@ -121,9 +123,10 @@ public class MenuItemMgr {
 	
 	/**
 	 * Method to remove menu item from the list of menu items, based on ID passed in
-	 * @param itemId - the id of the menu item to be removed
+	 * @param item_id - the id of the menu item to be removed
 	 */
 	public void removeItem(int itemId) {
+		// TODO - implement Menu.removeItem
 		int i;
 		for(i=0; i<listOfMenuItems.size();i++)
 		{
@@ -138,8 +141,8 @@ public class MenuItemMgr {
 	
 	/**
 	 * Method to update the Id and name of the menu item.
-	 * @param itemId the id of the menu item to be updated
-	 * @param newName the new name of the menu item
+	 * @param item_id - the id of the menu item to be updated
+	 * @param newName - the new name of the menu item
 	 */
 	public void updateItemName(int itemId, String newName) {
 		// TODO - implement Menu.updateItemName
@@ -161,10 +164,11 @@ public class MenuItemMgr {
 	
 	/**
 	 * Method to update the item price based on Item ID passed in
-	 * @param itemId the id of the menu item to be updated
-	 * @param newPrice the new price of the menu item
+	 * @param item_id - the id of the menu item to be updated
+	 * @param newPrice - the new price of the menu item
 	 */
 	public void updateItemPrice(int itemId, double newPrice) {
+		// TODO - implement Menu.UpdateItemPrice
 		if(newPrice <= 0) {
 			System.out.println("Invalid Price set.");
 			return;
@@ -183,10 +187,11 @@ public class MenuItemMgr {
 	
 	/**
 	 * Method to update the item description based on Item ID passed in
-	 * @param itemId the id of the menu item to be updated
-	 * @param newDesc the new description of the menu item
+	 * @param item_id - the id of the menu item to be updated
+	 * @param newDesc - the new description of the menu item
 	 */
 	public void updateItemDescription(int itemId, String newDesc) {
+		// TODO - implement Menu.updateItemDescription
 		int i;
 		for(i=0; i<listOfMenuItems.size();i++)
 		{
@@ -201,10 +206,11 @@ public class MenuItemMgr {
 	
 	/**
 	 * Method to update the item type based on Item ID passed in
-	 * @param itemId the id of the menu item to be updated
-	 * @param menuType the new type of the menu item
+	 * @param item_id - the id of the menu item to be updated
+	 * @param menuType - the new type of the menu item
 	 */
 	public void updateItemMenuType(int itemId, MenuItem.TYPE_OF_MENU menuType) {
+		// TODO - implement Menu.updateItemDescription
 		int i;
 		for(i=0; i<listOfMenuItems.size();i++)
 		{
@@ -219,8 +225,8 @@ public class MenuItemMgr {
 	
 	/**
 	 * Method to get the list of menu items object
-	 * @param itemId the id of the menu item to get
-	 * @return the menu item object, or null if not found
+	 * @param itemId - the id of the menu item to get
+	 * @return - the menu item object, or null if not found
 	 */
 	public static MenuItem getItemMenu(int itemId) {
 		int i;
@@ -234,7 +240,7 @@ public class MenuItemMgr {
 	
 	/**
 	 * Method to get the available ID for a new menu item
-	 * @return the available ID for a new menu item
+	 * @return - the available ID for a new menu item
 	 */
 	public static int getAvailableItemId() {
 		int i = 1;
