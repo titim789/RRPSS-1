@@ -62,6 +62,10 @@ public class ReservationMgr {
 		System.out.println("reservationID: " + reservationId +" not found.");
 	}
 	
+	public void customerWalkin(int tableId) {
+		tableManager.editTableDetail(tableId,"OCCUPIED");
+	}
+	
 	//-----------------Customer paid and leave change to vacant---------------------------//
 	public void customerLeave(int tableId) {
 		tableManager.editTableDetail(tableId,"VACANT");
