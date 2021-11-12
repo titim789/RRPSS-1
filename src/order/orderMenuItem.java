@@ -1,14 +1,14 @@
 package order;
 
 import menu.MenuItem;
-import menu.TYPEOFMENU;
+import menu.MenuItem.TYPEOFMENU;
 
 public class orderMenuItem extends MenuItem{
 	
 	private int qty;
 	private double qtyPrice;
 	
-	public orderMenuItem(int itemId, String name, String description, double price, TYPEOFMENU menuType, int qty) {
+	public orderMenuItem(int itemId, String name, String description, double price, MenuItem.TYPEOFMENU menuType, int qty) {
 		super(itemId, name, description, price, menuType);
 		this.qty = qty;
 		this.qtyPrice = price*qty;

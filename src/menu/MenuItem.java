@@ -3,11 +3,17 @@ import java.io.Serializable;
 
 public class MenuItem implements Serializable {
 
+	public enum TYPEOFMENU {
+		MAIN_COURSE,
+		DRINK,
+		DESSERT
+	}
 	private int itemId;
 	private String name;
 	private String description;
 	private double price;
 	private TYPEOFMENU menuType;
+	
 
 	/**
 	 * 

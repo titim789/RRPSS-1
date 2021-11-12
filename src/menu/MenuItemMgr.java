@@ -42,7 +42,7 @@ public class MenuItemMgr {
 					updateItemPrice(id, price);;			
 				}
 				else if(update == 4){
-					TYPEOFMENU menuType = menuItemUI.getMenuType();
+					MenuItem.TYPEOFMENU menuType = menuItemUI.getMenuType();
 					updateItemMenuType(id, menuType);						
 				}			
 		}
@@ -81,7 +81,7 @@ public class MenuItemMgr {
 	 * Returns 0 if failed to add
 	 * Returns 1 if added Successfully
 	 */
-	public int addNewMenuItem(int itemId, String name, String description, double price, TYPEOFMENU menuType) {
+	public int addNewMenuItem(int itemId, String name, String description, double price, MenuItem.TYPEOFMENU menuType) {
 		// TODO - implement Menu.addNewItem
 		int i;
 		for(i=0; i<listOfMenuItems.size();i++)
@@ -192,7 +192,7 @@ public class MenuItemMgr {
 	 * @param item_id
 	 * @param menuType
 	 */
-	public void updateItemMenuType(int itemId, TYPEOFMENU menuType) {
+	public void updateItemMenuType(int itemId, MenuItem.TYPEOFMENU menuType) {
 		// TODO - implement Menu.updateItemDescription
 		int i;
 		for(i=0; i<listOfMenuItems.size();i++)

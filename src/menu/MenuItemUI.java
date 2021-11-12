@@ -22,7 +22,7 @@ public class MenuItemUI {
 		String name;
 		String description; 
 		double price;
-		TYPEOFMENU menuType;
+		MenuItem.TYPEOFMENU menuType;
 		Scanner sc = new Scanner(System.in);
 		System.out.print("ID of New Item:");
 		id = sc.nextInt();
@@ -40,15 +40,15 @@ public class MenuItemUI {
 		System.out.print("Enter Choice : ");
 		int type = sc.nextInt();
 		if(type == 1) {
-			menuType = TYPEOFMENU.MAIN_COURSE;
+			menuType = MenuItem.TYPEOFMENU.MAIN_COURSE;
 		}
 		else if(type == 2) {
-			menuType = TYPEOFMENU.DRINK;
+			menuType = MenuItem.TYPEOFMENU.DRINK;
 		}
 		else if(type == 3) {
-			menuType = TYPEOFMENU.DESSERT;
+			menuType = MenuItem.TYPEOFMENU.DESSERT;
 		}
-		else menuType = TYPEOFMENU.MAIN_COURSE;
+		else menuType = MenuItem.TYPEOFMENU.MAIN_COURSE;
 		MenuItem temp = new MenuItem(id,name,description,price,menuType);
 		return temp;
 	}
@@ -102,7 +102,7 @@ public class MenuItemUI {
 		return price;
 	}
 	
-	public TYPEOFMENU getMenuType() {
+	public MenuItem.TYPEOFMENU getMenuType() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Type of New Item:\n"
 				+ "1. Main Course\n"
@@ -110,11 +110,11 @@ public class MenuItemUI {
 				+ "3. Dessert");
 		System.out.print("Enter Choice : ");
 		int type = sc.nextInt();
-		TYPEOFMENU menuType;
-		if(type == 1) menuType = TYPEOFMENU.MAIN_COURSE;
-		else if(type == 2) menuType = TYPEOFMENU.DRINK;
-		else if(type == 3) menuType = TYPEOFMENU.DESSERT;
-		else menuType = TYPEOFMENU.MAIN_COURSE;
+		MenuItem.TYPEOFMENU menuType;
+		if(type == 1) menuType = MenuItem.TYPEOFMENU.MAIN_COURSE;
+		else if(type == 2) menuType = MenuItem.TYPEOFMENU.DRINK;
+		else if(type == 3) menuType = MenuItem.TYPEOFMENU.DESSERT;
+		else menuType = MenuItem.TYPEOFMENU.MAIN_COURSE;
 		return menuType;
 	}
 }

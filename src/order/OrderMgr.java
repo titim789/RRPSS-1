@@ -98,14 +98,6 @@ public class OrderMgr {
 	}
 	
 	
-	/* no need save/load orders
-	public void save() {
-		
-	}
-	
-	public void load() {
-		
-	}
-	*/
+
 	
 }
