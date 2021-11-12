@@ -10,9 +10,24 @@ import java.io.Serializable;
  */
 
 public class Staff implements Serializable{
+	/**
+	 * initialise staff Id integer
+	*/
 	private int staffId;
+	
+	/**
+	 * initialise staff name string
+	*/
 	private String staffName;
+	
+	/**
+	 * initialise staff gender string
+	 */
 	private String gender;
+
+	/**
+	 * initialise staff job title string
+	*/
 	private String jobTitle;
 
 	/**

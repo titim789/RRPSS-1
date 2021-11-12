@@ -16,6 +16,9 @@ import java.lang.String;
  * @version 1.0
  */
 public class StaffMgr{
+	/**
+	 * A static list of staff objects.
+	*/
 	private static ArrayList<Staff> listOfStaff;
 	
 	/**
