@@ -52,6 +52,7 @@ public class TableMgr {
 	//---------------------Get Table Array-------------------------//
 	/**
 	 * returns list of table objects
+	 * @return list of table objects
 	 */
 	public ArrayList<Table> getTableList(){
 		return listOfTables;
