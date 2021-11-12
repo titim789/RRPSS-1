@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import menu.MenuItem;
 import menu.PromotionPackage;
 
-public class orderPromotionPackage extends PromotionPackage{
+public class OrderPromotionPackage extends PromotionPackage{
 	
 	private int qty;
 	private double qtyPrice;
 	
-	public orderPromotionPackage(int packageId, String packageName, double packagePrice,
+	public OrderPromotionPackage(int packageId, String packageName, double packagePrice,
 			String packageDescription, ArrayList<MenuItem> listOfMenuItem, int qty) {
 		super(packageId, packageName, packagePrice, packageDescription, listOfMenuItem);
 		this.qty = qty;

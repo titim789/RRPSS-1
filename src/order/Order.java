@@ -19,8 +19,8 @@ public class Order {
 	private double orderPrice;
 	//private ArrayList<orderMenuItem> listOfOrderItems = new ArrayList<orderMenuItem>();
 	//private ArrayList<orderPromotionPackage> listOfOrderPromotions = new ArrayList<orderPromotionPackage>();
-	private ArrayList<orderMenuItem> listOfOrderItems;
-	private ArrayList<orderPromotionPackage> listOfOrderPromotions;
+	private ArrayList<OrderMenuItem> listOfOrderItems;
+	private ArrayList<OrderPromotionPackage> listOfOrderPromotions;
 	private Calendar timestamp;
 	
 	private static final SimpleDateFormat sdf = 
@@ -33,39 +33,39 @@ public class Order {
 		this.customerId = customerId;
 		this.tableId = tableId;
 		this.timestamp = timestamp;
-		listOfOrderItems = new ArrayList<orderMenuItem>();
-		listOfOrderPromotions = new ArrayList<orderPromotionPackage>();
+		listOfOrderItems = new ArrayList<OrderMenuItem>();
+		listOfOrderPromotions = new ArrayList<OrderPromotionPackage>();
 	}
 	
 
-	public int getorderId() {
+	public int getOrderId() {
 		return this.orderId;
 	}
-	public void setorderId(int orderId) {
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
-	public int getstaffId() {
+	public int getStaffId() {
 		return this.staffId;
 	}
-	public void setstaffId(int staffId) {
+	public void setStaffId(int staffId) {
 		this.staffId = staffId;
 	}
-	public int gettableId() {
+	public int getTableId() {
 		return this.tableId;
 	}
-	public void settableId(int tableId) {
+	public void setTableId(int tableId) {
 		this.tableId = tableId;
 	}
-	public int getcustomerId() {
+	public int getCustomerId() {
 		return this.customerId;
 	}
-	public void setcustomerId(int customerId) {
+	public void setCustomerId(int customerId) {
 		this.customerId= customerId;
 	}
-	public double getorderPrice() {
+	public double getOrderPrice() {
 		return this.orderPrice;
 	}
-	public void setorderPrice(double orderPrice) {
+	public void setOrderPrice(double orderPrice) {
 		//to do: add all orderitem and promo item prices 
 		this.orderPrice = orderPrice;
 	}
@@ -85,7 +85,7 @@ public class Order {
 	
 	
 	
-	public void addOrderItem(orderMenuItem item) {
+	public void addOrderItem(OrderMenuItem item) {
 		listOfOrderItems.add(item);
 		orderPrice += item.getPrice();
 		System.out.println(item.getName()+" added.");
@@ -93,7 +93,7 @@ public class Order {
 
 
 	//param change to MenuItem
-	public void removeOrderItem(orderMenuItem item) {
+	public void removeOrderItem(OrderMenuItem item) {
 		if(listOfOrderItems.remove(item)) {
 			System.out.println("Successfully Removed");
 			orderPrice -= item.getPrice();
@@ -104,14 +104,14 @@ public class Order {
 	}
 
 	//param change to PromoItem
-	public void addPromotion(orderPromotionPackage pack) {
+	public void addPromotion(OrderPromotionPackage pack) {
 		listOfOrderPromotions.add(pack);
 		orderPrice += pack.getPackagePrice();
 		System.out.println(pack.getPackageName()+" added.");
 	}
 
 	//param change to PromoItem
-	public void removePromotion(orderPromotionPackage pack) {
+	public void removePromotion(OrderPromotionPackage pack) {
 		if(listOfOrderPromotions.remove(pack)) {
 			System.out.println("Successfully Removed");
 			orderPrice -= pack.getPackagePrice();
@@ -154,7 +154,7 @@ public class Order {
 	}
 	
 	//another method to print the stuff
-	public void printItem(orderMenuItem n){
+	public void printItem(OrderMenuItem n){
 		System.out.println(String.format("%-10s", n.getItemId() ) + 
 				String.format("%-20s", n.getName() ) + 
 				String.format("%-10s", n.getQty() ) + 
@@ -171,7 +171,7 @@ public class Order {
 	}
 	
 	//for package
-	public void printPack(orderPromotionPackage p){
+	public void printPack(OrderPromotionPackage p){
 		System.out.println(String.format("%-10s", p.getPackageId() )+ 
 				String.format("%-20s", p.getPackageName() )+
 				String.format("%-10s", p.getQty() )+ 
@@ -186,8 +186,8 @@ public class Order {
 	}
 	
 
-	public orderMenuItem getOrderMenuItem(int itemId) {
-		for(orderMenuItem ord: listOfOrderItems) {
+	public OrderMenuItem getOrderMenuItem(int itemId) {
+		for(OrderMenuItem ord: listOfOrderItems) {
 			if( ord.getItemId() == itemId) {
 				return ord;
 			}
@@ -197,8 +197,8 @@ public class Order {
 	}
 	
 	
-	public orderPromotionPackage getOrderPromotionPackage(int packageId) {
-		for(orderPromotionPackage pek: listOfOrderPromotions) {
+	public OrderPromotionPackage getOrderPromotionPackage(int packageId) {
+		for(OrderPromotionPackage pek: listOfOrderPromotions) {
 			if( pek.getPackageId() == packageId) {
 				return pek;
 			}

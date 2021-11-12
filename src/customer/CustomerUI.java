@@ -23,6 +23,7 @@ public class CustomerUI {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Customer Name");
 		String name = sc.next();
+		name += sc.nextLine();
 		return name;
 	}
 	
