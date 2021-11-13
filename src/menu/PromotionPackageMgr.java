@@ -156,8 +156,8 @@ public class PromotionPackageMgr {
 		for(i=0; i<listOfPromotion.size();i++)
 		{
 			if(listOfPromotion.get(i).getPackageId() == packageId) {
+				System.out.println("packageId " + packageId + ": "+listOfPromotion.get(i).getPackageName()+" removed.");
 				listOfPromotion.remove(i);
-				System.out.println("packageId:" + packageId + " removed.");
 				return;
 			}
 		}
