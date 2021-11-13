@@ -144,25 +144,31 @@ public class ReservationMgr {
 		
 		int tableId = tableManager.sizeMoreTableSize(noOfPax);
 		
-		if(tableId != -1) {
-			Reservation reservation = new Reservation();
-			reservation.setReservationId(i);
-			reservation.setTableId(tableId);
-			reservation.setCustomerId(customerId);
-			reservation.setDateTime(calen);
-			reservation.setNoOfPax(noOfPax);
-			reservation.setCustomerName(name);
-			reservation.setContact(contact);
-			
-			listOfReservations.add(reservation);
-			tableManager.editTableDetail(tableId,"RESERVED");
-			
-			System.out.println("New Reservation "+ i +" has been added.");
-			System.out.println(name + " has made a new reservation.");
-		}
-		else {
-			System.out.println("Reservation Not added as no available tables meet the capacity.");
-		}
+		try {
+			Date javaDate = sdf.parse(calen);
+			if(tableId != -1) {
+				Reservation reservation = new Reservation();
+				reservation.setReservationId(i);
+				reservation.setTableId(tableId);
+				reservation.setCustomerId(customerId);
+				reservation.setDateTime(calen);
+				reservation.setNoOfPax(noOfPax);
+				reservation.setCustomerName(name);
+				reservation.setContact(contact);
+				
+				listOfReservations.add(reservation);
+				tableManager.editTableDetail(tableId,"RESERVED");
+				
+				System.out.println("New Reservation "+ i +" has been added.");
+				System.out.println(name + " has made a new reservation.");
+			}
+			else {
+				System.out.println("Reservation Not added as no available tables meet the capacity.");
+			}
+		}catch (ParseException e)
+	    {
+	        System.out.println(calen+" is Invalid Date format");
+	    }
 	}
 	
 	//-----------------Remove Reservation By ID---------------------------//
