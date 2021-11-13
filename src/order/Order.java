@@ -208,9 +208,14 @@ public class Order implements Serializable{
 		//doesn't exist
 		return null;
 	}
+	
+	public ArrayList<OrderMenuItem> getListOfOrderItems(){
+		return listOfOrderItems;
+	}
 
-
-
+	public ArrayList<OrderPromotionPackage> getListOfOrderPromotions(){ 
+		 return listOfOrderPromotions; 
+	}
 
 
 

@@ -198,13 +198,14 @@ public class Restaurant {
 			}
 			//Tables & Reservations Choice
 			else if(choice == 3) {
-				System.out.println("\n--------------------Reservation------------------------------");
+				System.out.println("\n--------------------Reservation & Tables------------------------------");
 				System.out.println("0 : View Tables");
-				System.out.println("1 : Check Availability");
-				System.out.println("2 : Create reservation booking");
-				System.out.println("3 : Check/Remove Reservations");
-				System.out.println("4 : Update Reservation");
-				System.out.println("5 : Quit");
+				System.out.println("1 : Walk In Customer");
+				System.out.println("2 : Check Availability");
+				System.out.println("3 : Create reservation booking");
+				System.out.println("4 : Check/Remove Reservations");
+				System.out.println("5 : Update Reservation");
+				System.out.println("6 : Quit");
 				System.out.print("Enter Choice : ");
 				int reservechoice = sc.nextInt();
 				switch(reservechoice){
@@ -212,12 +213,43 @@ public class Restaurant {
 						reserveManager.displayTableDetails();
 						break;
 					case 1:
+						Scanner sc0 = new Scanner(System.in);
+						int pax1;
+						System.out.print("Enter Number of people: ");
+						pax1 = sc.nextInt();
+						int success = reserveManager.customerWalkin(pax1);
+						if(success == 1) {
+							System.out.print("Enter Customer ID(-1 for new customer): ");
+							int custId = sc0.nextInt();
+							String cname, ccontact;
+							if(customerMgr.isCustomerExist(custId)) {
+								cname = customerMgr.getCustomerName(custId);
+								ccontact = customerMgr.getCustomerPhone(custId);
+							}
+							else {
+								System.out.print("Enter Customer Name : ");
+								cname = sc0.nextLine();
+								cname +=sc0.nextLine();
+								System.out.print("Enter Contact Number : ");
+								ccontact = sc0.next();
+								custId = customerMgr.getLastCustomerId()+1;
+								customerMgr.addCustomer(custId, cname, ccontact, "n");
+								System.out.println(cname + " has been added to Customer table.");
+							}	
+							System.out.println("Table Status has been changed to occupied");
+						}
+						else {
+							System.out.println("No Table Available");
+						}
+						
+						break;
+					case 2:
 						Scanner sc1 = new Scanner(System.in);
 						System.out.print("Enter Size of Table : ");
 						int pax = sc1.nextInt();
 						reserveManager.checkAvail(pax);
 						break;
-					case 2:
+					case 3:
 						String name="", contact, date, time;
 						int customerId, noOfPax;
 						Scanner scan = new Scanner(System.in);
@@ -246,7 +278,7 @@ public class Restaurant {
 						}
 						reserveManager.newReservation(customerId,date+" "+time,noOfPax,name,contact);
 						break;
-					case 3:
+					case 4:
 						Scanner scan1 = new Scanner(System.in);
 						System.out.println("\nSelect Which Type of Reservation?");
 						System.out.println("0 : All Reservations");
@@ -256,13 +288,13 @@ public class Restaurant {
 						int n = scan1.nextInt();
 						reserveManager.displayResv(n);
 						break;
-					case 4:
+					case 5:
 						Scanner scan2 = new Scanner(System.in);
 						System.out.print("Enter Customer Id to check : ");
 						int editTerm = scan2.nextInt();
 						reserveManager.updateReservation(editTerm);
 						break;
-					case 5:
+					case 6:
 					default:
 						//pass
 						break;

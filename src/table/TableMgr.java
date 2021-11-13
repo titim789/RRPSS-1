@@ -61,6 +61,18 @@ public class TableMgr {
 		}
 	}
 	
+	//-----------------Get Available Table---------------------------//
+	public int getAvailableTable(int pax) {
+		for(Table table : listOfTables) {
+			if(table.getNoOfPax() == pax && (table.getTableStatus()).equals("VACANT")) return table.getTableId();			
+		}
+		for(Table table : listOfTables) {
+			if(table.getNoOfPax() > pax && (table.getTableStatus()).equals("VACANT")) return table.getTableId();			
+		}
+		return -1;
+	}
+	
+	
 	//-----------------print Size Of Table---------------------------//
 	public void displaySizeVacant(int pax){
 		tableUI.displayTablePax(listOfTables, pax);
