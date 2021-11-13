@@ -131,8 +131,8 @@ public class MenuItemMgr {
 		for(i=0; i<listOfMenuItems.size();i++)
 		{
 			if(listOfMenuItems.get(i).getItemId() == itemId) {
+				System.out.println("MenuItemId " + itemId + ": "+listOfMenuItems.get(i).getName()+" removed.");
 				listOfMenuItems.remove(i);
-				System.out.println("itemID:" + itemId + " removed.");
 				return;
 			}
 		}
