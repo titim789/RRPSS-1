@@ -377,10 +377,10 @@ public class Restaurant {
 						staffMgr.displayStaffList();
 					}
 					else if (option == 2) {
-						staffMgr.addStaff();
+						staffMgr.addStaffOption();
 					}
 					else if (option == 3) {
-						staffMgr.removeStaff();
+						staffMgr.removeStaffOption();
 					}
 					else if (option == 4) {
 						//pass
@@ -409,10 +409,10 @@ public class Restaurant {
 										customerMgr.displayCustomerList();
 									}
 									else if (option == 2) {
-										customerMgr.addCustomerInit();
+										customerMgr.addCustomerOption();
 									}
 									else if (option == 3) {
-										customerMgr.removeCustomer();
+										customerMgr.removeCustomerOption();
 									}
 									else if (option == 4) {
 										//pass

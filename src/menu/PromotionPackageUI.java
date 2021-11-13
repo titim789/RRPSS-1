@@ -3,10 +3,23 @@ package menu;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The UI class used for the promotion package control class
+ * Displays pertaining to UI are called from this class
+ * @author Yes
+ *
+ */
 public class PromotionPackageUI {
 	
+	/**
+	 * constructing the UI class does not require any special parameters
+	 */
 	public PromotionPackageUI() {}
 	
+	/**
+	 * Prints available options, then gets the edit option that the user chooses
+	 * @return The edit option that the user chooses
+	 */
 	public int getEditOption() {
 		int choice;
 	    Scanner sc = new Scanner(System.in);
@@ -20,6 +33,9 @@ public class PromotionPackageUI {
 		return choice;
 	}
 	
+	/**
+	 * Displays the list of promotion packages
+	 */
 	public void displayPackages() {
 		ArrayList<PromotionPackage> listOfPromotion = PromotionPackageMgr.getListOfPromotion();
 		int i;
@@ -37,6 +53,10 @@ public class PromotionPackageUI {
 	    }
 	}
 	
+	/**
+	 * Displays the item contents of a package
+	 * @param promotionPackage The promotion package whose contents we want to view
+	 */
 	public void displayItemsInPackage(PromotionPackage promotionPackage) {
 		int j;
 		for(j=0; j<promotionPackage.getNumberOfItems();j++){
@@ -47,6 +67,11 @@ public class PromotionPackageUI {
 		
 	}
 	
+	/**
+	 * Prints available options the user can choose when adding items,
+	 * then gets the option the user chooses
+	 * @return The option the user chooses
+	 */
 	public PromotionPackage getAddOption() {
 		Scanner sc = new Scanner(System.in);
 		int packageId = PromotionPackageMgr.getAvailablePromotionId();
@@ -77,6 +102,10 @@ public class PromotionPackageUI {
 		return temp;
 	}
 	
+	/**
+	 * Prompts the user to enter an ID
+	 * @return The package ID the user entered in int form
+	 */
 	public int getRemoveOption() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Please enter Package ID: ");
@@ -84,6 +113,10 @@ public class PromotionPackageUI {
 		return packageId;
 	}
 	
+	/**
+	 * Prints available options for updating
+	 * @return The option the user chooses
+	 */
 	public int getUpdateOption() {
 		int choice;
 		Scanner sc = new Scanner(System.in);
@@ -99,6 +132,10 @@ public class PromotionPackageUI {
 		return choice;
 	}
 	
+	/**
+	 * Prompts the user to enter a package ID
+	 * @return The package ID in int form
+	 */
 	public int getUpdateIDOption () {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Please enter Package ID: ");
@@ -106,6 +143,10 @@ public class PromotionPackageUI {
 		return packageId;
 	}
 	
+	/**
+	 * Prompts user to enter a name for a package
+	 * @return The package name entered by the user in String form
+	 */
 	public String getUpdateNameOption() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Please enter new Package Name: ");
@@ -114,6 +155,10 @@ public class PromotionPackageUI {
 		return packageName;
 	}
 	
+	/**
+	 * Prompts user to enter a description for a package
+	 * @return The package description entered by the user in String form
+	 */
 	public String getUpdateDescOption() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Please enter new Package Description: ");
@@ -122,6 +167,10 @@ public class PromotionPackageUI {
 		return packageDescription;
 	}
 	
+	/**
+	 * Prompts the user to enter a package price
+	 * @return The package price entered by the user in double form
+	 */
 	public double getUpdatePriceOption() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Please enter new Package Price: ");
@@ -129,13 +178,21 @@ public class PromotionPackageUI {
 		return packagePrice;
 	}
 	
+	/**
+	 * Prompts the user to enter a menu item ID to add
+	 * @return The menu item ID the user entered in int form
+	 */
 	public int getAddItemOption () {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Please enter Menu Item ID to add: ");
 		int itemId = sc.nextInt();
 		return itemId;
 	}
-	
+
+	/**
+	 * Prompts the user to enter a menu item ID to remove
+	 * @return The menu item ID the user entered in int form
+	 */
 	public int getRemoveItemOption () {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Please enter Menu Item ID to remove: ");

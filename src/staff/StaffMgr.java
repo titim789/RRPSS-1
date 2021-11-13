@@ -10,51 +10,26 @@ import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.lang.String;
 
+/**
+ * This is the controller class for the staff members.
+ * @author Ng Li Wang
+ * @version 1.0
+ */
 public class StaffMgr{
 	private static ArrayList<Staff> listOfStaff;
 	
+	/**
+	 * Constructor for StaffMgr, initializes the listOfStaff ArrayList, and loads the data from the file
+	 */
 	public StaffMgr() {
 		listOfStaff = new ArrayList<Staff>();
 		load();
 	}
 	
-
-	// checks if the staffId is already in the ArrayList, if yes, return true
-	public boolean checkStaffId(int staffId) {
-
-		for(int i = 0; i < listOfStaff.size(); i++) {
-			// System.out.println("staffId: "+listOfStaff.get(i).getStaffId());
-			if(listOfStaff.get(i).getStaffId() == staffId) {
-				return true;
-			}
-		}
-		// System.out.println("Invalid Staff ID");
-		return false;
-	}
 	
-	// remove staff based on staffId, store into a temp ArrayList if staddId is not StaffIdRemoval
-	public void removeStaff() {
-		StaffUI staffui = new StaffUI();
-		// remove staff object from the ArrayList of Staff
-		int staffIdRemoval = staffui.getRemoveId();			
-		displayStaffList();
-		ArrayList<Staff> tempList = new ArrayList<Staff>();
-		
-		// for each staff in listOfStaff, add to a temp list if staffId is not StaffIdRemoval
-		for(Staff staff: listOfStaff) {
-			if(staff.getStaffId() != staffIdRemoval) {
-				tempList.add(staff);
-			}
-		}
-		
-		listOfStaff.clear();
-		listOfStaff.addAll(tempList);
-		
-			// show what's after removal
-			System.out.println("Staff List Updated..");
-			displayStaffList();
-	}
-
+	/**
+	 * Method to display the list of staff
+	 */
 	// function to display the list of staff
 	public void displayStaffList() {
 		System.out.println(String.format("|%-10s", "ID")
@@ -73,6 +48,107 @@ public class StaffMgr{
 		}
 		}
 
+// function to add staff object to the list of staff
+	/**
+	 * Method to get added staff information from user
+	 */
+	public void addStaffOption() {
+		StaffUI staffui = new StaffUI();
+		int staffId = getLastId()+1;
+		System.out.println("staffID to insert:"+staffId);
+		
+		// launch StaffUI to get staff info
+		String name = staffui.getStaffName();
+		String gender = staffui.getStaffGender();				
+		String title = staffui.getStaffTitle();		
+
+		addStaff(staffId, name, gender, title);
+		System.out.println("Staff List Updated..");
+		displayStaffList();
+	}
+
+	/**
+	 * Method to add staff objects to the static list of staff
+	 * @param staffId Id of the staff to be added
+	 * @param name name of the staff to be added
+	 * @param gender gender of the staff to be added
+	 * @param title title of the staff to be added
+	 */
+	public void addStaff(int staffId, String name, String gender, String title){
+		listOfStaff.add(new Staff(staffId, name, gender, title));
+	}
+
+
+	/**
+	 * Method to remove staff, which calls UI to prompt user for removal ID
+	 */
+	public void removeStaffOption() {
+		StaffUI staffui = new StaffUI();
+		// remove staff object from the ArrayList of Staff
+		int staffIdRemoval = staffui.getRemoveId();			
+		displayStaffList();
+		removeStaff(staffIdRemoval);	
+	}
+
+	/**
+	 * Method to remove staff, based on staffIdRemoval
+	 * @param staffIdRemoval the id of the staff member to be removed
+	 */
+	public void removeStaff(int staffIdRemoval) {
+		ArrayList<Staff> tempList = new ArrayList<Staff>();
+		
+		// for each staff in listOfStaff, add to a temp list if staffId is not StaffIdRemoval
+		for(Staff staff: listOfStaff) {
+			if(staff.getStaffId() != staffIdRemoval) {
+				tempList.add(staff);
+			}
+		}
+		
+		listOfStaff.clear();
+		listOfStaff.addAll(tempList);
+		
+		// show what's after removal
+		System.out.println("Staff List Updated..");
+		displayStaffList();
+	}
+	
+	/** 
+	 * returns the last ID in the staff list
+	 * @return int returns the last staff ID in the staff list
+	 */
+	// returns the last auto increment staff id in the list
+	public int getLastId() {
+		int lastId = 0;
+		for(Staff staff : listOfStaff) {
+			if(staff.getStaffId() > lastId) {
+				lastId = staff.getStaffId();
+			}
+		}
+		return lastId;
+	}
+	
+	/**
+	 * checks if the staffId is already in the ArrayList, if yes, return true
+	 * @param staffId the id of the staff member to be searched for
+	 * @return boolean true if the staff member is found, false otherwise
+	 */
+	// checks if the staffId is already in the ArrayList, if yes, return true
+	public boolean checkStaffId(int staffId) {
+
+		for(int i = 0; i < listOfStaff.size(); i++) {
+			// System.out.println("staffId: "+listOfStaff.get(i).getStaffId());
+			if(listOfStaff.get(i).getStaffId() == staffId) {
+				return true;
+			}
+		}
+		// System.out.println("Invalid Staff ID");
+		return false;
+	}
+	
+	/** 
+	 * save the list of staff into the file
+	 * @param fileName the database file name to save to
+	 */
 	// save staff list to csv file
 	public void save(String fileName) {
 		// empty content in file fileName, then write new content, attributes of ListOfStaff2, then close the file
@@ -109,33 +185,11 @@ public class StaffMgr{
 
 	}
 	
-	// function to add staff object to the list of staff
-	public void addStaff() {
-		StaffUI staffui = new StaffUI();
-		int staffId = getLastId()+1;
-		System.out.println("staffID to insert:"+staffId);
-		
-		// launch StaffUI to get staff info
-		String name = staffui.getStaffName();
-		String gender = staffui.getStaffGender();				
-		String title = staffui.getStaffTitle();		
 
-		System.out.println("Staff List Updated..");
-		listOfStaff.add(new Staff(staffId, name, gender, title));
-		displayStaffList();
-	}
-
-	// returns the last auto increment staff id in the list
-	public int getLastId() {
-		int lastId = 0;
-		for(Staff staff : listOfStaff) {
-			if(staff.getStaffId() > lastId) {
-				lastId = staff.getStaffId();
-			}
-		}
-		return lastId;
-	}
-
+	
+	/**
+	 * Method to load the staff list from the database file
+	 */
 	public void load(){
    		// TODO - to impelemnt staffmgr.load
 		   ArrayList<Staff> listOfStaff = new ArrayList<Staff>();
@@ -170,6 +224,9 @@ public class StaffMgr{
 		this.listOfStaff = listOfStaff;
  	}
 
+	/**
+	 * Method to save the staff list to the database file 
+	 */
 	public void save(){
 		// TODO - implement staffmgr.save
 			
@@ -209,29 +266,4 @@ public class StaffMgr{
 			}	
 	}
 
-	// public void load() {
-	// 	// TODO - implement Menu.load
-	// 	try{
-	// 	    FileInputStream readData = new FileInputStream("staffList.txt");
-	// 	    ObjectInputStream readStream = new ObjectInputStream(readData);
-	// 	    listOfStaff = (ArrayList<Staff>) readStream.readObject();
-	// 	    readStream.close();
-	// 	    //System.out.println(listOfMenuItems.toString());
-	// 	}catch (Exception e) {
-	// 	    e.printStackTrace();
-	// 	}
-		
-	// }
-	
-	// public void save() {
-	// 	// TODO - implement Menu.save
-	// 	try {
-	// 	    FileOutputStream fos = new FileOutputStream("staffList.txt");
-	// 	    ObjectOutputStream oos = new ObjectOutputStream(fos);   
-	// 	    oos.writeObject(listOfStaff); // write List of customer to ObjectOutputStream
-	// 	    oos.close(); 
-	// 	} catch(Exception ex) {
-	// 	    ex.printStackTrace();
-	// 	}
-	// }
 }

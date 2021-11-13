@@ -21,14 +21,28 @@ import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 
+/**
+ * This class is used to manage the customer objects.
+ * @author Ng Li Wang
+ */
 public class CustomerMgr{
 
+	/**
+	 * This is a static list of customer objects.
+	 */
 	private static ArrayList<Customer> listOfCustomer;
 	
+	/**
+	 * This is the constructor of the class.
+	 */
 	public CustomerMgr() {
 		load();
 	}
 
+	/**
+	 * This method is used to display the list of customers in current list of customers.
+	 * @param customer
+	 */
 	// pass in an ArrayList<Customer> and display all customers in the list
 	public void displayCustomerList() {
 		System.out.println(String.format("|%-10s", "ID")
@@ -51,6 +65,34 @@ public class CustomerMgr{
 		}
 	}
 	
+
+	/**
+	 * Get user input to about new customer to be added
+	 */
+	// function to add customer object to list of customer
+	public void addCustomerOption() {
+		// int customerId, String name, String phone, String member
+
+		int customerId = getLastCustomerId() + 1;
+		System.out.println("Customer Id to insert:" + customerId);
+
+		CustomerUI customerui = new CustomerUI();
+
+		String name = customerui.getCustomerName();
+		String phone = customerui.getCustomerPhone();				
+		String member = customerui.getCustomerMember();
+
+		addCustomer(customerId, name, phone, member);
+	}
+	
+
+	/** 
+	 * This method is used to add a new customer to the static list of customers.
+	 * @param customerId the customer id of the new customer
+	 * @param name 	the name of the new customer
+	 * @param phone	the phone number of the new customer
+	 * @param member whether the new customer is a member or not
+	 */
 	public void addCustomer(int customerId, String name, String phone, String member) {
 		Customer newCustomer = new Customer();
 		newCustomer.setCustomerId(customerId);
@@ -65,48 +107,22 @@ public class CustomerMgr{
 		listOfCustomer.add(newCustomer);
 	}
 
-	// function to add customer object to list of customer
-	public void addCustomerInit() {
-		// int customerId, String name, String phone, String member
-
-		int customerId = getLastCustomerId() + 1;
-		System.out.println("Customer Id to insert:" + customerId);
-
-		CustomerUI customerui = new CustomerUI();
-
-		String name = customerui.getCustomerName();
-		String phone = customerui.getCustomerPhone();				
-		String member = customerui.getCustomerMember();
-
-		Customer newCustomer = new Customer();
-		newCustomer.setCustomerId(customerId);
-		newCustomer.setName(name);
-		newCustomer.setPhone(phone);
-		if(member.equals("y")) {
-			newCustomer.setMember(true);
-		}
-		else {
-			newCustomer.setMember(false);
-		}
-		listOfCustomer.add(newCustomer);
-	}
-
-	// returns the last customer id in the list
-	public int getLastCustomerId() {
-		int lastCustomerId = 0;
-		for (Customer customer : listOfCustomer) {
-			if (customer.getCustomerId() > lastCustomerId) {
-				lastCustomerId = customer.getCustomerId();
-			}
-		}
-		return lastCustomerId;
-	}
-
-	// remove customer object from the list of customer, store into a temp ArrayList if customer id is not CustomerIdemoval
-	public void removeCustomer() {
+	/**
+	 * This method is to get the customer ID to be removed
+	 * @param customerId the customer id of the customer to be removed
+	 */
+	public void removeCustomerOption(){
 		CustomerUI customerui = new CustomerUI();
 		int customerIdToRemove = customerui.getRemoveId();
+		removeCustomer(customerIdToRemove);
+	}
 
+	/**
+	 * This method is used to remove a new customer based on ID passed in
+	 * @param customerId the customer id of the customer to be removed
+	 */
+	// remove customer object from the list of customer, store into a temp ArrayList if customer id is not CustomerIdemoval
+	public void removeCustomer(int customerIdToRemove) {
 		ArrayList<Customer> tempList = new ArrayList<Customer>();
 		for (Customer customer : listOfCustomer) {
 			if (customer.getCustomerId() != customerIdToRemove) {
@@ -120,6 +136,26 @@ public class CustomerMgr{
 		displayCustomerList();
 	}
 
+	/** 
+	 * returns the last customer id in the list
+	 * @return int
+	 */
+	// returns the last customer id in the list
+	public int getLastCustomerId() {
+		int lastCustomerId = 0;
+		for (Customer customer : listOfCustomer) {
+			if (customer.getCustomerId() > lastCustomerId) {
+				lastCustomerId = customer.getCustomerId();
+			}
+		}
+		return lastCustomerId;
+	}
+	
+	/** 
+	 * pass in int customerId check if exist in the ArrayList Customer
+	 * @param customerId
+	 * @return boolean
+	 */
 	// pass in int customerId check if exist in the ArrayList Customer
 	public boolean isCustomerExist(int customerId) {
 		for (Customer customer : listOfCustomer) {
@@ -130,26 +166,11 @@ public class CustomerMgr{
 		return false;
 	}
 
-	// pass in customerId and returns customer phone attribtue
-	public String getCustomerPhone(int customerId) {
-		for (Customer customer : listOfCustomer) {
-			if (customer.getCustomerId() == customerId) {
-				return customer.getPhone();
-			}
-		}
-		return null;
-	}
-
-	// pass in customerId and returns customer name attribute
-	public String getCustomerName(int customerId) {
-		for (Customer customer : listOfCustomer) {
-			if (customer.getCustomerId() == customerId) {
-				return customer.getName();
-			}
-		}
-		return null;
-	}
-
+		/** 
+	 * pass in an CustomerId integer and return the customer object
+	 * @param customerId
+	 * @return Customer
+	 */
 	// pass in an CustomerId integer and return the customer object
 	public Customer getCustomerObj(int customerId) {
 		Customer customer = new Customer();
@@ -160,7 +181,42 @@ public class CustomerMgr{
 		}
 		return customer;
 	}
+	
+	/**
+	 *  pass in customerId and returns customer phone attribtue
+	 * @param customerId
+	 * @return String
+	 */
+	// pass in customerId and returns customer phone attribtue
+	public String getCustomerPhone(int customerId) {
+		for (Customer customer : listOfCustomer) {
+			if (customer.getCustomerId() == customerId) {
+				return customer.getPhone();
+			}
+		}
+		return null;
+	}
 
+	
+	/** 
+	 * pass in customerId and returns customer name attribtue
+	 * @param customerId
+	 * @return String
+	 */
+	// pass in customerId and returns customer name attribute
+	public String getCustomerName(int customerId) {
+		for (Customer customer : listOfCustomer) {
+			if (customer.getCustomerId() == customerId) {
+				return customer.getName();
+			}
+		}
+		return null;
+	}
+
+
+	/**
+	 * save the customer list to a list of customer database file
+	 */
 	public void save() {
 		// TODO Auto-generated method stub
 		PrintWriter pw = null;
@@ -198,6 +254,9 @@ public class CustomerMgr{
 		}
 	}
 
+	/**
+	 * load the customer list from a list of customer database file
+	 */
 	public void load() {
 		// TODO Auto-generated method stub
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
@@ -243,29 +302,4 @@ public class CustomerMgr{
 		this.listOfCustomer = customerList;
 	}
 	
-	// public void load() {
-	// 	// TODO - implement Menu.load
-	// 	try{
-	// 	    FileInputStream readData = new FileInputStream("customerList.txt");
-	// 	    ObjectInputStream readStream = new ObjectInputStream(readData);
-	// 	    ListOfCustomer = (ArrayList<Customer>) readStream.readObject();
-	// 	    readStream.close();
-	// 	    //System.out.println(listOfMenuItems.toString());
-	// 	}catch (Exception e) {
-	// 	    e.printStackTrace();
-	// 	}
-		
-	// }
-	
-	// public void save() {
-	// 	// TODO - implement Menu.save
-	// 	try {
-	// 	    FileOutputStream fos = new FileOutputStream("customerList.txt");
-	// 	    ObjectOutputStream oos = new ObjectOutputStream(fos);   
-	// 	    oos.writeObject(ListOfCustomer); // write List of customer to ObjectOutputStream
-	// 	    oos.close(); 
-	// 	} catch(Exception ex) {
-	// 	    ex.printStackTrace();
-	// 	}
-	// }
 }

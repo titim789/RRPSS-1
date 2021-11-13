@@ -6,16 +6,36 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * The control class for promotion packages
+ * This control class will manage the list of promotion packages
+ * @author yes
+ *
+ */
 public class PromotionPackageMgr {
+	/**
+	 * The list of promotion packages
+	 */
 	private static ArrayList<PromotionPackage> listOfPromotion;
+	
+	/**
+	 * This control uses a separate class, promotionPackageUI, for all UI display options
+	 */
 	private PromotionPackageUI promotionPackageUI;
 	
-	//constructor
+	/**
+	 * When instantiating this control, it will create a list of promotion packages,
+	 * as well as instantiate a promotionPackageUI for UI displays
+	 */
 	public PromotionPackageMgr() {
 		listOfPromotion = new ArrayList<PromotionPackage>();
 		promotionPackageUI = new PromotionPackageUI();
 	}
 	
+	/**
+	 * Edits the promotion package based on the user's choices accordingly
+	 * @param listOfMenuItems The list of menu items, should they be added to a package
+	 */
 	public void edit(ArrayList<MenuItem> listOfMenuItems) {
 	    int choice = promotionPackageUI.getEditOption();
 	    if(choice == 1){
@@ -57,10 +77,19 @@ public class PromotionPackageMgr {
 	    }
 	}
 	
+	/**
+	 * Gets the list of promotion packages
+	 * @return The list of promotion packages
+	 */
 	public static ArrayList<PromotionPackage> getListOfPromotion() {
 		return listOfPromotion;
 	}
 	
+	/**
+	 * Gets the promotion package object from the package ID
+	 * @param packageId The ID from which we want to get the promotion package object
+	 * @return The promotion package object corresponding to the package ID entered
+	 */
 	public static PromotionPackage getItemPromotionPackage(int packageId) {
 		int i;
 		for(i=0;i<listOfPromotion.size();i++) {
@@ -71,24 +100,31 @@ public class PromotionPackageMgr {
 		return null;
 	}
 
+	/**
+	 * Gets ???
+	 * @return
+	 */
 	public static int getAvailablePromotionId() {
 		int i = 1;
 		while(getItemPromotionPackage(i) != null) i++;
 		return i;
 	}
 	
+	/**
+	 * Displays the existing promotion packages
+	 */
 	public void viewPackages() {
 		// TODO - implement Menu.viewPackages
 		promotionPackageUI.displayPackages();
 	}
 
 	/**
-	 * 
-	 * @param package_id
-	 * @param package_name
-	 * @param package_description
-	 * @param package_price
-	 * @param listOdMenuItem
+	 * Adds a new promotion package to the list
+	 * @param package_id The ID of the promotion package to add
+	 * @param package_name The name of the promotion package to add
+	 * @param package_description The description of the promotion package to add
+	 * @param package_price The price of the promotion package to add
+	 * @param listOfMenuItem The contents, in menuItems, of the promotion package
 	 */
 	public void addNewPromotion(int packageId, String packageName, String packageDescription, double packagePrice, ArrayList<MenuItem> listOfMenuItem) {
 		// TODO - implement Menu.addNewPromotion
@@ -111,8 +147,8 @@ public class PromotionPackageMgr {
 	}
 
 	/**
-	 * 
-	 * @param package_id
+	 * Removes a promotion package from the list
+	 * @param package_id The ID of the promotion package to be removed
 	 */
 	public void removePromotion(int packageId) {
 		// TODO - implement Menu.removePromotion
@@ -129,9 +165,9 @@ public class PromotionPackageMgr {
 	}
 
 	/**
-	 * 
-	 * @param package_id
-	 * @param newName
+	 * Updates the name of a promotion package
+	 * @param package_id The ID of the promotion package to edit. If the ID cannot be found, the user will be notified
+	 * @param newName The new name of the promotion package to be changed to. If the name is invalid, the user will be notified
 	 */
 	public void updatePackageName(int packageId, String newName) {
 		// TODO - implement Menu.updatePackageName
@@ -152,9 +188,9 @@ public class PromotionPackageMgr {
 	}
 
 	/**
-	 * 
-	 * @param package_id
-	 * @param newDesc
+	 * Updates the description of the package
+	 * @param package_id The ID of the package whose description shall be updated. If the ID does not exist, the user will be notified
+	 * @param newDesc The new description to set 
 	 */
 	public void updatePackageDescription(int packageId, String newDesc) {
 		// TODO - implement Menu.updatePackageDescription
@@ -171,9 +207,9 @@ public class PromotionPackageMgr {
 	}
 
 	/**
-	 * 
-	 * @param package_id
-	 * @param newPrice
+	 * Updates the price of the package
+	 * @param package_id The ID of the package whose price shall be updated. If the ID does not exist, the user will be notified
+	 * @param newPrice The new price to set. This value cannot be less than or equal to 0
 	 */
 	public void updatePackagePrice(int packageId, double newPrice) {
 		// TODO - implement Menu.UpdatePackagePrice
@@ -194,10 +230,10 @@ public class PromotionPackageMgr {
 	}
 
 	/**
-	 * 
-	 * @param package_id
-	 * @param item_id
-	 * @param listOfMenuItems
+	 * Adds an item to an existing package
+	 * @param package_id The ID of the package we want to add an item to. The user will be notified if the ID does not exist
+	 * @param item_id The ID of the item to add to the package. If the item does not exist, the user will be notified
+	 * @param listOfMenuItems The full list of menu items
 	 */
 	public void addItemToPackage(int packageId, int itemId, ArrayList<MenuItem> listOfMenuItems) {
 		// TODO - implement Menu.addItemtoPackage
@@ -222,9 +258,9 @@ public class PromotionPackageMgr {
 	}
 
 	/**
-	 * 
-	 * @param package_id
-	 * @param item_id
+	 * Removes an item from a package
+	 * @param package_id The ID of the package from which we will remove an item from
+	 * @param item_id The ID of the item to be removed from the package
 	 */
 	public void removeItemFromPackage(int packageId, int itemId) {
 		// TODO - implement Menu.removeItemfromPackage
@@ -241,8 +277,8 @@ public class PromotionPackageMgr {
 	}
 
 	/**
-	 * 
-	 * @param package_id
+	 * Prints the item contents of a package
+	 * @param package_id The ID of the package we want to view
 	 */
 	public void viewItemsInPackage(int packageId) {
 		// TODO - implement Menu.viewItemsinPackage
@@ -258,8 +294,9 @@ public class PromotionPackageMgr {
 		System.out.println(packageId+" not found.");
 	}
 	
-	
-	
+	/**
+	 * Loads the list of promotion packages from a .txt file
+	 */
 	public void load() {
 		// TODO - implement Menu.load
 		try{
@@ -274,9 +311,9 @@ public class PromotionPackageMgr {
 		}
 		
 	}
+
 	/**
-	 * 
-	 * @param menuType (String - either 'promopack', 'menu', or both is accepted)
+	 * Saves the list of promotions to the "promotionpackages.txt" file
 	 */
 	public void save() {
 		// TODO - implement Menu.save
