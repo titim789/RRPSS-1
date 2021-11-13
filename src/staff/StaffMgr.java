@@ -51,7 +51,7 @@ public class StaffMgr{
 		}
 		}
 
-// function to add staff object to the list of staff
+	// function to add staff object to the list of staff
 	/**
 	 * Method to get added staff information from user
 	 */
