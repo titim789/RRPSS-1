@@ -148,48 +148,6 @@ public class StaffMgr{
 		return false;
 	}
 	
-	/** 
-	 * save the list of staff into the file
-	 * @param fileName the database file name to save to
-	 */
-	// save staff list to csv file
-	public void save(String fileName) {
-		// empty content in file fileName, then write new content, attributes of ListOfStaff2, then close the file
-		PrintWriter pw = null;
-		try {
-			pw = new PrintWriter(new File(fileName));
-			pw.print("");
-			pw.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			pw = new PrintWriter(new FileWriter(fileName, true));
-			pw.println("staffId,staffName,gender,jobTitle");
-			pw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// write new content to file fileName
-		try {
-			pw = new PrintWriter(new FileWriter(fileName, true));
-			for(Staff staff: listOfStaff) {
-				pw.println(staff.getStaffId() + "," + staff.getStaffName() + "," + staff.getGender() + "," + staff.getJobTitle());
-			}
-			pw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-	
-
-	
 	/**
 	 * Method to load the staff list from the database file
 	 */
