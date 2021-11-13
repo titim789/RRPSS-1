@@ -77,7 +77,7 @@ public class ReservationMgr {
 		}
 	}
 	
-	//-----------------Cusomter arrive delete reservation change to occupied---------------------------//
+	//-----------------Customer arrive delete reservation change to occupied---------------------------//
 	/**
 	 * Deletes a reservation and changes the corresponding table to occupied when the customer arrives
 	 * @param reservationId The reservation ID of the customer who just arrived
@@ -183,8 +183,8 @@ public class ReservationMgr {
 		{
 			if(listOfReservations.get(i).getReservationId() == resvId) {
 				tableManager.editTableDetail(listOfReservations.get(i).getTableId(),"VACANT");
+				System.out.println(listOfReservations.get(i).getCustomerName()+" has cancelled his/her reservation at "+ listOfReservations.get(i).getDateTime());
 				listOfReservations.remove(i);
-				System.out.println("reservationID: " + resvId + " has been removed.");
 				return;
 			}
 		}
