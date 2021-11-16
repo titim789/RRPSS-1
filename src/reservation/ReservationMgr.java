@@ -40,7 +40,8 @@ public class ReservationMgr {
 	//-----------------Check Availability---------------------------//
 	public void checkAvail(int n){
 		if(tableManager.checkAvailability(n)) {
-			tableManager.displaySizeVacant(n);
+			//tableManager.displaySizeVacant(n);
+			System.out.println("Table Found.");
 		}
 		else{
 			System.out.println("No table of Size "+ n + " is vacant!!");
