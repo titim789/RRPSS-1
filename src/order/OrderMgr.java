@@ -42,7 +42,7 @@ public class OrderMgr {
 			listOfOrders.get(orderId).viewOrder();	
 		}
 		else {
-			System.out.println("Order ID does not exist.");
+			System.out.println("Order ID does not exist.\n");
 		}
 	}
 	
